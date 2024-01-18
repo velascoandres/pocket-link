@@ -16,7 +16,7 @@ export default async function Home() {
         <h1 className="text-white text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
           Pocket url
         </h1>
-        <p className="max-w-[600px] text-gray-200 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+        <p className="max-w-[300px] md:max-w-[600px] text-gray-200 md:text-xl/relaxed dark:text-gray-400">
           Discover a <strong className="text-amber-400">user-friendly</strong> platform designed to effortlessly manage <strong className="text-amber-400">all your links</strong>.
           Say goodbye to <strong className="text-amber-400">link clutter</strong> with our streamlined solution, offering easy organization and monitoring.
           Tailor your digital presence with <strong className="text-amber-400">personalized branding</strong>.
@@ -26,7 +26,7 @@ export default async function Home() {
         session ? (
         <Link
           href="/dashboard"
-          className="rounded-full bg-white px-10 py-3 font-semibold no-underline transition hover:bg-white/70"
+          className="text-black rounded-full bg-white px-10 py-3 font-semibold no-underline transition hover:bg-white/70"
         >
           Continue to dashboard
         </Link>) : (

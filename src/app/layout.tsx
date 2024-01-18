@@ -1,13 +1,13 @@
 import '@/styles/globals.css'
 
-import { Inter } from 'next/font/google'
+import { Onest } from 'next/font/google'
 
 import { TRPCReactProvider } from '@/trpc/react'
 
 import { ThemeProvider } from '@/components/theme/theme-provider'
 import { AuthProvider } from '@/components/auth/auth-provider'
 
-const inter = Inter({
+const inter = Onest({
   subsets: ['latin'],
   variable: '--font-sans',
 })
@@ -25,7 +25,7 @@ const RootLayout = ({
 }) => {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable} bg-black`}>
+      <body className={`font-sans ${inter.variable} `}>
         <AuthProvider>
           <ThemeProvider
             attribute="class"
