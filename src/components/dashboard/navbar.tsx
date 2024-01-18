@@ -26,12 +26,12 @@ export const Navbar = () => {
 									<Avatar>
 										<AvatarImage src={data.user.image!} />
 										<AvatarFallback>
-											{data.user.name!}
+											{data.user.name}
 										</AvatarFallback>
 									</Avatar>
 								</DropdownMenuTrigger>
 								<DropdownMenuContent>
-									<DropdownMenuLabel>My Account</DropdownMenuLabel>
+									<DropdownMenuLabel>{data.user.name}</DropdownMenuLabel>
 									<DropdownMenuSeparator />
 									<DropdownMenuItem 
 									  className="cursor-pointer"
