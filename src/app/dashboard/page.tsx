@@ -98,7 +98,7 @@ const DashboardPage = () => {
     }
 
     return (
-        <main className="flex flex-col gap-4 items-start w-full">
+        <main className="flex flex-col gap-4 items-center w-full">
             <section className="w-full flex flex-row  flex-wrap justify-start md:justify-center items-center gap-2">
                 <LinkSearchBox onSearch={onSearchHandler} value={searchParams.get('search') ?? ''} />
                 <Button variant="secondary" onClick={addNewLink}>
@@ -106,7 +106,7 @@ const DashboardPage = () => {
                 </Button>
             </section>
 
-            <section className="flex flex-row flex-wrap gap-4 justify-center mt-10">
+            <section className="grid grid-cols-4 gap-4 justify-center mt-10">
                 {
                     links.map((link) => (
                         <LinkCard

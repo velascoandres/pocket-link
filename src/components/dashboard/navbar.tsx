@@ -13,7 +13,7 @@ export const Navbar = () => {
 	}
 
 	return (
-		<nav className="bg-transparent backdrop-blur-2xl">
+		<nav className="bg-transparent backdrop-blur-xl">
 			<div className="max-w-screen-2xl flex items-center justify-between mx-auto p-4">
 				<div className="flex items-center space-x-3 rtl:space-x-reverse">
 					<span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
