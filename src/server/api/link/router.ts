@@ -25,7 +25,7 @@ export const linkRouter = createTRPCRouter({
     getUserLinks: protectedProcedure.input(searchDto)
         .query(({ ctx, input }) => {
             return searchUserLinksService(ctx.db, {
-                name: input.name,
+                ...input,
                 createdById: ctx.session.user.id,
             })
         }),

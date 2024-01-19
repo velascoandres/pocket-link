@@ -4,8 +4,9 @@ import { Onest } from 'next/font/google'
 
 import { TRPCReactProvider } from '@/trpc/react'
 
-import { ThemeProvider } from '@/components/theme/theme-provider'
-import { AuthProvider } from '@/components/auth/auth-provider'
+import { ThemeProvider } from '@/app/_components/theme/theme-provider'
+import { AuthProvider } from '@/app/_components/auth/auth-provider'
+import { ModalContainer } from '@/app/_components/ui/modal-container'
 
 const inter = Onest({
   subsets: ['latin'],
@@ -34,7 +35,10 @@ const RootLayout = ({
             disableTransitionOnChange
           >
             <div className="absolute top-0 z-[-2] h-screen w-screen bg-black bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
-              <TRPCReactProvider>{children}</TRPCReactProvider>
+              <TRPCReactProvider>
+                <ModalContainer />
+                {children}
+              </TRPCReactProvider>
             </div>
           </ThemeProvider>
         </AuthProvider>

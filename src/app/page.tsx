@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 // import { CreatePost } from '@/app/_components/create-post'
 import { getServerAuthSession } from '@/server/auth'
-import { SigninProviders } from '../components/auth/signin-providers'
+import { SigninProviders } from './_components/auth/signin-providers'
 
 export default async function Home() {
   noStore()

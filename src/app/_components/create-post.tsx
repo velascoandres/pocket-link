@@ -15,7 +15,7 @@ export function CreatePost() {
       setName('')
     },
   })
-
+  
   return (
     <form
       onSubmit={(e) => {

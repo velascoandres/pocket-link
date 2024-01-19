@@ -1,13 +1,14 @@
 'use client'
 
-import { CreateUpdateLink } from '@/components/link/create-update-link'
-import { LinkCard } from '@/components/link/link-card'
-import { LinkSearchBox } from '@/components/link/link-search-box'
-import { Button } from '@/components/ui/button'
-import { Dialog } from '@/components/ui/dialog'
-import { type Link } from '@/interfaces/link'
+import { CreateUpdateLink } from '@/app/_components/link/create-update-link'
+import { LinkCard } from '@/app/_components/link/link-card'
+import { LinkSearchBox } from '@/app/_components/link/link-search-box'
+import { Button } from '@/app/_components/ui/button'
+import { Dialog } from '@/app/_components/ui/dialog'
+import { type Link } from '@/app/_interfaces/link'
 import { useSearchParams, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { useModalStore } from '../_store'
 
 const links: Link[] = [
     {
@@ -65,19 +66,24 @@ const DashboardPage = () => {
     const searchParams = useSearchParams()
     const router = useRouter()
 
-    const [selectedLink, setSelectedLink] = useState<Link | undefined>(undefined)
-    const [openModal, setOpenModal] = useState(false)
+    const { openModal } = useModalStore()
 
     const addNewLink = () => {
-        setSelectedLink(undefined)
+        // setSelectedLink(undefined)
 
-        setOpenModal(true)
+        // setOpenModal(true)
+        openModal({
+            component: CreateUpdateLink,
+        })
     }
 
     const updateLink = (link: Link) => {
-        setSelectedLink(link)
-
-        setOpenModal(true)
+        openModal({
+            component: CreateUpdateLink,
+            props: {
+                link,
+            }
+        })
     }
 
     const onSearchHandler = (search: string) => {
@@ -87,14 +93,6 @@ const DashboardPage = () => {
         const queryParams = params.toString()
 
         router.push('/dashboard' + '?' + queryParams)
-    }
-
-    const handleOpenChange = (open: boolean) => {
-        setOpenModal(open)
-
-        if (!open) {
-            setSelectedLink(undefined)
-        }
     }
 
     return (
@@ -117,9 +115,6 @@ const DashboardPage = () => {
                     ))
                 }
             </section>
-            <Dialog open={openModal} onOpenChange={handleOpenChange}>
-                <CreateUpdateLink key={selectedLink?.id} link={selectedLink} />
-            </Dialog>
         </main>
     )
 }

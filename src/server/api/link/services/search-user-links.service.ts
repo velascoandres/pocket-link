@@ -1,7 +1,9 @@
 import { type PrismaClient } from '@prisma/client'
 
 interface Options {
-    name?: string
+    search?: string
+    perPage?: number
+    page?: number
     createdById: string
 }
 
@@ -12,22 +14,43 @@ interface LinkWhereQuery {
     }
 }
 
-export const searchUserLinksService = (prisma: PrismaClient, options: Options) => {
-    const { name, createdById } = options
+export const searchUserLinksService = async (prisma: PrismaClient, options: Options) => {
+    const { search, perPage = 10, page = 1, createdById } = options
 
     const query: LinkWhereQuery = {
         createdById
     }
 
-    if (name){
+    if (search) {
         query.name = {
-            contains: name
+            contains: search
         }
     }
 
-    return prisma.link.findMany({
+    const totalQuery = prisma.link.count({
         where: {
             ...query
-        }
+        },
     })
+
+    const dataQuery = prisma.link.findMany({
+        where: {
+            ...query
+        },
+        skip: perPage * (page - 1),
+        take: perPage,
+    })
+
+    const [total, data] = await Promise.all([totalQuery, dataQuery])
+
+    const totalPages = Math.ceil(total / perPage)
+    const hasNextPage = page < totalPages
+
+    return {
+        hasNextPage,
+        totalPages,
+        total,
+        page,
+        data
+    }
 }

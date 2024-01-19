@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
 export const searchDto = z.object({
-    name: z.string()
+    search: z.string(),
+    perPage: z.number().optional().default(10),
+    page: z.number().optional().default(1),
 })

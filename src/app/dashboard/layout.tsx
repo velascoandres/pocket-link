@@ -2,8 +2,8 @@
 
 import React from 'react'
 
-import { Navbar } from '@/components/dashboard/navbar'
-import { withAuth } from '@/components/auth/with-auth'
+import { Navbar } from '@/app/_components/dashboard/navbar'
+import { withAuth } from '@/app/_components/auth/with-auth'
 
 const Layout = ({
 	children,

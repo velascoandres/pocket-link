@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { IconSearch } from '@tabler/icons-react'
 
 import { Input } from '../ui/input'
-import { useDebounceCallback } from '@/hooks/use-debounce-callback'
+import { useDebounceCallback } from '@/app/_hooks'
 
 interface Props {
 	value?: string

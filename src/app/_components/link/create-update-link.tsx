@@ -5,14 +5,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
-import { type Link } from '@/interfaces/link'
+import { type Link } from '@/app/_interfaces/link'
 import {
 	DialogContent,
 	DialogFooter,
 	DialogHeader,
 	DialogTitle
 } from '../ui/dialog'
-import { Button } from '@/components/ui/button'
 import {
 	Form,
 	FormControl,
@@ -21,8 +20,9 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+} from '@/app/_components/ui/form'
+import { Input } from '@/app/_components/ui/input'
+import { Button } from '../ui/button'
 
 interface Props {
 	link?: Link

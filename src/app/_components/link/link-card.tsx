@@ -1,7 +1,7 @@
 import React from 'react'
 import NextLink from 'next/link'
 
-import { type Link } from '@/interfaces/link'
+import { type Link } from '@/app/_interfaces/link'
 import {
   Card,
   CardContent,
