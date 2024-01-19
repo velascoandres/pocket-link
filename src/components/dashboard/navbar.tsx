@@ -8,7 +8,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 export const Navbar = () => {
 	const { data } = useSession()
 
-	if (!data?.user){
+	if (!data?.user) {
 		return null
 	}
 
@@ -16,7 +16,9 @@ export const Navbar = () => {
 		<nav className="bg-transparent backdrop-blur-2xl">
 			<div className="max-w-screen-2xl flex items-center justify-between mx-auto p-4">
 				<div className="flex items-center space-x-3 rtl:space-x-reverse">
-					<span className="self-center text-2xl font-semibold whitespace-nowrap text-white">Pocket link</span>
+					<span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
+						<strong className="text-amber-400">Pocket</strong> <strong className="text-gray-400">link</strong>
+					</span>
 				</div>
 				<div className="md:block" id="navbar-default">
 					<ul className="font-medium flex p-0 rounded-lg flex-row space-x-8 rtl:space-x-reverse">
@@ -33,8 +35,8 @@ export const Navbar = () => {
 								<DropdownMenuContent>
 									<DropdownMenuLabel>{data.user.name}</DropdownMenuLabel>
 									<DropdownMenuSeparator />
-									<DropdownMenuItem 
-									  className="cursor-pointer"
+									<DropdownMenuItem
+										className="cursor-pointer"
 										onClick={() => signOut({ callbackUrl: '/' })}
 									>
 										Sign out

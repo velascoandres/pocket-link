@@ -23,23 +23,23 @@ export const LinkCard = ({
 }: Props) => {
   const { name, originalLink, path, updatedAt } = link
 
-  const shortOriginalLink = originalLink.length <= 15
+  const shortOriginalLink = originalLink.length <= 30
     ? originalLink
-    : originalLink.slice(0, 12).concat('...')
+    : originalLink.slice(0, 30).concat('...')
 
-  const shortName = name.length <= 15
+  const shortName = name.length <= 20
     ? name
-    : name.slice(0, 12).concat('...')
+    : name.slice(0, 20).concat('...')
 
   const dateAgo = getDiffTime(updatedAt)
 
   return (
     <Card
-      className="transition ease-in cursor-pointer w-[150px] md:w-[200px]"
+      className="transition ease-in cursor-pointer w-[300px] md:w-[350px] border border-gray-800 hover:border-gray-100 hover:border"
       onClick={() => onClick(link)}
     >
       <CardHeader>
-        <CardTitle>{shortName}</CardTitle>
+        <CardTitle className="text-base">{shortName}</CardTitle>
       </CardHeader>
       <CardContent>
         <p className="text-gray-300 font-bold text-sm">{path}</p>

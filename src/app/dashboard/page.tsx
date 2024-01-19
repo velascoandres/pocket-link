@@ -106,7 +106,7 @@ const DashboardPage = () => {
                 </Button>
             </section>
 
-            <section className="flex flex-row flex-wrap gap-4 justify-start mt-10">
+            <section className="flex flex-row flex-wrap gap-4 justify-center mt-10">
                 {
                     links.map((link) => (
                         <LinkCard

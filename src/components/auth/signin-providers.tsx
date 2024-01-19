@@ -13,7 +13,7 @@ export function SigninProviders() {
     return (
         <div className="flex flex-row justify-center items-center gap-4">
             <Button
-                variant="default"
+                variant="ghost"
                 className="bg-indigo-900 text-white"
                 onClick={() => signIn('discord', CONFIG)}
             >
@@ -23,7 +23,7 @@ export function SigninProviders() {
             </Button>
 
             <Button
-                variant="default"
+                variant="ghost"
                 className="bg-black text-white"
                 onClick={() => signIn('github', CONFIG)}
             >
