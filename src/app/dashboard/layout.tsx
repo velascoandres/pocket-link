@@ -15,7 +15,7 @@ const Layout = ({
 			<div className="fixed w-screen">
 				<Navbar />
 			</div>
-			<div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto px-4 mt-20 overflow-y-auto">
+			<div className="max-w-screen-2xl flex flex-col items-start flex-wrap justify-between mx-auto px-4 mt-20 h-[calc(100vh-5rem)] overflow-y-auto">
 				{children}
 			</div>
 		</>

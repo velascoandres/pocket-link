@@ -18,7 +18,7 @@ export const Navbar = () => {
 				<div className="flex items-center space-x-3 rtl:space-x-reverse">
 					<span className="self-center text-2xl font-semibold whitespace-nowrap text-white">Pocket link</span>
 				</div>
-				<div className="md:w-full md:block" id="navbar-default">
+				<div className="md:block" id="navbar-default">
 					<ul className="font-medium flex p-0 rounded-lg flex-row space-x-8 rtl:space-x-reverse">
 						<li>
 							<DropdownMenu>
