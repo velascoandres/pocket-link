@@ -35,7 +35,7 @@ export const LinkCard = ({
 
   return (
     <Card
-      className="transition ease-in cursor-pointer w-[300px] md:w-[350px] border border-gray-800 hover:border-gray-100 hover:border"
+      className="transition ease-in cursor-pointer border border-gray-800 hover:border-gray-100 hover:border"
       onClick={() => onClick(link)}
     >
       <CardHeader>

@@ -1,13 +1,13 @@
-import React from 'react'
+import { useRef, useCallback, useEffect } from 'react'
 
 const DEFAULT_DEBOUNCE_TIME = 500
 
 type CallBack = () => void
 
 export const useDebounceCallback = (delay?: number) => {
-  const timerRef = React.useRef<NodeJS.Timeout | null>(null)
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
 
-  const debounceCallback = React.useCallback((cb: CallBack) => {
+  const debounceCallback = useCallback((cb: CallBack) => {
     cleanTimer()
 
     timerRef.current = setTimeout(() => {  
@@ -21,7 +21,7 @@ export const useDebounceCallback = (delay?: number) => {
     }
   }
 
-  React.useEffect(() => {  
+  useEffect(() => {  
     return () => {
       cleanTimer()
     }

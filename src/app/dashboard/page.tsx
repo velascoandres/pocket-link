@@ -1,122 +1,95 @@
 'use client'
 
 import { CreateUpdateLink } from '@/app/_components/link/create-update-link'
-import { LinkCard } from '@/app/_components/link/link-card'
 import { LinkSearchBox } from '@/app/_components/link/link-search-box'
 import { Button } from '@/app/_components/ui/button'
-import { Dialog } from '@/app/_components/ui/dialog'
 import { type Link } from '@/app/_interfaces/link'
-import { useSearchParams, useRouter } from 'next/navigation'
-import React, { useState } from 'react'
 import { useModalStore } from '../_store'
-
-const links: Link[] = [
-    {
-        id: 1,
-        name: 'test link 2',
-        path: '/g/test',
-        originalLink: 'https:/google/news/sports/test',
-        createdAt: new Date(),
-        updatedAt: new Date('2023/04/21'),
-    },
-    {
-        id: 1,
-        name: 'test link 3',
-        path: '/g/test',
-        originalLink: 'https:/google/news/sports/test',
-        createdAt: new Date(),
-        updatedAt: new Date('2024/01/15'),
-    },
-    {
-        id: 1,
-        name: 'test link 4',
-        path: '/g/test',
-        originalLink: 'https:/google/news/sports/test',
-        createdAt: new Date(),
-        updatedAt: new Date('2023/12/15'),
-    },
-    {
-        id: 1,
-        name: 'test link 4',
-        path: '/g/test',
-        originalLink: 'https:/google/news/sports/test',
-        createdAt: new Date(),
-        updatedAt: new Date('2024/01/18 20:48:00'),
-    },
-    {
-        id: 1,
-        name: 'test link 4',
-        path: '/g/test',
-        originalLink: 'https:/google/news/sports/test',
-        createdAt: new Date(),
-        updatedAt: new Date('2024/01/18 19:58:00'),
-    },
-    {
-        id: 1,
-        name: 'test link 4',
-        path: '/g/test',
-        originalLink: 'https:/google/news/sports/test',
-        createdAt: new Date(),
-        updatedAt: new Date('2021/01/18 19:58:00'),
-    }
-]
-
+import { LinkGridList } from '../_components/link/link-grid-list'
+import { useQueryParams } from '../_hooks'
+import { Pagination } from '../_components/ui/pagination'
+import { api } from '@/trpc/react'
+import { EmptyState } from '../_components/ui/empty-state'
+import { Skeleton } from '../_components/ui/skeleton'
+import { LinkCardSkeleton } from '../_components/link/link-card-skeleton'
 
 const DashboardPage = () => {
-    const searchParams = useSearchParams()
-    const router = useRouter()
+	const { searchParams, setParam, removeParam } = useQueryParams()
 
-    const { openModal } = useModalStore()
+	const { openModal } = useModalStore()
 
-    const addNewLink = () => {
-        // setSelectedLink(undefined)
+	const page = searchParams.get('page') ? Number(searchParams.get('page')) : 1
 
-        // setOpenModal(true)
-        openModal({
-            component: CreateUpdateLink,
-        })
-    }
 
-    const updateLink = (link: Link) => {
-        openModal({
-            component: CreateUpdateLink,
-            props: {
-                link,
-            }
-        })
-    }
+	const { data: response, isLoading } = api.link.getUserLinks.useQuery({
+		search: searchParams.get('search') ?? '',
+		perPage: 10
+	})
 
-    const onSearchHandler = (search: string) => {
-        const params = new URLSearchParams(searchParams.toString())
-        params.set('search', search)
+	const onPageChange = (newPage: number) => {
+		setParam('page', newPage.toString())
+	}
 
-        const queryParams = params.toString()
+	const addNewLink = () => {
+		openModal({
+			component: CreateUpdateLink,
+		})
+	}
 
-        router.push('/dashboard' + '?' + queryParams)
-    }
+	const handleUpdate = (link: Link) => {
+		openModal({
+			component: CreateUpdateLink,
+			props: {
+				link,
+			}
+		})
+	}
 
-    return (
-        <main className="flex flex-col gap-4 items-center w-full">
-            <section className="w-full flex flex-row  flex-wrap justify-start md:justify-center items-center gap-2">
-                <LinkSearchBox onSearch={onSearchHandler} value={searchParams.get('search') ?? ''} />
-                <Button variant="secondary" onClick={addNewLink}>
-                    + Add new link
-                </Button>
-            </section>
+	const onSearchHandler = (search: string) => {
+		if (search) {
+			setParam('search', search)
+		} else {
+			removeParam('search')
+		}
+	}
 
-            <section className="grid grid-cols-4 gap-4 justify-center mt-10">
-                {
-                    links.map((link) => (
-                        <LinkCard
-                            key={link.id}
-                            onClick={updateLink}
-                            link={link}
-                        />
-                    ))
-                }
-            </section>
-        </main>
-    )
+	const getContent = () => {
+		if (isLoading) {
+			return <LinkCardSkeleton />
+		}
+
+		if (!response?.data?.length) {
+			return <EmptyState
+				title="No links were found"
+				description="Please start adding links or try changes with a different search"
+			/>
+		}
+
+
+		return (
+			<>
+				<LinkGridList
+					links={response.data} onClickUpdate={handleUpdate} />
+				<Pagination
+					page={page}
+					totalPages={response?.totalPages ?? 0}
+					onPageChange={onPageChange}
+				/>
+			</>
+		)
+	}
+
+	return (
+		<main className="flex flex-col gap-8 items-center w-full">
+			<section className="w-full flex flex-row  flex-wrap justify-start md:justify-center items-center gap-2">
+				<LinkSearchBox onSearch={onSearchHandler} value={searchParams.get('search') ?? ''} />
+				<Button variant="secondary" onClick={addNewLink}>
+					+ Add new link
+				</Button>
+			</section>
+			{getContent()}
+		</main>
+	)
 }
 
 export default DashboardPage

@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -23,6 +23,9 @@ import {
 } from '@/app/_components/ui/form'
 import { Input } from '@/app/_components/ui/input'
 import { Button } from '../ui/button'
+import { api } from '@/trpc/react'
+import { useModalStore } from '@/app/_store'
+import { useDebounceCallback, useToast } from '@/app/_hooks'
 
 interface Props {
 	link?: Link
@@ -41,19 +44,76 @@ const formSchema = z.object({
 })
 
 export const CreateUpdateLink = ({ link }: Props) => {
+	const utils = api.useUtils()
+
+	const { toast } = useToast()
+
+	const {
+		mutate: createLink,
+		isLoading: isCreating,
+		isSuccess: isCreateSuccess,
+	} = api.link.create.useMutation()
+	const {
+		mutate: updateLink,
+		isLoading: isUpdating,
+		isSuccess: isUpdateSuccess,
+	} = api.link.update.useMutation()
+
+	const [pathWatched, setPathWatched] = useState('')
+	const debounce = useDebounceCallback()
+
+	const { data: existingPath } = api.link.searchLinkByPath.useQuery({
+		path: pathWatched,
+	}, {
+		enabled: Boolean(pathWatched)
+	})
+
+	const onPathChange = (path: string) => {
+
+		debounce(() => setPathWatched(path))
+	}
+
+	const { closeModal } = useModalStore()
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			...link
+			...link ?? {}
 		},
 	})
 
 	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		// Do something with the form values.
-		// ✅ This will be type-safe and validated.
-		console.log(values)
+		if (link) {
+			updateLink({
+				...values,
+				id: link.id,
+			})
+		} else {
+			createLink({
+				...values,
+			})
+		}
 	}
+
+	useEffect(() => {
+		if (existingPath) {
+			form.setError('path', { message: 'Path already exist' })
+		}
+	}, [existingPath, form])
+
+	useEffect(() => {
+		if (isCreateSuccess || isUpdateSuccess) {
+			void utils.link.getUserLinks.invalidate()
+
+			toast({
+				title: isCreateSuccess ? 'Link created' : 'Link updated',
+				duration: 2000,
+			})
+
+			closeModal()
+		}
+
+	}, [isCreateSuccess, isUpdateSuccess, utils, closeModal, toast])
 
 	return (
 		<DialogContent>
@@ -70,7 +130,10 @@ export const CreateUpdateLink = ({ link }: Props) => {
 								<FormItem className="w-full">
 									<FormLabel>Name*</FormLabel>
 									<FormControl>
-										<Input placeholder="Free books" {...field}/>
+										<Input
+											placeholder="Free books"
+											{...field}
+										/>
 									</FormControl>
 									<FormDescription>
 										This is your link name.
@@ -102,7 +165,14 @@ export const CreateUpdateLink = ({ link }: Props) => {
 								<FormItem className="w-full" >
 									<FormLabel>Path</FormLabel>
 									<FormControl>
-										<Input placeholder="/g/book" {...field} />
+										<Input
+											placeholder="/g/book"
+											{...field}
+											onChange={(evt) => {
+												field.onChange(evt)
+												onPathChange(evt.target.value)
+											}}
+										/>
 									</FormControl>
 									<FormDescription>
 										Enter a path to alias the url. If empty a random url path should be generated
@@ -114,7 +184,12 @@ export const CreateUpdateLink = ({ link }: Props) => {
 					</div>
 
 					<DialogFooter>
-						<Button type="submit">Save changes</Button>
+						<Button
+							disabled={isCreating || isUpdating}
+							type="submit"
+						>
+							Save changes
+						</Button>
 					</DialogFooter>
 				</form>
 			</Form>

@@ -1,7 +1,7 @@
 'use client'
 
 import { signIn } from 'next-auth/react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/app/_components/ui/button'
 import React from 'react'
 
 import { IconBrandDiscordFilled, IconBrandGithubFilled } from '@tabler/icons-react'
