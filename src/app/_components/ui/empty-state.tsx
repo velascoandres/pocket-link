@@ -22,8 +22,8 @@ export const EmptyState = ({
 				height={300}
 			/>
 
-			<h2 className="text-lg font-bold text-white">{title}</h2>
-			<p className="text-gray-300 font-semibold">{description}</p>
+			<h2 className="text-4xl font-bold text-amber-400">{title}</h2>
+			<p className="text-gray-300 font-semibold text-lg">{description}</p>
 		</div>
 	)
 }

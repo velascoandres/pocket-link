@@ -50,7 +50,7 @@ const DashboardPage = () => {
 		if (!response?.data?.length) {
 			return <EmptyState
 				title="No links were found"
-				description="Please start adding links or try changes with a different search"
+				description="Please try adding new links or change your search parameters"
 			/>
 		}
 
