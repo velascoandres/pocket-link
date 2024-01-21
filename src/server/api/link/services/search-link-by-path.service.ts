@@ -1,15 +1,15 @@
 import { type PrismaClient } from '@prisma/client'
 
 interface Options {
-    path: string
+	path: string
 }
 
 export const searchLinkByPathService = (prisma: PrismaClient, options: Options) => {
-    const { path } = options
+	const { path } = options
 
-    return prisma.link.findUnique({
-        where: {
-            path
-        }
-    })
+	return prisma.link.findUnique({
+		where: {
+			path
+		}
+	})
 }

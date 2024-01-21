@@ -95,7 +95,7 @@ export const CreateUpdateLink = ({ link }: Props) => {
 			void utils.link.getUserLinks.invalidate()
 
 			toast({
-				title: isCreateSuccess ? 'Link created' : 'Link updated',
+				title: `✅ Link ${isCreateSuccess ? 'created' : 'updated'}`,
 				duration: 2000,
 			})
 

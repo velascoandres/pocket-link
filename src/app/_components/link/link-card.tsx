@@ -68,11 +68,14 @@ export const LinkCard = ({
   }
 
   const handleCopyClipboard = () => {
-    void navigator.clipboard.writeText(link.path)
+    const domain = window.location.origin
+    const completeLink = `${domain}/p/${link.path}`
+
+    void navigator.clipboard.writeText(completeLink)
     
     toast({
-      title: 'Link copied to clipboard',
-      description: `Copied for: ${link.name}`,
+      title: '✅ Link copied to clipboard',
+      description: completeLink,
       duration: 2000,
     })
   }
@@ -114,7 +117,9 @@ export const LinkCard = ({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-gray-300 font-bold text-sm">{path}</p>
+        <NextLink href={`/p/${path}`} target="_blank">
+          <p className="text-gray-300 font-bold text-sm hover:underline">/p/{path}</p>
+        </NextLink>
         <NextLink href={originalLink} target="_blank">
           <span className="text-gray-400 hover:underline text-sm">{shortOriginalLink}</span>
         </NextLink>

@@ -1,3 +1,4 @@
 export const IMAGES = {
-    EMPTY_STATE: '/no-data.svg'
+	EMPTY_STATE: '/cheems-meme.svg',
+	CHEEMS: '/cheems-meme.svg'
 }
