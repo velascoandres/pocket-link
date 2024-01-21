@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import * as z from 'zod'
 
 import { type Link } from '@/app/_interfaces/link'
 import {
@@ -26,22 +25,12 @@ import { Button } from '../ui/button'
 import { api } from '@/trpc/react'
 import { useModalStore } from '@/app/_store'
 import { useDebounceCallback, useToast } from '@/app/_hooks'
+import { CreateLinkDto } from '@/dtos'
+import { type z } from 'zod'
 
 interface Props {
 	link?: Link
 }
-
-const formSchema = z.object({
-	name: z.string().min(2, {
-		message: 'Name must be at least 2 characters.',
-	}),
-	path: z.string().optional(),
-	originalLink: z.string()
-		.min(10, {
-			message: 'Path must be at least 10 characters.',
-		})
-		.url('Path should be a valid url format'),
-})
 
 export const CreateUpdateLink = ({ link }: Props) => {
 	const utils = api.useUtils()
@@ -75,14 +64,14 @@ export const CreateUpdateLink = ({ link }: Props) => {
 
 	const { closeModal } = useModalStore()
 
-	const form = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	const form = useForm<z.infer<typeof CreateLinkDto>>({
+		resolver: zodResolver(CreateLinkDto),
 		defaultValues: {
 			...link ?? {}
 		},
 	})
 
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
+	const onSubmit = (values: z.infer<typeof CreateLinkDto>) => {
 		if (link) {
 			updateLink({
 				...values,

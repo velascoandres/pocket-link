@@ -3,14 +3,12 @@
 import { CreateUpdateLink } from '@/app/_components/link/create-update-link'
 import { LinkSearchBox } from '@/app/_components/link/link-search-box'
 import { Button } from '@/app/_components/ui/button'
-import { type Link } from '@/app/_interfaces/link'
 import { useModalStore } from '../_store'
 import { LinkGridList } from '../_components/link/link-grid-list'
 import { useQueryParams } from '../_hooks'
 import { Pagination } from '../_components/ui/pagination'
 import { api } from '@/trpc/react'
 import { EmptyState } from '../_components/ui/empty-state'
-import { Skeleton } from '../_components/ui/skeleton'
 import { LinkCardSkeleton } from '../_components/link/link-card-skeleton'
 
 const DashboardPage = () => {
@@ -33,15 +31,6 @@ const DashboardPage = () => {
 	const addNewLink = () => {
 		openModal({
 			component: CreateUpdateLink,
-		})
-	}
-
-	const handleUpdate = (link: Link) => {
-		openModal({
-			component: CreateUpdateLink,
-			props: {
-				link,
-			}
 		})
 	}
 
@@ -68,8 +57,7 @@ const DashboardPage = () => {
 
 		return (
 			<>
-				<LinkGridList
-					links={response.data} onClickUpdate={handleUpdate} />
+				<LinkGridList links={response.data} />
 				<Pagination
 					page={page}
 					totalPages={response?.totalPages ?? 0}

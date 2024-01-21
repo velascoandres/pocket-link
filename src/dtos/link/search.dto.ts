@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const searchDto = z.object({
+export const SearchDto = z.object({
     search: z.string(),
     perPage: z.number().optional().default(10),
     page: z.number().optional().default(1),

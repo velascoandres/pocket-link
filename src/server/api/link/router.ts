@@ -1,11 +1,11 @@
 import { createTRPCRouter, protectedProcedure } from '../trpc'
 import { 
-    createLinkDto, 
-    searchByPathDto, 
-    updateLinkDto, 
-    searchDto, 
-    deleteLinkDto 
-} from './dtos'
+    CreateLinkDto, 
+    SearchByPathDto, 
+    UpdateLinkDto, 
+    SearchDto, 
+    DeleteLinkDto 
+} from '../../../dtos/link'
 import { 
     createLinkService, 
     deleteUserLinkService, 
@@ -16,27 +16,27 @@ import {
 
 
 export const linkRouter = createTRPCRouter({
-    searchLinkByPath: protectedProcedure.input(searchByPathDto)
+    searchLinkByPath: protectedProcedure.input(SearchByPathDto)
         .query(({ ctx, input }) => {
             return searchLinkByPathService(ctx.db, {
                 path: input.path,
             })
         }),
-    getUserLinks: protectedProcedure.input(searchDto)
+    getUserLinks: protectedProcedure.input(SearchDto)
         .query(({ ctx, input }) => {
             return searchUserLinksService(ctx.db, {
                 ...input,
                 createdById: ctx.session.user.id,
             })
         }),
-    deleteUserLink: protectedProcedure.input(deleteLinkDto)
+    deleteUserLink: protectedProcedure.input(DeleteLinkDto)
         .mutation(({ ctx, input }) => {
             return deleteUserLinkService(ctx.db, {
                 id: input.id,
                 createdById: ctx.session.user.id,
             })
         }),
-    create: protectedProcedure.input(createLinkDto)
+    create: protectedProcedure.input(CreateLinkDto)
         .mutation(({ ctx, input }) => {
 
             const options = {
@@ -50,7 +50,7 @@ export const linkRouter = createTRPCRouter({
                 ctx.db, options
             )
         }),
-    update: protectedProcedure.input(updateLinkDto)
+    update: protectedProcedure.input(UpdateLinkDto)
         .mutation(({ ctx, input }) => {
 
             const options = {
