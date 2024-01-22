@@ -84,7 +84,7 @@ export const LinkCard = ({
 
   return (
     <Card
-      className="transition relative ease-in cursor-pointer border border-gray-800 hover:border-gray-100 hover:border"
+      className="transition relative ease-in border border-gray-800 hover:border-gray-100 hover:border"
     >
       <CardHeader>
         <CardTitle className="text-base flex flex-row justify-start items-center gap-2">

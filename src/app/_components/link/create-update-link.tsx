@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { type z } from 'zod'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { IconLoader2 } from '@tabler/icons-react'
 
 import {
   Form,
@@ -19,6 +20,7 @@ import { useDebounceCallback, useToast } from '@/app/_hooks'
 import { type Link } from '@/app/_interfaces/link'
 import { useModalStore } from '@/app/_store'
 import { CreateLinkDto } from '@/dtos'
+import { cn } from '@/lib/utils'
 import { api } from '@/trpc/react'
 
 import { Button } from '../ui/button'
@@ -38,16 +40,29 @@ export const CreateUpdateLink = ({ link }: Props) => {
 
   const { toast } = useToast()
 
+  const handleSuccess = () => {
+    void utils.link.getUserLinks.invalidate()
+
+    toast({
+      title: `✅ Link ${link ? 'updated' : 'created'}`,
+      duration: 2000,
+    })
+
+    closeModal()
+  }
+
   const {
     mutate: createLink,
     isLoading: isCreating,
-    isSuccess: isCreateSuccess,
-  } = api.link.create.useMutation()
+  } = api.link.create.useMutation({
+    onSuccess: handleSuccess,
+  })
   const {
     mutate: updateLink,
     isLoading: isUpdating,
-    isSuccess: isUpdateSuccess,
-  } = api.link.update.useMutation()
+  } = api.link.update.useMutation({
+    onSuccess: handleSuccess,
+  })
 
   const [pathWatched, setPathWatched] = useState('')
   const debounce = useDebounceCallback()
@@ -91,20 +106,6 @@ export const CreateUpdateLink = ({ link }: Props) => {
     }
   }, [existingPath, form])
 
-  useEffect(() => {
-    if (isCreateSuccess || isUpdateSuccess) {
-      void utils.link.getUserLinks.invalidate()
-
-      toast({
-        title: `✅ Link ${isCreateSuccess ? 'created' : 'updated'}`,
-        duration: 2000,
-      })
-
-      closeModal()
-    }
-
-  }, [isCreateSuccess, isUpdateSuccess, utils, closeModal, toast])
-
   return (
     <DialogContent>
       <DialogHeader>
@@ -142,7 +143,7 @@ export const CreateUpdateLink = ({ link }: Props) => {
                     <Input placeholder="https://my-long-domain.com/long/123/post" {...field} />
                   </FormControl>
                   <FormDescription>
-										Paste your complete url.
+										Enter the entire link
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -165,7 +166,7 @@ export const CreateUpdateLink = ({ link }: Props) => {
                     />
                   </FormControl>
                   <FormDescription>
-										Enter a path to alias the url. If empty a random url path should be generated
+										Enter a path to alias the link. If it is empty, a random path will be generated.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -177,8 +178,17 @@ export const CreateUpdateLink = ({ link }: Props) => {
             <Button
               disabled={isCreating || isUpdating}
               type="submit"
+
             >
-							Save changes
+              <div className="flex justify-start items-center gap-2">
+                <IconLoader2 
+                  className={cn('hidden',{
+                    'block animate-spin': isCreating || isUpdating,
+                  })}
+								 />
+								Save changes
+              </div>
+
             </Button>
           </DialogFooter>
         </form>

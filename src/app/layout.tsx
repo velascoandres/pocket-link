@@ -22,11 +22,11 @@ export const metadata = {
 const RootLayout = ({
   children,
 }: {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }) => {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans ${inter.variable} `}>
+      <body className={`font-sans ${inter.variable}`}>
         <AuthProvider>
           <ThemeProvider
             attribute="class"

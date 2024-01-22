@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { getServerAuthSession } from '@/server/auth'
 
 import { SigninProviders } from './_components/auth/signin-providers'
+import { Footer } from './_components/ui/footer'
 
 export default async function Home() {
   noStore()
@@ -13,7 +14,7 @@ export default async function Home() {
     <main className="flex flex-col h-screen items-center justify-center gap-4">
       <div className="space-y-2 flex flex-col items-center gap-4">
         <h1 className="text-white text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-          <strong className="text-amber-400">Pocket</strong> link
+          <strong className="text-amber-400">Pocket</strong> <strong className="text-gray-400">link</strong>
         </h1>
         <p className="max-w-[300px] md:max-w-[600px] text-gray-200 md:text-xl/relaxed dark:text-gray-400">
           Discover a <strong className="text-amber-400">user-friendly</strong> platform designed to effortlessly manage <strong className="text-amber-400">all your links</strong>.
@@ -32,7 +33,7 @@ export default async function Home() {
           <SigninProviders />
         )
       }
-
+      <Footer />
     </main>
   )
 }
