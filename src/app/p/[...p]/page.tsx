@@ -9,8 +9,6 @@ const PathPage = async ({ params }: { params: Params }) => {
 
   const pathToRedirect = params.p.join('/')
 
-  console.log(pathToRedirect)
-
   await redirectLinkByPath(pathToRedirect)
 
   return null
