@@ -4,7 +4,11 @@ const config = {
   parserOptions: {
     project: true,
   },
-  plugins: ['@typescript-eslint'],
+  plugins: [
+    '@typescript-eslint', 
+    'simple-import-sort', 
+    'import',
+  ],
   extends: [
     'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended-type-checked',
@@ -33,7 +37,40 @@ const config = {
     ],
     'quotes': ['error', 'single'],
     'semi': ['error', 'never'],
+    'indent': [2, 2, { MemberExpression: 0 }],
+    'space-in-parens': 2,
+    'newline-before-return': 2,
+    'object-curly-spacing': ['error', 'always'],
   },
+  overrides: [
+    {
+      files: ['**/*.js', '**/*.ts', '**/*.tsx'],
+      rules: {
+        'simple-import-sort/imports': [
+          'error',
+          {
+            groups: [
+              // `react` first, `next` second, then packages starting with a character
+              ['^react$', '^next', '^[a-z]'],
+              // Packages starting with `@`
+              ['^@'],
+              ['^@/'],
+              // Packages starting with `~`
+              ['^~'],
+              // Imports starting with `../`
+              ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+              // Imports starting with `./`
+              ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+              // Style imports
+              ['^.+\\.s?css$'],
+              // Side effect imports
+              ['^\\u0000'],
+            ],
+          },
+        ],
+      },
+    },
+  ]
 }
 
 module.exports = config

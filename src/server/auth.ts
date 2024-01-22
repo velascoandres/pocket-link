@@ -1,11 +1,12 @@
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import {
-  getServerSession,
   type DefaultSession,
+  getServerSession,
   type NextAuthOptions,
 } from 'next-auth'
 import DiscordProvider from 'next-auth/providers/discord'
 import GithubProvider from 'next-auth/providers/github'
+
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
 
 import { env } from '@/env'
 import { db } from '@/server/db'

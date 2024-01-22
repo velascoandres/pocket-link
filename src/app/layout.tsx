@@ -1,13 +1,12 @@
-import '@/styles/globals.css'
-
 import { Onest } from 'next/font/google'
 
-import { TRPCReactProvider } from '@/trpc/react'
-
-import { ThemeProvider } from '@/app/_components/theme/theme-provider'
 import { AuthProvider } from '@/app/_components/auth/auth-provider'
+import { ThemeProvider } from '@/app/_components/theme/theme-provider'
 import { ModalContainer } from '@/app/_components/ui/modal-container'
 import { Toaster } from '@/app/_components/ui/toaster'
+import { TRPCReactProvider } from '@/trpc/react'
+
+import '@/styles/globals.css'
 
 const inter = Onest({
   subsets: ['latin'],

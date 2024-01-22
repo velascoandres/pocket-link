@@ -1,69 +1,71 @@
 'use client'
 
-import { useModalStore } from '@/app/_store'
 import { useEffect } from 'react'
+
+import { useModalStore } from '@/app/_store'
+
 import { Dialog } from './dialog'
 
 
 export const ModalContainer = () => {
 
-	const {
-		currentModal,
-		closeModal,
-		isOpen,
-	} = useModalStore()
+  const {
+    currentModal,
+    closeModal,
+    isOpen,
+  } = useModalStore()
 
 
-	const renderModal = () => {
-		if (!currentModal) {
-			return null
-		}
+  const renderModal = () => {
+    if (!currentModal) {
+      return null
+    }
 
-		const { component, componentProps } = currentModal
+    const { component, componentProps } = currentModal
 
-		if (!component) {
-			return null
-		}
+    if (!component) {
+      return null
+    }
 
-		const ModalComponent = component
+    const ModalComponent = component
 
-		return <ModalComponent {...componentProps} />
-	}
+    return <ModalComponent {...componentProps} />
+  }
 
-	const onOpenChange = (value: boolean) => {
-		if (!value) {
-			closeModal()
+  const onOpenChange = (value: boolean) => {
+    if (!value) {
+      closeModal()
 
-			return
-		}
-	}
+      return
+    }
+  }
 
-	useEffect(() => {
-		const hasCloseOnEscapeKeydown = currentModal?.config?.closeOnEscapeKeydown
+  useEffect(() => {
+    const hasCloseOnEscapeKeydown = currentModal?.config?.closeOnEscapeKeydown
 
-		const handleKeydown = (event: KeyboardEvent) => {
-			if (event.key !== 'Escape') {
-				return
-			}
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') {
+        return
+      }
 
-			if (!hasCloseOnEscapeKeydown) {
-				return
-			}
+      if (!hasCloseOnEscapeKeydown) {
+        return
+      }
 
-			closeModal()
-		}
+      closeModal()
+    }
 
-		document.addEventListener('keydown', handleKeydown)
+    document.addEventListener('keydown', handleKeydown)
 
-		return () => {
-			document.removeEventListener('keydown', handleKeydown)
-		}
+    return () => {
+      document.removeEventListener('keydown', handleKeydown)
+    }
 
-	}, [closeModal, currentModal])
+  }, [closeModal, currentModal])
 
-	return (
-		<Dialog open={isOpen} onOpenChange={onOpenChange}>
-			{renderModal()}
-		</Dialog>
-	)
+  return (
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+      {renderModal()}
+    </Dialog>
+  )
 }

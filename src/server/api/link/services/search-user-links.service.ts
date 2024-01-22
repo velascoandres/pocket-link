@@ -14,56 +14,56 @@ interface LinkWhereQuery {
 }
 
 export const searchUserLinksService = async (prisma: PrismaClient, options: Options) => {
-	const { search, perPage = 10, page = 1, createdById } = options
+  const { search, perPage = 10, page = 1, createdById } = options
 
-	const query: LinkWhereQuery = {
-		createdById
-	}
+  const query: LinkWhereQuery = {
+    createdById
+  }
 
-	if (search) {
-		query.OR = [
-			{
-				name: {
-					contains: search
-				}
-			},
-			{
-				path: {
-					contains: search
-				}
-			},
-			{
-				originalLink: {
-					contains: search
-				}
-			}
-		]
-	}
+  if (search) {
+    query.OR = [
+      {
+        name: {
+          contains: search
+        }
+      },
+      {
+        path: {
+          contains: search
+        }
+      },
+      {
+        originalLink: {
+          contains: search
+        }
+      }
+    ]
+  }
 
-	const totalQuery = prisma.link.count({
-		where: {
-			...query
-		},
-	})
+  const totalQuery = prisma.link.count({
+    where: {
+      ...query
+    },
+  })
 
-	const dataQuery = prisma.link.findMany({
-		where: {
-			...query
-		},
-		skip: perPage * (page - 1),
-		take: perPage,
-	})
+  const dataQuery = prisma.link.findMany({
+    where: {
+      ...query
+    },
+    skip: perPage * (page - 1),
+    take: perPage,
+  })
 
-	const [total, data] = await Promise.all([totalQuery, dataQuery])
+  const [total, data] = await Promise.all([totalQuery, dataQuery])
 
-	const totalPages = Math.ceil(total / perPage)
-	const hasNextPage = page < totalPages
+  const totalPages = Math.ceil(total / perPage)
+  const hasNextPage = page < totalPages
 
-	return {
-		hasNextPage,
-		totalPages,
-		total,
-		page,
-		data
-	}
+  return {
+    hasNextPage,
+    totalPages,
+    total,
+    page,
+    data
+  }
 }

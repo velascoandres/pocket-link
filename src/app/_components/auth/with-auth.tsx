@@ -1,9 +1,9 @@
 /* eslint-disable react/display-name */
 'use client'
 
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
 type PageProps = {
 	children: React.ReactNode;
@@ -13,35 +13,35 @@ type PageComponent = (props: PageProps) => React.ReactNode
 
 export const withAuth = (Page: PageComponent) => {
 
-	return ({ children }: PageProps) => {
-		const { status } = useSession()
-		const router = useRouter()
+  return ({ children }: PageProps) => {
+    const { status } = useSession()
+    const router = useRouter()
 
-		const [isAllowed, setIsAllowed] = useState(false)
+    const [isAllowed, setIsAllowed] = useState(false)
 
-		useEffect(() => {
-			if (status === 'unauthenticated') {
-				router.push('/')
+    useEffect(() => {
+      if (status === 'unauthenticated') {
+        router.push('/')
 
-				return
-			}
+        return
+      }
 
-			if (status === 'authenticated') {
-				setIsAllowed(true)
-			}
+      if (status === 'authenticated') {
+        setIsAllowed(true)
+      }
 
-		}, [router, status])
+    }, [router, status])
 
-		if (!isAllowed) {
-			return null
-		}
+    if (!isAllowed) {
+      return null
+    }
 
 
-		return (
-			<Page >
-				{children}
-			</Page>
-		)
-	}
+    return (
+      <Page >
+        {children}
+      </Page>
+    )
+  }
 }
 

@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+
 import { type Link } from '../_interfaces/link'
 
 type State = {
@@ -10,6 +11,6 @@ type Action = {
 }
 
 export const useLinkStore = create<State & Action>((set) => ({
-	links: [],
-	setLinks: (links) => set(() => ({ links: [...links] })),
+  links: [],
+  setLinks: (links) => set(() => ({ links: [...links] })),
 }))

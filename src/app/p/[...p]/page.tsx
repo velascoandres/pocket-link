@@ -7,13 +7,13 @@ interface Params {
 
 const PathPage = async ({ params }: { params: Params }) => {
 
-	const pathToRedirect = params.p.join('/')
+  const pathToRedirect = params.p.join('/')
 
-	console.log(pathToRedirect)
+  console.log(pathToRedirect)
 
-	await redirectLinkByPath(pathToRedirect)
+  await redirectLinkByPath(pathToRedirect)
 
-	return null
+  return null
 }
 
 
