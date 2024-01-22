@@ -1,28 +1,41 @@
-# Create T3 App
+# Pocket Link
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Welcome to Pocket Link, your go-to application for link management featuring a convenient dashboard! This application is built using the [T3 stack](https://create.t3.gg/) with prisma.
 
-## What's next? How do I make an app with this?
+Not only does it shorten links, but it also allows you to efficiently organize and monitor them through an intuitive dashboard. Transform lengthy links into concise, customized URLs that are effortlessly shareable. Take advantage of our dashboard to save, categorize, and track the performance of your links.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## How to Use
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+Clone this repository.
+Set up your virtual environment (optional but recommended).
+Copy the contents of `.env.example` into a new file named `.env` and configure the required variables.
+```text
+DATABASE_URL=""
+NEXTAUTH_SECRET=""
+NEXTAUTH_URL=""
+DISCORD_CLIENT_ID=""
+DISCORD_CLIENT_SECRET=""
+```
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+Install dependencies.
+```shell_script
+yarn
+```
+Setup the database.
+```shell_script
+yarn postinstall
+yarn db:push
+```
+Run the application in dev mode
+```shell_script
+yarn dev
+```
+Open your browser and visit [http://localhost:3000](http://localhost:3000) to begin shortening URLs.
 
-## Learn More
+## Key Features
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- **Quick Shortening:** Transform long links with just a few clicks.
+- **Intuitive Dashboard:** Save, organize, and manage your links efficiently.
+- **Customization:** Personalize shortened URLs according to your preferences.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+We hope you enjoy using Pocket Link for all your link management needs! If you have any questions or issues, feel free to open an [issue](https://github.com/velascoandres/pocket-link/issues)

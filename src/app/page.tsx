@@ -1,6 +1,8 @@
 import { unstable_noStore as noStore } from 'next/cache'
 import Link from 'next/link'
 
+import { IconChevronRight } from '@tabler/icons-react'
+
 import { getServerAuthSession } from '@/server/auth'
 
 import { SigninProviders } from './_components/auth/signin-providers'
@@ -11,7 +13,7 @@ export default async function Home() {
   const session = await getServerAuthSession()
 
   return (
-    <main className="flex flex-col h-screen items-center justify-center gap-4">
+    <main className="flex flex-col h-screen items-center justify-center gap-6">
       <div className="space-y-2 flex flex-col items-center gap-4">
         <h1 className="text-white text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
           <strong className="text-amber-400">Pocket</strong> <strong className="text-gray-400">link</strong>
@@ -26,9 +28,10 @@ export default async function Home() {
         session ? (
           <Link
             href="/dashboard"
-            className="text-black rounded-full bg-white px-10 py-3 font-semibold no-underline transition hover:bg-white/70"
+            className="transition ease-in group rounded-full border flex border-white text-white pl-4 pr-2 py-3 font-semibold no-underline hover:border-amber-400"
           >
-          Continue to dashboard
+            <span className="group-hover:text-amber-400">Continue to dashboard </span>
+            <IconChevronRight className="transition ease-out duration-200 group-hover:translate-x-1 group-hover:text-amber-400" />
           </Link>) : (
           <SigninProviders />
         )
