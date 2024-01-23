@@ -2,7 +2,10 @@
 
 import { redirect } from 'next/navigation'
 
-import { searchLinkByPathService } from '@/server/api/link/services'
+import { 
+  createLinInteractionService, 
+  searchLinkByPathService 
+} from '@/server/api/link/services'
 import { db } from '@/server/db'
 
 export const redirectLinkByPath = async (path: string) => {
@@ -11,6 +14,8 @@ export const redirectLinkByPath = async (path: string) => {
   if (!link) {
     redirect('/not-found')
   }
+
+  await createLinInteractionService(db, { linkId: link?.id })
 
   redirect(link.originalLink)
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import NextLink from 'next/link'
 
-import { IconCopy, IconDotsVertical, IconEdit, IconTrash } from '@tabler/icons-react'
+import { IconCopy, IconDotsVertical, IconEdit, IconEye, IconTrash } from '@tabler/icons-react'
 
 import { useToast } from '@/app/_hooks'
 import { type Link } from '@/app/_interfaces/link'
@@ -14,7 +14,8 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-  CardTitle } from '../ui/card'
+  CardTitle
+} from '../ui/card'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,6 +23,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '../ui/dropdown-menu'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '../ui/tooltip'
 
 import { CreateUpdateLink } from './create-update-link'
 import { DeleteLink } from './delete-link'
@@ -34,7 +41,7 @@ interface Props {
 export const LinkCard = ({
   link,
 }: Props) => {
-  const { name, originalLink, path, updatedAt } = link
+  const { name, originalLink, path, updatedAt, totalInteractions } = link
 
   const { openModal } = useModalStore()
 
@@ -74,7 +81,7 @@ export const LinkCard = ({
     const completeLink = `${domain}/p/${link.path}`
 
     void navigator.clipboard.writeText(completeLink)
-    
+
     toast({
       title: '✅ Link copied to clipboard',
       description: completeLink,
@@ -97,7 +104,7 @@ export const LinkCard = ({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="rounded-full px-2">
-                <IconDotsVertical/>
+                <IconDotsVertical />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -125,6 +132,16 @@ export const LinkCard = ({
         <NextLink href={originalLink} target="_blank">
           <span className="text-gray-400 hover:underline text-sm">{shortOriginalLink}</span>
         </NextLink>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger className="flex flex-row gap-2 justify-start items-center mt-2">
+              <IconEye /> <span className="text-white text-sm">{totalInteractions}</span>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="font-medium">Total link interactions</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </CardContent>
       <CardFooter>
         <span className="text-gray-400 text-xs" >{dateAgo}</span>

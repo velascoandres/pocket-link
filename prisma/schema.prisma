@@ -13,6 +13,7 @@ datasource db {
     // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
     url      = env("DATABASE_URL")
 }
+
 // Necessary for Next auth
 model Account {
     id                       String  @id @default(cuid())
@@ -68,8 +69,20 @@ model Link {
     createdAt    DateTime @default(now())
     updatedAt    DateTime @updatedAt
 
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
+    createdBy        User              @relation(fields: [createdById], references: [id])
+    createdById      String
+    linkInteractions LinkInteraction[]
 
     @@index([name, path])
+}
+
+model LinkInteraction {
+    id Int @id @default(autoincrement())
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    link      Link     @relation(fields: [linkId], references: [id])
+    linkId    Int
+
+    @@index([linkId])
 }

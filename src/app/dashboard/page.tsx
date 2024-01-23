@@ -70,10 +70,10 @@ const DashboardPage = () => {
 
   return (
     <main className="flex flex-col gap-8 items-center w-full">
-      <section className="w-full flex flex-row  flex-wrap justify-start md:justify-center items-center gap-2">
+      <section className="w-full flex flex-col md:flex-row flex-wrap justify-start md:justify-center items-center gap-2">
         <LinkSearchBox onSearch={onSearchHandler} value={searchParams.get('search') ?? ''} />
-        <Button variant="secondary" onClick={addNewLink}>
-					+ Add new link
+        <Button variant="secondary" onClick={addNewLink} className="w-1/2 md:w-auto">
+          + Add new link
         </Button>
       </section>
       {getContent()}

@@ -47,6 +47,13 @@ export const searchUserLinksService = async (prisma: PrismaClient, options: Opti
   })
 
   const dataQuery = prisma.link.findMany({
+    include: {
+      linkInteractions: {
+        select: {
+          id: true,
+        }
+      }
+    },
     where: {
       ...query
     },
@@ -57,7 +64,17 @@ export const searchUserLinksService = async (prisma: PrismaClient, options: Opti
     take: perPage,
   })
 
-  const [total, data] = await Promise.all([totalQuery, dataQuery])
+  const [total, linksData] = await Promise.all([totalQuery, dataQuery])
+
+  const data = linksData.map((link) => ({
+    id: link.id,
+    name: link.name,
+    originalLink: link.originalLink,
+    path: link.path,
+    totalInteractions: link.linkInteractions.length,
+    createdAt: link.createdAt,
+    updatedAt: link.updatedAt,
+  }))
 
   const totalPages = Math.ceil(total / perPage)
   const hasNextPage = page < totalPages
