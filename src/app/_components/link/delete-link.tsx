@@ -38,11 +38,11 @@ export const DeleteLink = ({
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle className="text-xl">Delete link</DialogTitle>
+        <DialogTitle className="text-xl">Delete: <strong className="text-amber-400" >{link.name}</strong></DialogTitle>
       </DialogHeader>
 
       <p className="px-2 font-semibold text-lg">
-				Do you want to <strong className="text-red-700">delete</strong> the link <strong className="text-indigo-600" >{link.name}</strong> ?
+        Are you sure to <strong className="text-red-500">delete</strong> the link?
       </p>
 
       <DialogFooter>

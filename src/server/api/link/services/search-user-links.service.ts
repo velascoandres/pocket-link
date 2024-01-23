@@ -53,7 +53,7 @@ export const searchUserLinksService = async (prisma: PrismaClient, options: Opti
     orderBy: {
       updatedAt: 'desc',
     },
-    skip: perPage * (page - 1),
+    skip: perPage * (page - 1), 
     take: perPage,
   })
 

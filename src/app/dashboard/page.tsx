@@ -11,6 +11,7 @@ import { useQueryParams } from '@/app/_hooks'
 import { useModalStore } from '@/app/_store'
 import { api } from '@/trpc/react'
 
+
 const DashboardPage = () => {
   const { searchParams, setParam, removeParam } = useQueryParams()
 
@@ -18,9 +19,9 @@ const DashboardPage = () => {
 
   const page = searchParams.get('page') ? Number(searchParams.get('page')) : 1
 
-
   const { data: response, isLoading } = api.link.getUserLinks.useQuery({
     search: searchParams.get('search') ?? '',
+    page: Number(searchParams.get('page') ?? 1),
     perPage: 10
   })
 

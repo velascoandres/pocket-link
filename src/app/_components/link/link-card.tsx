@@ -95,9 +95,9 @@ export const LinkCard = ({
           <span className="w-[150px]">{shortName}</span>
 
           <DropdownMenu>
-            <DropdownMenuTrigger>
+            <DropdownMenuTrigger asChild>
               <Button variant="outline" className="rounded-full px-2">
-                <IconDotsVertical />
+                <IconDotsVertical/>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>

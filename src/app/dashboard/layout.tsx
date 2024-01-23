@@ -19,8 +19,7 @@ const Layout = ({
       <div className="relative h-[calc(100vh-14rem)] overflow-y-auto max-w-screen-2xl flex flex-col items-start flex-wrap justify-between mx-auto px-4 mt-20">
         {children}
       </div>
-
-	  <Footer />
+	    <Footer />
     </div>
   )
 }
