@@ -3,7 +3,7 @@
 import React from 'react'
 import { signIn } from 'next-auth/react'
 
-import { IconBrandDiscordFilled, IconBrandGithubFilled } from '@tabler/icons-react'
+import { IconBrandDiscordFilled, IconBrandGithubFilled, IconBrandGoogleFilled } from '@tabler/icons-react'
 
 import { Button } from '@/app/_components/ui/button'
 
@@ -13,6 +13,15 @@ export function SigninProviders() {
 
   return (
     <div className="flex flex-row justify-center items-center gap-4">
+      <Button
+        variant="ghost"
+        className="bg-white text-black"
+        onClick={() => signIn('google', CONFIG)}
+      >
+        <IconBrandGoogleFilled className="mx-2" />
+
+                Sign in with Google
+      </Button>
       <Button
         variant="ghost"
         className="bg-indigo-900 text-white"
