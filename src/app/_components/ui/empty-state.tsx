@@ -21,10 +21,11 @@ export const EmptyState = ({
         alt={title}
         width={300}
         height={300}
+        className="w-[200px] md:w-[250px] lg:w-[270px]"
       />
 
-      <h2 className="text-4xl font-bold text-amber-400">{title}</h2>
-      <p className="text-gray-300 font-semibold text-lg">{description}</p>
+      <h2 className="text-2xl md:text-4xl font-bold text-amber-400">{title}</h2>
+      <p className="text-gray-300 font-semibold text-base md:text-lg">{description}</p>
     </div>
   )
 }

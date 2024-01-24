@@ -1,7 +1,14 @@
 import React from 'react'
 import NextLink from 'next/link'
 
-import { IconCopy, IconDotsVertical, IconEdit, IconEye, IconTrash } from '@tabler/icons-react'
+import { 
+  IconChartSankey, 
+  IconCopy, 
+  IconDotsVertical, 
+  IconEdit, 
+  IconEye, 
+  IconTrash 
+} from '@tabler/icons-react'
 
 import { useToast } from '@/app/_hooks'
 import { type Link } from '@/app/_interfaces/link'
@@ -32,6 +39,7 @@ import {
 
 import { CreateUpdateLink } from './create-update-link'
 import { DeleteLink } from './delete-link'
+import { LinkInteractions } from './link-interactions'
 
 interface Props {
   link: Link
@@ -63,6 +71,15 @@ export const LinkCard = ({
       component: CreateUpdateLink,
       props: {
         link,
+      }
+    })
+  }
+
+  const openInteractions = () => {
+    openModal({
+      component: LinkInteractions,
+      props: {
+        link
       }
     })
   }
@@ -113,6 +130,12 @@ export const LinkCard = ({
                 className="cursor-pointer flex justify-start gap-2"
               >
                 <IconEdit className="h-5 w-5" /> Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="cursor-pointer flex justify-start gap-2"
+                onClick={openInteractions}
+              >
+                <IconChartSankey className="h-5 w-5" /> Analytics
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
