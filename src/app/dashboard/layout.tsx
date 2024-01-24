@@ -12,14 +12,14 @@ const Layout = ({
 	children: React.ReactNode;
 }) => {
   return (
-    <div className="h-screen overflow-y-auto relative">
+    <div className="h-screen relative flex flex-col items-start justify-between overflow-y-auto">
       <div className="fixed w-screen top-0 z-10">
         <Navbar />
       </div>
-      <div className="relative h-[calc(100vh-14rem)] overflow-y-auto max-w-screen-2xl flex flex-col items-start flex-wrap justify-between mx-auto px-4 mt-20">
+      <div className="flex-1 max-w-screen-2xl flex flex-col items-start flex-wrap justify-between mx-auto px-4 pt-20 mb-8">
         {children}
       </div>
-	    <Footer />
+      <Footer />
     </div>
   )
 }

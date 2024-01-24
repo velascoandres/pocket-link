@@ -12,7 +12,7 @@ const CONFIG = { callbackUrl: '/dashboard' }
 export function SigninProviders() {
 
   return (
-    <div className="flex flex-row justify-center items-center gap-4">
+    <div className="flex flex-row justify-center flex-wrap items-center gap-4">
       <Button
         variant="ghost"
         className="bg-white text-black"
@@ -34,7 +34,7 @@ export function SigninProviders() {
 
       <Button
         variant="ghost"
-        className="bg-black text-white"
+        className="bg-black text-white border border-white"
         onClick={() => signIn('github', CONFIG)}
       >
         <IconBrandGithubFilled className="mx-2" />
