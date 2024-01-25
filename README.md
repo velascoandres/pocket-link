@@ -11,10 +11,18 @@ Set up your virtual environment (optional but recommended).
 Copy the contents of `.env.example` into a new file named `.env` and configure the required variables.
 ```text
 DATABASE_URL=""
+
 NEXTAUTH_SECRET=""
 NEXTAUTH_URL=""
+
 DISCORD_CLIENT_ID=""
 DISCORD_CLIENT_SECRET=""
+
+GH_CLIENT_ID=""
+GH_CLIENT_SECRET=""
+
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
 ```
 
 Install dependencies.
