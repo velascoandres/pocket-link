@@ -17,13 +17,13 @@ jobs:
       - name: Set up Node.js and Yarn
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 'latest'
           registry-url: 'https://registry.yarnpkg.com/'
 
       - name: Install dependencies
         run: yarn install  
 
-      - name: Check link
+      - name: Check lint
         run: yarn lint
 
       - name: Setup db
