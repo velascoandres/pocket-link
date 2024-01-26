@@ -103,6 +103,8 @@ export const CreateUpdateLink = ({ link }: Props) => {
   useEffect(() => {
     if (existingPath) {
       form.setError('path', { message: 'Path already exist' })
+    } else {
+      form.clearErrors('path')
     }
   }, [existingPath, form])
 
