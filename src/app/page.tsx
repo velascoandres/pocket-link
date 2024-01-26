@@ -21,7 +21,7 @@ export default async function Home() {
           <strong className="text-amber-400">Pocket</strong> <strong className="text-gray-400">link</strong>
         </h1>
         <p className="max-w-[300px] sm:max-w-[400px] md:max-w-[600px] lg:max-w-[850px] text-gray-200 text-lg/relaxed md:text-xl/relaxed dark:text-gray-400">
-          Discover a <strong className="text-amber-400">user-friendly</strong> platform designed to effortlessly manage <strong className="text-amber-400">all your links</strong>.
+          Discover an <strong className="text-amber-400">user-friendly</strong> platform designed to effortlessly manage <strong className="text-amber-400">all your links</strong>.
           Say goodbye to <strong className="text-amber-400">link clutter</strong> with our streamlined solution, offering easy organization and monitoring.
           Tailor your digital presence with <strong className="text-amber-400">personalized branding</strong>.
         </p>
