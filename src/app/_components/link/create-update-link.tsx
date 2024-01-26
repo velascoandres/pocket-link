@@ -157,7 +157,7 @@ export const CreateUpdateLink = ({ link }: Props) => {
                   <FormLabel>Path</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="/g/book"
+                      placeholder="g/book"
                       {...field}
                       onChange={(evt) => {
                         field.onChange(evt)
