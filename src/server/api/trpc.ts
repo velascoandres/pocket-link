@@ -101,3 +101,5 @@ export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
     },
   })
 })
+
+export const createCallerFactory = t.createCallerFactory

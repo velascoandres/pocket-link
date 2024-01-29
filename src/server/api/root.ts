@@ -1,5 +1,5 @@
 import { linkRouter } from '@/server/api/link/router'
-import { createTRPCRouter } from '@/server/api/trpc'
+import { createCallerFactory, createTRPCRouter } from '@/server/api/trpc'
 
 /**
  * This is the primary router for your server.
@@ -9,6 +9,9 @@ import { createTRPCRouter } from '@/server/api/trpc'
 export const appRouter = createTRPCRouter({
   link: linkRouter
 })
+
+
+export const createCaller = createCallerFactory(appRouter)
 
 // export type definition of API
 export type AppRouter = typeof appRouter;

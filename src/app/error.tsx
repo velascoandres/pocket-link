@@ -7,7 +7,7 @@ import { IconChevronLeft } from '@tabler/icons-react'
 
 import { IMAGES } from '@/constants/images'
 
-export default function Error() {
+export default function GlobalError() {
   return (
     <main className="h-screen w-screen flex flex-col items-center justify-center gap-4 px-10">
       <Image src={IMAGES.CHEEMS} width={200} height={200} alt="Cheems meme sad" />
