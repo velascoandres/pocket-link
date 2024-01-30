@@ -1,5 +1,6 @@
 import { 
   CreateLinkDto, 
+  CreateLinkInteractionDto, 
   DeleteLinkDto, 
   SearchByPathDto, 
   SearchDto, 
@@ -7,10 +8,11 @@ import {
   UpdateLinkDto 
 } from '@/dtos/link'
 
-import { createTRPCRouter, protectedProcedure } from '../trpc'
+import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc'
 
 import { searchInteractionAnalyticsService } from './services/search-interaction-analytics.service'
 import { 
+  createLinkInteractionService,
   createLinkService, 
   deleteUserLinkService, 
   searchLinkByPathService, 
@@ -26,7 +28,7 @@ export const linkRouter = createTRPCRouter({
     startDate: input.startDate,
     endDate: input.endDate,
   })),
-  searchLinkByPath: protectedProcedure.input(SearchByPathDto)
+  searchLinkByPath: publicProcedure.input(SearchByPathDto)
   .query(({ ctx, input }) => {
     return searchLinkByPathService(ctx.db, {
       path: input.path,

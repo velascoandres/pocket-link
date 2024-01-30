@@ -9,7 +9,7 @@ import { IMAGES } from '@/constants/images'
 export default function NotFound() {
   return (
     <main className="h-screen w-screen flex flex-col items-center justify-center gap-4 px-10">
-      <Image src={IMAGES.CHEEMS} width={200} height={200} alt="Cheems meme sad" />
+      <Image src={IMAGES.CHEEMS} width={200} height={200} draggable={false} alt="Cheems meme sad" />
       <h2 className="text-4xl font-bold text-amber-400">Not found</h2>
       <p className="text-white font-medium text-lg">We are sorry <span className="text-xl">😟</span> but we could not find the resource</p>
       <Link href="/">

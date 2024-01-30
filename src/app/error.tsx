@@ -7,10 +7,10 @@ import { IconChevronLeft } from '@tabler/icons-react'
 
 import { IMAGES } from '@/constants/images'
 
-export default function Error() {
+export default function GlobalError() {
   return (
     <main className="h-screen w-screen flex flex-col items-center justify-center gap-4 px-10">
-      <Image src={IMAGES.CHEEMS} width={200} height={200} alt="Cheems meme sad" />
+      <Image src={IMAGES.CHEEMS} width={200} height={200} alt="Cheems meme sad" draggable={false} />
       <h2 className="text-4xl font-bold text-red-500">An error has occurred</h2>
       <p className="text-white font-medium text-lg">Please try to request more later</p>
       <Link href="/">

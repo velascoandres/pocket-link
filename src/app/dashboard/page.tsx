@@ -1,5 +1,7 @@
 'use client'
 
+import { IconPlus } from '@tabler/icons-react'
+
 import { CreateUpdateLink } from '@/app/_components/link/create-update-link'
 import { LinkCardSkeleton } from '@/app/_components/link/link-card-skeleton'
 import { LinkGridList } from '@/app/_components/link/link-grid-list'
@@ -72,8 +74,8 @@ const DashboardPage = () => {
     <main className="flex flex-col gap-8 items-center w-full">
       <section className="w-full flex flex-col md:flex-row flex-wrap justify-start md:justify-center items-center gap-2">
         <LinkSearchBox onSearch={onSearchHandler} value={searchParams.get('search') ?? ''} />
-        <Button variant="secondary" onClick={addNewLink} className="w-1/2 md:w-auto">
-          + Add new link
+        <Button variant="secondary" onClick={addNewLink} className="fixed bottom-32 border border-white md:border-none z-10 right-4 md:relative p-2 py-8 md:p-0 md:px-4 md:w-auto flex flex-row md:gap-2 justify-center items-center rounded-full md:rounded-md">
+          <IconPlus className="w-12 h-12 md:w-auto md:h-auto" /> <span className="hidden md:block">Add new link</span>
         </Button>
       </section>
       {getContent()}
