@@ -157,7 +157,7 @@ export const LinkCard = ({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <NextLink href={`/p/${path}`} target="_blank">
+        <NextLink prefetch={false} href={`/p/${path}`} target="_blank">
           <p className="text-gray-300 font-bold text-sm hover:underline">/p/{path}</p>
         </NextLink>
         <NextLink href={originalLink} target="_blank">
