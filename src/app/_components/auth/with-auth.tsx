@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 
+import { LoadingPage } from '@/app/_components/ui/loading-page'
+
 type PageProps = {
 	children: React.ReactNode;
 }
@@ -33,7 +35,7 @@ export const withAuth = (Page: PageComponent) => {
     }, [router, status])
 
     if (!isAllowed) {
-      return null
+      return <LoadingPage />
     }
 
 

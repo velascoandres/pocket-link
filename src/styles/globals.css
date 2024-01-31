@@ -74,4 +74,12 @@
   /* body {
     font-family: 'Onest Variable', sans-serif;
   } */
+  html {
+    scroll-behavior: auto;
+  }
+  
+  body {
+    min-height: 100vh;
+    overscroll-behavior: none;
+  }
 }

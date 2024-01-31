@@ -1,5 +1,7 @@
 import { type PrismaClient } from '@prisma/client'
 
+import { deleteLinkService } from './delete-link.service'
+
 interface Options {
     id: number
     createdById: string
@@ -21,9 +23,5 @@ export const deleteUserLinkService = async (prisma: PrismaClient, options: Optio
   }
 
 
-  return prisma.link.delete({
-    where: {
-      id
-    }
-  })
+  return deleteLinkService(prisma, id)
 }

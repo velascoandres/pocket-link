@@ -4,8 +4,8 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
   push:
-    branches-ignore:
-      - main
+    branches:
+      - develop
 jobs:
   Deploy-Preview:
     runs-on: ubuntu-latest
@@ -30,6 +30,8 @@ jobs:
 
           envkey_GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           envkey_GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+
+          envkey_REDIS_URL: ${{ secrets.REDIS_URL }}
 
           file_name: .env
           fail_on_empty: false

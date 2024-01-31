@@ -1,8 +1,7 @@
 import { type PrismaClient } from '@prisma/client'
 
 import { generateUniqueString } from '@/helpers'
-
-import { DEFAULT_PATH_SIZE } from '../constants'
+import CONSTANTS from '@/server/constants'
 
 interface Options {
     name: string
@@ -18,7 +17,7 @@ export const createLinkService = async (prisma: PrismaClient, options: Options) 
     return prisma.link.create({
       data: {
         name,
-        path: generateUniqueString({ size: DEFAULT_PATH_SIZE }),
+        path: generateUniqueString({ size: CONSTANTS.DEFAULT_PATH_SIZE }),
         createdBy: { connect: { id: createdById } },
         originalLink,
       }

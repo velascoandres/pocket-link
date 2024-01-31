@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import NextLink from 'next/link'
 
@@ -43,11 +45,13 @@ import { LinkInteractions } from './link-interactions'
 
 interface Props {
   link: Link
+  showPublic?: boolean
 }
 
 
 export const LinkCard = ({
   link,
+  showPublic = false
 }: Props) => {
   const { name, originalLink, path, updatedAt, totalInteractions } = link
 
@@ -118,34 +122,38 @@ export const LinkCard = ({
 
           <span className="w-[150px]">{shortName}</span>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="rounded-full px-2">
-                <IconDotsVertical />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem
-                onClick={openUpdateModal}
-                className="cursor-pointer flex justify-start gap-2"
-              >
-                <IconEdit className="h-5 w-5" /> Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                className="cursor-pointer flex justify-start gap-2"
-                onClick={openInteractions}
-              >
-                <IconChartSankey className="h-5 w-5" /> Analytics
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
-                onClick={openDeleteModal}
-                className="cursor-pointer flex justify-start gap-2 text-red-600"
-              >
-                <IconTrash className="h-5 w-5" /> Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {
+            !showPublic && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" className="rounded-full px-2">
+                    <IconDotsVertical />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem
+                    onClick={openUpdateModal}
+                    className="cursor-pointer flex justify-start gap-2"
+                  >
+                    <IconEdit className="h-5 w-5" /> Edit
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="cursor-pointer flex justify-start gap-2"
+                    onClick={openInteractions}
+                  >
+                    <IconChartSankey className="h-5 w-5" /> Analytics
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={openDeleteModal}
+                    className="cursor-pointer flex justify-start gap-2 text-red-600"
+                  >
+                    <IconTrash className="h-5 w-5" /> Delete
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )
+          }
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -155,16 +163,20 @@ export const LinkCard = ({
         <NextLink href={originalLink} target="_blank">
           <span className="text-gray-400 hover:underline text-sm">{shortOriginalLink}</span>
         </NextLink>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger className="flex flex-row gap-2 justify-start items-center mt-2">
-              <IconEye /> <span className="text-white text-sm">{totalInteractions}</span>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="font-medium">Total link interactions</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        {
+          Boolean(totalInteractions) && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger className="flex flex-row gap-2 justify-start items-center mt-2">
+                  <IconEye /> <span className="text-white text-sm">{totalInteractions}</span>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p className="font-medium">Total link interactions</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )
+        }
       </CardContent>
       <CardFooter>
         <span className="text-gray-400 text-xs" >{dateAgo}</span>

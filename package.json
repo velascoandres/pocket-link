@@ -12,7 +12,8 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix ",
     "db-build": "prisma generate && prisma db push",
-    "start": "next start"
+    "start": "next start",
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -34,9 +35,12 @@
     "@trpc/react-query": "^10.43.6",
     "@trpc/server": "^10.43.6",
     "@types/uuid": "^9.0.7",
+    "bullmq": "^5.1.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "crypto": "^1.0.1",
     "date-fns": "^3.3.1",
+    "ioredis": "^5.3.2",
     "lucide-react": "^0.312.0",
     "next": "^14.0.4",
     "next-auth": "^4.24.5",
@@ -47,6 +51,7 @@
     "react-hook-form": "^7.49.3",
     "recharts": "^2.10.4",
     "server-only": "^0.0.1",
+    "stream": "^0.0.2",
     "superjson": "^2.2.1",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
@@ -65,6 +70,7 @@
     "eslint": "^8.54.0",
     "eslint-config-next": "^14.0.4",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "husky": "^9.0.7",
     "postcss": "^8.4.31",
     "prettier": "^3.1.0",
     "prettier-plugin-tailwindcss": "^0.5.7",
@@ -75,5 +81,17 @@
   "ct3aMetadata": {
     "initVersion": "7.25.2"
   },
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.19",
+  "browser": {
+    "crypto": false,
+    "stream": false,
+    "dns": false,
+    "net": false,
+    "tls": false,
+    "string_decoder": false,
+    "path": false,
+    "child_process": false,
+    "worker_threads": false,
+    "fs": false
+  }
 }
