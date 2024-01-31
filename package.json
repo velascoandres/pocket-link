@@ -12,7 +12,8 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix ",
     "db-build": "prisma generate && prisma db push",
-    "start": "next start"
+    "start": "next start",
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -69,6 +70,7 @@
     "eslint": "^8.54.0",
     "eslint-config-next": "^14.0.4",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "husky": "^9.0.7",
     "postcss": "^8.4.31",
     "prettier": "^3.1.0",
     "prettier-plugin-tailwindcss": "^0.5.7",

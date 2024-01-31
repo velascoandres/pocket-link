@@ -163,16 +163,20 @@ export const LinkCard = ({
         <NextLink href={originalLink} target="_blank">
           <span className="text-gray-400 hover:underline text-sm">{shortOriginalLink}</span>
         </NextLink>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger className="flex flex-row gap-2 justify-start items-center mt-2">
-              <IconEye /> <span className="text-white text-sm">{totalInteractions}</span>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="font-medium">Total link interactions</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        {
+          Boolean(totalInteractions) && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger className="flex flex-row gap-2 justify-start items-center mt-2">
+                  <IconEye /> <span className="text-white text-sm">{totalInteractions}</span>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p className="font-medium">Total link interactions</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )
+        }
       </CardContent>
       <CardFooter>
         <span className="text-gray-400 text-xs" >{dateAgo}</span>

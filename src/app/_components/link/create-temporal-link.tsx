@@ -1,10 +1,10 @@
 'use client'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { type z } from 'zod'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { IconLoader2 } from '@tabler/icons-react'
+import { IconLoader2, IconTerminal } from '@tabler/icons-react'
 
 import {
   Form,
@@ -16,13 +16,12 @@ import {
   FormMessage,
 } from '@/app/_components/ui/form'
 import { Input } from '@/app/_components/ui/input'
-import { useToast } from '@/app/_hooks'
-import { type Link } from '@/app/_interfaces/link'
 import { useModalStore } from '@/app/_store'
 import { CreateLinkDto } from '@/dtos'
 import { cn } from '@/lib/utils'
 import { api } from '@/trpc/react'
 
+import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
 import { Button } from '../ui/button'
 import {
   DialogContent,
@@ -31,67 +30,40 @@ import {
   DialogTitle
 } from '../ui/dialog'
 
+import { LinkCard } from './link-card'
 import { PathField } from './path-field'
 
-interface Props {
-	link?: Link
-}
+export const CreateTemporalLink = () => {
+  const { closeModal } = useModalStore()
 
-export const CreateUpdateLink = ({ 
-  link,
-}: Props) => {
   const utils = api.useUtils()
 
-  const { toast } = useToast()
-
   const handleSuccess = () => {
-    void utils.link.getUserLinks.invalidate()
-
-    toast({
-      title: `✅ Link ${link ? 'updated' : 'created'}`,
-      duration: 2000,
-    })
-
-    closeModal()
+    void utils.link.getTemporalLinks.invalidate()
   }
 
-  const {
-    mutate: createLink,
-    isLoading: isCreating,
-  } = api.link.create.useMutation({
-    onSuccess: handleSuccess,
-  })
-  const {
-    mutate: updateLink,
-    isLoading: isUpdating,
-  } = api.link.update.useMutation({
-    onSuccess: handleSuccess,
-  })
 
-  const { closeModal } = useModalStore()
+  const {
+    data: createdLink,
+    mutate: createTemporalLink,
+    isLoading: isCreatingTemporal,
+    isSuccess
+  } = api.link.createTemporalLink.useMutation({
+    onSuccess: handleSuccess,
+  })
 
   const form = useForm<z.infer<typeof CreateLinkDto>>({
     resolver: zodResolver(CreateLinkDto),
     defaultValues: {
-      ...link ?? {
-        name: '',
-        originalLink: '',
-        path: '',
-      }
+      name: '',
+      originalLink: '',
+      path: '',
     },
+    mode: 'onChange'
   })
 
   const onSubmit = (values: z.infer<typeof CreateLinkDto>) => {
-    if (link) {
-      updateLink({
-        ...values,
-        id: link.id,
-      })
-
-      return
-    }
-
-    createLink({
+    createTemporalLink({
       ...values,
     })
   }
@@ -101,11 +73,35 @@ export const CreateUpdateLink = ({
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>{link ? 'Link information' : 'Add new link'} </DialogTitle>
+        <DialogTitle className={cn({
+          'text-green-700': isSuccess
+        })}>{isSuccess ? '🎉 Link shortened!' : 'Quick short'}</DialogTitle>
       </DialogHeader>
+      {
+        createdLink && (
+          <div className="flex flex-col justify-center gap-2">
+            <LinkCard
+              link={{
+                ...createdLink,
+                totalInteractions: 0
+              }}
+              showPublic
+            />
+            <Alert className="border-amber-400">
+              <IconTerminal className="h-4 w-4 " />
+              <AlertTitle className="text-amber-400">Heads up!</AlertTitle>
+              <AlertDescription>
+                   The shortened link will last 72 hours. Create a <strong className="text-amber-400">free account</strong> to create unlimited links
+              </AlertDescription>
+            </Alert>
+          </div>
+        )
+      }
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
-          <div className="flex flex-col items-start gap-4 w-full">
+          <div className={cn('flex flex-col items-start gap-4 w-full', {
+            'hidden': isSuccess
+          })}>
             <FormField
               control={form.control}
               name="name"
@@ -119,7 +115,7 @@ export const CreateUpdateLink = ({
                     />
                   </FormControl>
                   <FormDescription>
-										This is your link name.
+                        This is your link name.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -135,30 +131,44 @@ export const CreateUpdateLink = ({
                     <Input placeholder="https://my-long-domain.com/long/123/post" {...field} />
                   </FormControl>
                   <FormDescription>
-										Enter the entire link
+                     Enter the entire link
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <PathField />
-          </div>
 
+          </div>
           <DialogFooter>
             <Button
-              disabled={ isCreating || isUpdating || hasErrors }
+              disabled={
+                isCreatingTemporal || hasErrors
+              }
               type="submit"
-
+              className={cn('block', {
+                'hidden': isSuccess
+              })}
             >
               <div className="flex justify-start items-center gap-2">
-                <IconLoader2 
-                  className={cn('hidden',{
-                    'block animate-spin': isCreating || isUpdating,
+                <IconLoader2
+                  className={cn('hidden', {
+                    'block animate-spin': isCreatingTemporal,
                   })}
-								 />
-								Save changes
+                />
+                   Save changes
               </div>
 
+            </Button>
+
+            <Button
+              type='button'
+              className={cn('block', {
+                'hidden': !isSuccess
+              })}
+              onClick={closeModal}
+            >
+                Close
             </Button>
           </DialogFooter>
         </form>
