@@ -1,6 +1,5 @@
 import { 
   CreateLinkDto, 
-  CreateLinkInteractionDto, 
   DeleteLinkDto, 
   SearchByPathDto, 
   SearchDto, 
@@ -12,12 +11,12 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc'
 
 import { searchInteractionAnalyticsService } from './services/search-interaction-analytics.service'
 import { 
-  createLinkInteractionService,
   createLinkService, 
+  createTemporalLinkService, 
   deleteUserLinkService, 
   searchLinkByPathService, 
-  searchUserLinksService, 
-  updateLinkService 
+  searchLinksService, 
+  updateLinkService,
 } from './services'
 
 
@@ -36,9 +35,16 @@ export const linkRouter = createTRPCRouter({
   }),
   getUserLinks: protectedProcedure.input(SearchDto)
   .query(({ ctx, input }) => {
-    return searchUserLinksService(ctx.db, {
+    return searchLinksService(ctx.db, {
       ...input,
       createdById: ctx.session.user.id,
+    })
+  }),
+  getTemporalLinks: publicProcedure.input(SearchDto)
+  .query(({ ctx, input }) => {
+    return searchLinksService(ctx.db, {
+      ...input,
+      isPublic: true,
     })
   }),
   deleteUserLink: protectedProcedure.input(DeleteLinkDto)
@@ -59,6 +65,19 @@ export const linkRouter = createTRPCRouter({
     }
 
     return createLinkService(
+      ctx.db, options
+    )
+  }),
+  createTemporalLink: publicProcedure.input(CreateLinkDto)
+  .mutation(({ ctx, input }) => {
+
+    const options = {
+      name: input.name,
+      path: input.path,
+      originalLink: input.originalLink,
+    }
+
+    return createTemporalLinkService(
       ctx.db, options
     )
   }),

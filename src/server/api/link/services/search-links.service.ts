@@ -4,20 +4,26 @@ interface Options {
 	search?: string
 	perPage?: number
 	page?: number
-	createdById: string
+	createdById?: string
+  isPublic?: boolean
 }
 
 
 interface LinkWhereQuery {
-	createdById: string
+  isPublic: boolean
+	createdById?: string
 	OR?: Record<string, { contains: string }>[]
 }
 
-export const searchUserLinksService = async (prisma: PrismaClient, options: Options) => {
-  const { search, perPage = 10, page = 1, createdById } = options
+export const searchLinksService = async (prisma: PrismaClient, options: Options) => {
+  const { search, perPage = 10, page = 1, createdById, isPublic = false } = options
 
   const query: LinkWhereQuery = {
-    createdById
+    isPublic,
+  }
+
+  if (createdById){
+    query.createdById = createdById
   }
 
   if (search) {
@@ -72,8 +78,10 @@ export const searchUserLinksService = async (prisma: PrismaClient, options: Opti
     originalLink: link.originalLink,
     path: link.path,
     totalInteractions: link.linkInteractions.length,
+    isPublic: link.isPublic,
     createdAt: link.createdAt,
     updatedAt: link.updatedAt,
+    expiresAt: link.expiresAt,
   }))
 
   const totalPages = Math.ceil(total / perPage)

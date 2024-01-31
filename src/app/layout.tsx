@@ -6,6 +6,8 @@ import { ModalContainer } from '@/app/_components/ui/modal-container'
 import { Toaster } from '@/app/_components/ui/toaster'
 import { TRPCReactProvider } from '@/trpc/react'
 
+import { Footer } from './_components/ui/footer'
+
 import '@/styles/globals.css'
 
 const inter = Onest({
@@ -26,7 +28,9 @@ const RootLayout = ({
 }) => {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans ${inter.variable}`}>
+      <body className={`font-sans relative flex ${inter.variable} flex-col`}>        
+        <div className="absolute top-0 bottom-0  z-[-2] min-h-screen w-full bg-neutral-950 
+        bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
         <AuthProvider>
           <ThemeProvider
             attribute="class"
@@ -34,15 +38,14 @@ const RootLayout = ({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="absolute top-0 z-[-2] h-screen w-screen bg-black bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] overflow-y-auto">
-              <TRPCReactProvider>
-                <ModalContainer />
-                <Toaster />
-                {children}
-              </TRPCReactProvider>
-            </div>
+            <TRPCReactProvider>
+              <ModalContainer />
+              <Toaster />
+              {children}
+            </TRPCReactProvider>
           </ThemeProvider>
         </AuthProvider>
+        <Footer />
       </body>
     </html>
   )

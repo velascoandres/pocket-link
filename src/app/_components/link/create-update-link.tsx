@@ -33,9 +33,13 @@ import {
 
 interface Props {
 	link?: Link
+  isTemporal: boolean
 }
 
-export const CreateUpdateLink = ({ link }: Props) => {
+export const CreateUpdateLink = ({ 
+  link,
+  isTemporal
+}: Props) => {
   const utils = api.useUtils()
 
   const { toast } = useToast()
@@ -55,6 +59,12 @@ export const CreateUpdateLink = ({ link }: Props) => {
     mutate: createLink,
     isLoading: isCreating,
   } = api.link.create.useMutation({
+    onSuccess: handleSuccess,
+  })
+  const {
+    mutate: createTemporalLink,
+    isLoading: isCreatingTemporal,
+  } = api.link.createTemporalLink.useMutation({
     onSuccess: handleSuccess,
   })
   const {
@@ -93,11 +103,21 @@ export const CreateUpdateLink = ({ link }: Props) => {
         ...values,
         id: link.id,
       })
-    } else {
-      createLink({
+
+      return
+    }
+
+    if (isTemporal){
+      createTemporalLink({
         ...values,
       })
+
+      return
     }
+
+    createLink({
+      ...values,
+    })
   }
 
   useEffect(() => {
@@ -178,7 +198,7 @@ export const CreateUpdateLink = ({ link }: Props) => {
 
           <DialogFooter>
             <Button
-              disabled={isCreating || isUpdating}
+              disabled={isCreating || isUpdating || isCreatingTemporal}
               type="submit"
 
             >

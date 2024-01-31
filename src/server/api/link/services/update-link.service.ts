@@ -2,7 +2,7 @@ import { type PrismaClient } from '@prisma/client'
 
 import { generateUniqueString } from '@/helpers'
 
-import { DEFAULT_PATH_SIZE } from '../constants'
+import { DEFAULT_PATH_SIZE } from '../../../constants'
 
 interface Options {
 	id: number

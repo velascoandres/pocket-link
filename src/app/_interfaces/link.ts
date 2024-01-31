@@ -4,6 +4,7 @@ export interface Link {
 	path: string
 	originalLink: string
 	totalInteractions: number
+	isPublic: boolean
 	createdAt: Date
 	updatedAt: Date
 } 

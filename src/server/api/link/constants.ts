@@ -1,1 +1,0 @@
-export const DEFAULT_PATH_SIZE = 6
