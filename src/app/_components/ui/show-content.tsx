@@ -6,7 +6,7 @@ interface Props {
     fallback: React.ReactNode
     emptyState: React.ReactNode
 
-    children: React.ReactNode
+    children: React.ReactNode | React.ReactNode[]
 }
 
 

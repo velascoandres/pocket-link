@@ -48,4 +48,6 @@ export const createTemporalLinkService = async (prisma: PrismaClient, options: O
   })
 
   void linkQueue.add('remove-temporal-link', temporalLink)
+
+  return temporalLink
 }

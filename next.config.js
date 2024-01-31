@@ -8,7 +8,7 @@ await import('./src/env.js')
 const config = {
   experimental: {
     instrumentationHook: true
-  }
+  },
 }
 
 export default config

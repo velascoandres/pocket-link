@@ -1,5 +1,6 @@
 'use client'
-import React, { useMemo } from 'react'
+
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { type z } from 'zod'
 
@@ -73,9 +74,7 @@ export const CreateTemporalLink = () => {
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle className={cn({
-          'text-green-700': isSuccess
-        })}>{isSuccess ? '🎉 Link shortened!' : 'Quick short'}</DialogTitle>
+        <DialogTitle>{isSuccess ? '🎉 Link shortened!' : 'Quick short'}</DialogTitle>
       </DialogHeader>
       {
         createdLink && (
@@ -91,7 +90,8 @@ export const CreateTemporalLink = () => {
               <IconTerminal className="h-4 w-4 " />
               <AlertTitle className="text-amber-400">Heads up!</AlertTitle>
               <AlertDescription>
-                   The shortened link will last 72 hours. Create a <strong className="text-amber-400">free account</strong> to create unlimited links
+                   The shortened link will last <strong className="text-amber-400">72 hours</strong>. 
+                   Create a <strong className="text-amber-400">free account</strong> to create unlimited links
               </AlertDescription>
             </Alert>
           </div>

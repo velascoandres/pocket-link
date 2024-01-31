@@ -16,7 +16,7 @@ export const PublicLinksSection = () => {
   const { data: response } = api.link.getTemporalLinks.useQuery({
     search: '',
     page: 1,
-    perPage: 15,
+    perPage: 10,
   })
 
   const { openModal } = useModalStore()
@@ -29,7 +29,7 @@ export const PublicLinksSection = () => {
 
   return (
     <section className="flex flex-col w-full items-center mx-auto max-w-[300px] sm:max-w-[400px] md:max-w-[600px] lg:max-w-[850px] py-8 gap-4">
-      <h2 className="text-4xl font-bold text-gray-400"> 
+      <h2 className="text-3xl font-bold text-gray-400 sm:text-4xl md:text-5xl lg:text-6xl/none"> 
         Recently <strong className="text-amber-400">shortened</strong>
       </h2>
       <div className=" w-full flex flex-col md:flex-row flex-wrap justify-start md:justify-center items-center gap-2">
