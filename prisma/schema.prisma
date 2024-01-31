@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+    provider      = "prisma-client-js"
     binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
@@ -70,9 +70,11 @@ model Link {
     createdAt    DateTime @default(now())
     updatedAt    DateTime @updatedAt
 
-    createdBy        User              @relation(fields: [createdById], references: [id])
-    createdById      String
+    createdBy        User?             @relation(fields: [createdById], references: [id])
+    createdById      String?
     linkInteractions LinkInteraction[]
+    expiresAt        DateTime?
+    isPublic         Boolean @default(false)
 
     @@index([name, path])
 }

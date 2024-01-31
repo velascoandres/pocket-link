@@ -2,9 +2,9 @@ import React from 'react'
 
 import { Skeleton } from '@/app/_components/ui/skeleton'
 
-const Loading = () => {
+export const LoadingPage = () => {
   return (
-    <div className="h-screen overflow-y-auto z-20 w-screen">
+    <div className="h-[calc(100dvh-85px)] overflow-y-auto z-20 w-screen">
       <div className="fixed w-full top-0 z-10 px-2 mt-2 py-2">
         <Skeleton className="w-full h-[50px]" />
       </div>
@@ -15,5 +15,3 @@ const Loading = () => {
     </div>
   )
 }
-
-export default Loading

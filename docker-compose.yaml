@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  redis_dev:
+    container_name: pocket_link_redis_dev
+    image: redis:latest
+    restart: always
+    ports:
+      - '6379:6379'
+    expose:
+      - '6379'
+    volumes:
+      - /var/lib/pocket_link_redis:/data/
+  postgres_dev:
+    container_name: pocket_link_postgres_dev
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - /var/lib/pocket_link_dev_db:/data/
+    environment:
+      - POSTGRES_PASSWORD=dev_password
+      - POSTGRES_USER=dev_user
+      - POSTGRES_DB=pocket_link_dev_db
