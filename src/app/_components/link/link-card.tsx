@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import Image from 'next/image'
 import NextLink from 'next/link'
 
 import { 
@@ -33,6 +32,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '../ui/dropdown-menu'
+import { ImageWithFallback } from '../ui/image-fallback'
 import {
   Tooltip,
   TooltipContent,
@@ -119,12 +119,13 @@ export const LinkCard = ({
     >
       <CardHeader>
         <CardTitle className="text-base flex flex-row justify-between items-center gap-2">
-          <Image 
+          <ImageWithFallback
+            fallback="/404.png"
             src={favIcon} 
             width={32} 
             height={32} 
             alt={link.name}
-            className="rounded-full border border-white/10"
+            className="rounded-full border border-white/10 bg-white"
           />
 
           <span className="w-[150px]">{shortName}</span>
