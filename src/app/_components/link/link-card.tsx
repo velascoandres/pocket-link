@@ -1,11 +1,12 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 import NextLink from 'next/link'
 
 import { 
   IconChartSankey, 
-  IconCopy, 
+  IconClipboard, 
   IconDotsVertical, 
   IconEdit, 
   IconEye, 
@@ -97,6 +98,8 @@ export const LinkCard = ({
     })
   }
 
+  const favIcon = `https://www.google.com/s2/favicons?domain=${link.originalLink}&sz=${32}`
+
   const handleCopyClipboard = () => {
     const domain = window.location.origin
     const completeLink = `${domain}/p/${link.path}`
@@ -115,10 +118,14 @@ export const LinkCard = ({
       className="transition relative ease-in border border-gray-800 hover:border-gray-100 hover:border"
     >
       <CardHeader>
-        <CardTitle className="text-base flex flex-row justify-start items-center gap-2">
-          <Button variant="ghost" className="rounded-md px-2" onClick={handleCopyClipboard} >
-            <IconCopy />
-          </Button>
+        <CardTitle className="text-base flex flex-row justify-between items-center gap-2">
+          <Image 
+            src={favIcon} 
+            width={32} 
+            height={32} 
+            alt={link.name}
+            className="rounded-full border border-white/10"
+          />
 
           <span className="w-[150px]">{shortName}</span>
 
@@ -156,19 +163,27 @@ export const LinkCard = ({
           }
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <NextLink href={`/p/${path}`} target="_blank">
-          <p className="text-gray-300 font-bold text-sm hover:underline">/p/{path}</p>
-        </NextLink>
+      <CardContent className="h-30 flex flex-col gap-3">
+        <div className="flex flex-row justify-start items-center gap-2 rounded-xl py-1 px-1 border border-white/10">
+          <Button variant="ghost" className="rounded-md px-2" onClick={handleCopyClipboard} >
+            <IconClipboard />
+          </Button>
+          <NextLink href={`/p/${path}`} target="_blank">
+            <p className="text-gray-300 font-bold text-sm hover:underline">/p/{path}</p>
+          </NextLink>
+        </div>
+
         <NextLink href={originalLink} target="_blank">
           <span className="text-gray-400 hover:underline text-sm">{shortOriginalLink}</span>
         </NextLink>
+      </CardContent>
+      <CardFooter className="flex flex-row justify-between items-center">
         {
           Boolean(totalInteractions) && (
             <TooltipProvider>
               <Tooltip>
-                <TooltipTrigger className="flex flex-row gap-2 justify-start items-center mt-2">
-                  <IconEye /> <span className="text-white text-sm">{totalInteractions}</span>
+                <TooltipTrigger className="flex flex-row gap-2 justify-start items-center text-gray-400">
+                  <IconEye /> <span className="text-sm">{totalInteractions}</span>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p className="font-medium">Total link interactions</p>
@@ -177,9 +192,7 @@ export const LinkCard = ({
             </TooltipProvider>
           )
         }
-      </CardContent>
-      <CardFooter>
-        <span className="text-gray-400 text-xs" >{dateAgo}</span>
+        <span className="text-gray-400 text-sm" >{dateAgo}</span>
       </CardFooter>
     </Card>
   )

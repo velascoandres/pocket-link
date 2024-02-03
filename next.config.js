@@ -9,6 +9,9 @@ const config = {
   experimental: {
     instrumentationHook: true
   },
+  images: {
+    domains: ['www.google.com'],
+  },
 }
 
 export default config
