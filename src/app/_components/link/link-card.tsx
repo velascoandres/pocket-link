@@ -169,7 +169,7 @@ export const LinkCard = ({
           <Button variant="ghost" className="rounded-md px-2" onClick={handleCopyClipboard} >
             <IconClipboard />
           </Button>
-          <NextLink href={`/p/${path}`} target="_blank">
+          <NextLink href={`/p/${path}`} target="_blank" prefetch={false}>
             <p className="text-gray-300 font-bold text-sm hover:underline">/p/{path}</p>
           </NextLink>
         </div>
