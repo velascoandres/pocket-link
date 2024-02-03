@@ -11,6 +11,7 @@ Set up your virtual environment (optional but recommended).
 Copy the contents of `.env.example` into a new file named `.env` and configure the required variables.
 ```text
 DATABASE_URL=""
+REDIS_URL=""
 
 NEXTAUTH_SECRET=""
 NEXTAUTH_URL=""
@@ -29,11 +30,19 @@ Install dependencies.
 ```shell_script
 yarn
 ```
+
+If you need to build the databases locally, you can use the `docker-compose.yaml` file.
+```shell_script
+docker compose -D
+```
+> An instance of postgresql and redis will be created
+
 Setup the database.
 ```shell_script
 yarn postinstall
 yarn db:push
 ```
+
 Run the application in dev mode
 ```shell_script
 yarn dev

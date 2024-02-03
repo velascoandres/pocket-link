@@ -17,7 +17,7 @@ const inter = Onest({
 
 export const metadata = {
   title: 'Pocket link',
-  description: 'A url link shortener',
+  description: 'A URL shortener with some analytics',
   icons: [{ rel: 'icon', url: '/favicon.ico' }],
 }
 
