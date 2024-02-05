@@ -118,7 +118,7 @@ export const LinkCard = ({
       className="transition relative ease-in border border-gray-800 hover:border-gray-100 hover:border"
     >
       <CardHeader>
-        <CardTitle className="text-base flex flex-row justify-between items-center gap-2">
+        <CardTitle className="text-base flex flex-row justify-start items-center gap-2">
           <ImageWithFallback
             fallback="/404.png"
             src={favIcon} 
