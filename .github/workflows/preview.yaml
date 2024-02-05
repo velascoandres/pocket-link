@@ -31,8 +31,6 @@ jobs:
           envkey_GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
           envkey_GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
 
-          envkey_REDIS_URL: ${{ secrets.REDIS_URL }}
-
           file_name: .env
           fail_on_empty: false
 

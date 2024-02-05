@@ -1,15 +1,5 @@
 version: '3.8'
 services:
-  redis_dev:
-    container_name: pocket_link_redis_dev
-    image: redis:latest
-    restart: always
-    ports:
-      - '6379:6379'
-    expose:
-      - '6379'
-    volumes:
-      - /var/lib/pocket_link_redis:/data/
   postgres_dev:
     container_name: pocket_link_postgres_dev
     image: postgres:14-alpine

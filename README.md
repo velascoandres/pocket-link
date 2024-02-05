@@ -11,7 +11,6 @@ Set up your virtual environment (optional but recommended).
 Copy the contents of `.env.example` into a new file named `.env` and configure the required variables.
 ```text
 DATABASE_URL=""
-REDIS_URL=""
 
 NEXTAUTH_SECRET=""
 NEXTAUTH_URL=""
@@ -35,7 +34,9 @@ If you need to build the databases locally, you can use the `docker-compose.yaml
 ```shell_script
 docker compose -D
 ```
-> An instance of postgresql and redis will be created
+> An instance of postgresql will be created
+
+> This application uses vercel cronjobs
 
 Setup the database.
 ```shell_script
@@ -54,5 +55,6 @@ Open your browser and visit [http://localhost:3000](http://localhost:3000) to be
 - **Quick Shortening:** Transform long links with just a few clicks.
 - **Intuitive Dashboard:** Save, organize, and manage your links efficiently.
 - **Customization:** Personalize shortened URLs according to your preferences.
-
+- **Analytics:** Show analytics according of link interactions.
+- **Not account required:** Create links without an account. But the links have a temporal duration.
 We hope you enjoy using Pocket Link for all your link management needs! If you have any questions or issues, feel free to open an [issue](https://github.com/velascoandres/pocket-link/issues)

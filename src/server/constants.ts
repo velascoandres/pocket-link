@@ -5,7 +5,7 @@ const QUEUES = {
 }
 
 
-const JOB_DELAY_TIME = 1000 * 3600 * 24 * 3
+const JOB_DELAY_TIME = 5000
 const JOB_CONCURRENCY = 5
 
 const JOB_DELAY_REMOVE_TIME = 1000
