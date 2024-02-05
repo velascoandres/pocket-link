@@ -3,8 +3,6 @@ import { type PrismaClient } from '@prisma/client'
 import { addDaysWrapped, generateUniqueString } from '@/helpers'
 import CONSTANTS from '@/server/constants'
 
-import { linkQueue } from './../queue'
-
 interface Options {
     name: string
     path?: string
@@ -46,8 +44,6 @@ export const createTemporalLinkService = async (prisma: PrismaClient, options: O
       ...dataWithoutPath,
     }
   })
-
-  void linkQueue.add('remove-temporal-link', temporalLink)
 
   return temporalLink
 }
