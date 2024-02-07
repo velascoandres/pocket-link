@@ -10,7 +10,12 @@ const config = {
     instrumentationHook: true
   },
   images: {
-    domains: ['www.google.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
 }
 

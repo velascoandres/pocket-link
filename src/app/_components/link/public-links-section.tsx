@@ -7,7 +7,7 @@ import { IconUnlink } from '@tabler/icons-react'
 import { useModalStore } from '@/app/_store'
 import { api } from '@/trpc/react'
 
-import { Button } from '../ui/button'
+import { AnimatedBagde } from '../ui/animated-bagde'
 
 import { CreateTemporalLink } from './create-temporal-link'
 import { LinkCard } from './link-card'
@@ -32,10 +32,12 @@ export const PublicLinksSection = () => {
       <h2 className="text-3xl font-bold text-gray-400 sm:text-4xl md:text-5xl lg:text-6xl/none"> 
         Recently <strong className="text-amber-400">shortened</strong>
       </h2>
-      <div className=" w-full flex flex-col md:flex-row flex-wrap justify-start md:justify-center items-center gap-2">
-        <Button variant="secondary" onClick={addNewLink} className="border border-white flex gap-2">
-          <IconUnlink /> Quick short a link
-        </Button>
+      <div className=" w-full flex flex-col group md:flex-row flex-wrap justify-start md:justify-center items-center gap-2">
+        <AnimatedBagde role="button" onClick={addNewLink} className="transition ease-in cursor-pointer active:scale-105">
+          <div className="flex gap-2 group-hover:text-amber-400 items-center">
+            <IconUnlink className="transition ease-out duration-200 group-hover:text-amber-400" /> Quick short a link
+          </div>
+        </AnimatedBagde>
       </div>
       
       {

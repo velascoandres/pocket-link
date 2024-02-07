@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { type z } from 'zod'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { IconLoader2, IconTerminal } from '@tabler/icons-react'
+import { IconAlertTriangle, IconLoader2 } from '@tabler/icons-react'
 
 import {
   Form,
@@ -32,6 +32,7 @@ import {
 } from '../ui/dialog'
 
 import { LinkCard } from './link-card'
+import { LinkPreview } from './link-preview'
 import { PathField } from './path-field'
 
 export const CreateTemporalLink = () => {
@@ -63,6 +64,8 @@ export const CreateTemporalLink = () => {
     mode: 'onChange'
   })
 
+  const watchedUrl = form.watch('originalLink') || ''
+
   const onSubmit = (values: z.infer<typeof CreateLinkDto>) => {
     createTemporalLink({
       ...values,
@@ -72,7 +75,11 @@ export const CreateTemporalLink = () => {
   const hasErrors = Boolean(Object.values(form.formState.errors).length) || !form.formState.isValid
 
   return (
-    <DialogContent>
+    <DialogContent 
+      className="h-screen overflow-y-auto md:h-auto md:max-w-xl"
+      preventCloseClickOutside
+      preventScapeKeydown
+    >
       <DialogHeader>
         <DialogTitle>{isSuccess ? '🎉 Link shortened!' : 'Quick short'}</DialogTitle>
       </DialogHeader>
@@ -87,11 +94,11 @@ export const CreateTemporalLink = () => {
               showPublic
             />
             <Alert className="border-amber-400">
-              <IconTerminal className="h-4 w-4 " />
+              <IconAlertTriangle className="h-4 w-4" />
               <AlertTitle className="text-amber-400">Heads up!</AlertTitle>
-              <AlertDescription>
-                   The shortened link will last <strong className="text-amber-400">72 hours</strong>. 
-                   Create a <strong className="text-amber-400">free account</strong> to create unlimited links
+              <AlertDescription className="[&>strong]:text-amber-400">
+                   The shortened link will last <strong>72 hours</strong>. 
+                   Create a <strong>free account</strong> to short <strong>unlimited links</strong>  
               </AlertDescription>
             </Alert>
           </div>
@@ -128,17 +135,19 @@ export const CreateTemporalLink = () => {
                 <FormItem className="w-full" >
                   <FormLabel>Original link*</FormLabel>
                   <FormControl>
-                    <Input placeholder="https://my-long-domain.com/long/123/post" {...field} />
+                    <Input placeholder="https://a-very-long-domain/long/123/post" {...field} />
                   </FormControl>
                   <FormDescription>
-                     Enter the entire link
+                     Enter or paste the entire link
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <PathField />
-
+            {
+              watchedUrl && <LinkPreview url={watchedUrl} />
+            }
           </div>
           <DialogFooter>
             <Button
@@ -150,7 +159,7 @@ export const CreateTemporalLink = () => {
                 'hidden': isSuccess
               })}
             >
-              <div className="flex justify-start items-center gap-2">
+              <div className="flex justify-center md:justify-start items-center gap-2">
                 <IconLoader2
                   className={cn('hidden', {
                     'block animate-spin': isCreatingTemporal,

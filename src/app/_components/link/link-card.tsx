@@ -15,7 +15,7 @@ import {
 import { useToast } from '@/app/_hooks'
 import { type Link } from '@/app/_interfaces/link'
 import { useModalStore } from '@/app/_store'
-import { getDiffTime } from '@/helpers'
+import { getDiffTime, getTinyFavicon } from '@/helpers'
 
 import { Button } from '../ui/button'
 import {
@@ -98,7 +98,7 @@ export const LinkCard = ({
     })
   }
 
-  const favIcon = `https://www.google.com/s2/favicons?domain=${link.originalLink}&sz=${32}`
+  const favIcon = getTinyFavicon(link.originalLink)
 
   const handleCopyClipboard = () => {
     const domain = window.location.origin
