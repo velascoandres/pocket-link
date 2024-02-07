@@ -102,7 +102,11 @@ export const CreateUpdateLink = ({
 
 
   return (
-    <DialogContent className="h-screen overflow-y-auto md:h-auto md:max-w-xl">
+    <DialogContent 
+      className="h-screen overflow-y-auto md:h-auto md:max-w-xl" 
+      preventCloseClickOutside
+      preventScapeKeydown
+    >
       <DialogHeader>
         <DialogTitle>{link ? 'Link information' : 'Add new link'} </DialogTitle>
       </DialogHeader>
@@ -135,7 +139,7 @@ export const CreateUpdateLink = ({
                 <FormItem className="w-full" >
                   <FormLabel>Original link*</FormLabel>
                   <FormControl>
-                    <Input placeholder="https://my-long-domain.com/long/123/post" {...field} />
+                    <Input placeholder="https://a-very-long-domain.com/long/123/post" {...field} />
                   </FormControl>
                   <FormDescription>
 										Enter the entire link

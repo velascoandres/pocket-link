@@ -25,7 +25,7 @@ export const Navbar = () => {
     <nav className="bg-transparent backdrop-blur px-4">
       <div className="max-w-screen-2xl flex items-center justify-between mx-auto p-4">
         <div className="flex items-center space-x-3 rtl:space-x-reverse">
-          <Link href="/dashboard" className="self-center text-2xl font-semibold whitespace-nowrap text-white">
+          <Link href="/" className="self-center text-2xl font-semibold whitespace-nowrap text-white">
             <strong className="text-amber-400">Pocket</strong> <strong className="text-gray-400">link</strong>
           </Link>
         </div>
