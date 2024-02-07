@@ -31,6 +31,7 @@ import {
   DialogTitle
 } from '../ui/dialog'
 
+import { LinkPreview } from './link-preview'
 import { PathField } from './path-field'
 
 interface Props {
@@ -97,9 +98,11 @@ export const CreateUpdateLink = ({
   }
 
   const hasErrors = Boolean(Object.values(form.formState.errors).length) || !form.formState.isValid
+  const watchedUrl = form.watch('originalLink') || ''
+
 
   return (
-    <DialogContent>
+    <DialogContent className="h-screen overflow-y-auto md:h-auto md:max-w-xl">
       <DialogHeader>
         <DialogTitle>{link ? 'Link information' : 'Add new link'} </DialogTitle>
       </DialogHeader>
@@ -142,6 +145,9 @@ export const CreateUpdateLink = ({
               )}
             />
             <PathField />
+            {
+              watchedUrl && <LinkPreview url={watchedUrl} />
+            }
           </div>
 
           <DialogFooter>

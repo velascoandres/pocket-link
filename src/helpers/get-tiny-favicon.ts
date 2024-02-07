@@ -1,0 +1,1 @@
+export const getTinyFavicon = (url: string, size = 32) => `https://www.google.com/s2/favicons?domain=${url}&sz=${size}`
