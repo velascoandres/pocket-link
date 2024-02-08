@@ -44,14 +44,15 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String          @id @default(cuid())
     name          String?
-    email         String?   @unique
+    email         String?         @unique
     emailVerified DateTime?
     image         String?
     accounts      Account[]
     sessions      Session[]
     links         Link[]
+    space         Space[]
 }
 
 model VerificationToken {
@@ -74,7 +75,9 @@ model Link {
     createdById      String?
     linkInteractions LinkInteraction[]
     expiresAt        DateTime?
-    isPublic         Boolean @default(false)
+    isPublic         Boolean           @default(false)
+    spaceLink        SpaceLink?    
+    spaceLinkId      Int?
 
     @@index([name, path])
 }
@@ -88,4 +91,30 @@ model LinkInteraction {
     linkId    Int
 
     @@index([linkId])
+}
+
+model Space {
+    id          Int      @id @default(autoincrement())
+    name        String
+    description String?
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    createdBy   User     @relation(fields: [createdById], references: [id])
+    createdById String
+    style       Json?
+
+    spaceLinks        SpaceLink[]    
+}
+
+model SpaceLink {
+    id Int @id @default(autoincrement())
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    link   Link    @relation(fields: [linkId], references: [id], onDelete: Cascade)
+    linkId Int     @unique
+
+    space   Space  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+    spaceId Int   
 }

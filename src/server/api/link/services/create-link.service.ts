@@ -1,27 +1,29 @@
+import { type z } from 'zod'
+
 import { type PrismaClient } from '@prisma/client'
 
+import { type CreateLinkDto } from '@/dtos'
 import { generateUniqueString } from '@/helpers'
 import CONSTANTS from '@/server/constants'
 
-interface Options {
-    name: string
-    path?: string
-    originalLink: string
+type Options = z.infer<typeof CreateLinkDto> & {
     createdById: string
 }
 
 export const createLinkService = async (prisma: PrismaClient, options: Options) => {
-  const { name, path, createdById, originalLink } = options
+  const { name, path = '', createdById, originalLink } = options
+
+  const dataToCreate = {
+    name,
+    path: '',
+    createdBy: { connect: { id: createdById } },
+    originalLink,
+  }
 
   if (!path) {
-    return prisma.link.create({
-      data: {
-        name,
-        path: generateUniqueString({ size: CONSTANTS.DEFAULT_PATH_SIZE }),
-        createdBy: { connect: { id: createdById } },
-        originalLink,
-      }
-    })
+    dataToCreate.path = generateUniqueString({ size: CONSTANTS.DEFAULT_PATH_SIZE })
+  } else {
+    dataToCreate.path = path
   }
 
   const existingLink = await prisma.link.findFirst({
@@ -36,10 +38,7 @@ export const createLinkService = async (prisma: PrismaClient, options: Options) 
 
   return prisma.link.create({
     data: {
-      name,
-      path,
-      createdBy: { connect: { id: createdById } },
-      originalLink,
+      ...dataToCreate,
     }
   })
 }
