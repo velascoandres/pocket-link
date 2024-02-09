@@ -22,7 +22,7 @@ export const Navbar = () => {
   }
 
   return (
-    <nav className="bg-transparent backdrop-blur px-4">
+    <nav className="bg-transparent backdrop-blur px-4 border border-transparent border-b-gray-700">
       <div className="max-w-screen-2xl flex items-center justify-between mx-auto p-4">
         <div className="flex items-center space-x-3 rtl:space-x-reverse">
           <Link href="/" className="self-center text-2xl font-semibold whitespace-nowrap text-white">

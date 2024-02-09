@@ -1,9 +1,9 @@
 import React from 'react'
 
-const DashboardPage = () => {
+const SpacePage = () => {
   return (
     <div>page</div>
   )
 }
 
-export default DashboardPage
+export default SpacePage
