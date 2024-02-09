@@ -4,7 +4,7 @@ import { type PrismaClient } from '@prisma/client'
 
 import { type SearchDto } from '@/dtos'
 
-type Options = z.infer<typeof SearchDto> & { createdById: string, isPublic?: boolean }
+type Options = z.infer<typeof SearchDto> & { createdById?: string, isPublic?: boolean }
 
 interface LinkWhereQuery {
   isPublic: boolean

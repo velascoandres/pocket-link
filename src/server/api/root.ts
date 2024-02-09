@@ -1,4 +1,5 @@
 import { linkRouter } from '@/server/api/link/router'
+import { spaceRouter } from '@/server/api/space/router'
 import { createCallerFactory, createTRPCRouter } from '@/server/api/trpc'
 
 /**
@@ -7,7 +8,8 @@ import { createCallerFactory, createTRPCRouter } from '@/server/api/trpc'
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  link: linkRouter
+  link: linkRouter,
+  space: spaceRouter,
 })
 
 
