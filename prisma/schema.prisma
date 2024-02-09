@@ -103,7 +103,9 @@ model Space {
     createdById String
     style       Json?
 
-    spaceLinks        SpaceLink[]    
+    spaceLinks        SpaceLink[]
+
+    @@unique([createdById, name])    
 }
 
 model SpaceLink {

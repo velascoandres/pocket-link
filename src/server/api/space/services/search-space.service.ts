@@ -26,7 +26,7 @@ export const searchSpaceService = async (db: PrismaClient, options: Options) => 
       },
     },
     {
-      search: {
+      description: {
         contains: search
       },
     }]

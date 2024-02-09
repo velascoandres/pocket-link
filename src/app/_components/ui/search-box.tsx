@@ -6,15 +6,16 @@ import { IconSearch } from '@tabler/icons-react'
 
 import { useDebounceCallback } from '@/app/_hooks'
 
-import { Input } from '../ui/input'
+import { Input } from './input'
 
 interface Props {
 	value?: string
+  placeholder?: string
 	onSearch: (search: string) => void
 }
 
 
-export const LinkSearchBox = ({ value, onSearch }: Props) => {
+export const SearchBox = ({ value, onSearch, placeholder = 'Search something' }: Props) => {
 
   const debounce = useDebounceCallback()
 
@@ -33,7 +34,7 @@ export const LinkSearchBox = ({ value, onSearch }: Props) => {
       <IconSearch className="absolute z-10 left-2 top-4" />
       <Input
         value={inputValue}
-        placeholder="Search your links"
+        placeholder={placeholder}
         className="w-full pl-10"
         onChange={handleChange}
       />
