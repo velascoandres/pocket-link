@@ -54,6 +54,9 @@ export const CreateUpdateSpace = ({
   const utils = api.useUtils()
 
   const { toast } = useToast()
+  const [nameWatched, setNameWatched] = useState('')
+  const debounce = useDebounceCallback()
+  const { closeModal } = useModalStore()
 
   const handleSuccess = () => {
     void utils.space.searchSpace.invalidate()
@@ -79,8 +82,7 @@ export const CreateUpdateSpace = ({
     onSuccess: handleSuccess,
   })
 
-  const { closeModal } = useModalStore()
-
+  
   const form = useForm<z.infer<typeof CreateSpaceDto>>({
     resolver: zodResolver(CreateSpaceDto),
     defaultValues: {
@@ -90,7 +92,8 @@ export const CreateUpdateSpace = ({
         background: {
           type: 'color',
           value: COLORS[0] ?? ''
-        }
+        },
+        textColor: 'black'
       }
     },
   })
@@ -109,9 +112,6 @@ export const CreateUpdateSpace = ({
       ...values,
     })
   }
-
-  const [nameWatched, setNameWatched] = useState('')
-  const debounce = useDebounceCallback()
 
   const { data: existingSpace } = api.space.searchSpaceByName.useQuery({
     name: nameWatched,
@@ -143,6 +143,13 @@ export const CreateUpdateSpace = ({
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [existingSpace])
+
+  // useEffect(() => {
+  //   const color = space?.style?.background.value
+    
+  //   handleColorSelection(color)
+
+  // }, [])
 
   const hasErrors = Boolean(Object.values(form.formState.errors).length) || !form.formState.isValid
 
@@ -237,20 +244,16 @@ export const CreateUpdateSpace = ({
             </div>   
           </div>
 
-          {
-            form.watch('name') && (
-              <div className="flex flex-row justify-center w-full">
-                <SpaceCard 
-                  space={{
-                    id: 0,
-                    name: form.watch('name'),
-                    description: form.watch('description') ?? '',
-                    style: form.watch('style')
-                  }}  
-                />
-              </div>
-            )
-          }
+          <div className="flex flex-row justify-center w-full">
+            <SpaceCard 
+              space={{
+                id: 0,
+                name: form.watch('name'),
+                description: form.watch('description') ?? '',
+                style: form.watch('style')
+              }}  
+            />
+          </div>
           
 
           <DialogFooter>
@@ -265,7 +268,7 @@ export const CreateUpdateSpace = ({
                     'block animate-spin': isCreating || isUpdating,
                   })}
 			    />
-				Save changes
+				      Save changes
               </div>
 
             </Button>
