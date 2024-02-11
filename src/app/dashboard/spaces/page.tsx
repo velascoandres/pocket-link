@@ -94,7 +94,7 @@ const SpacePage = () => {
                   onClickUpdate={openUpdateSpaceModal} 
                   onClickRemove={openDeleteSpaceModal} 
                 />
-                <SpaceAnalytics interactions={20} links={15} />
+                <SpaceAnalytics interactions={space.totalInteractions} links={space.totalLinks} />
               </SpaceCard>
             ))}
           </div>

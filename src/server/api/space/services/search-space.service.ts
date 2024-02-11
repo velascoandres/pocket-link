@@ -46,17 +46,40 @@ export const searchSpaceService = async (db: PrismaClient, options: Options) => 
     orderBy: {
       createdAt: 'desc',
     },
+    include: {
+      spaceLinks: {
+        include: {
+          link: {
+            include: {
+              linkInteractions: true
+            }
+          }
+        }
+      },
+    },
     skip: perPage * (page - 1), 
     take: perPage,
   })
 
-  const [data, total] = await Promise.all([dataQuery, totalQuery]) 
+  const [data, total] = await Promise.all([dataQuery, totalQuery])
+
+  
+  const spaces = data.map((space) => ({
+    id: space.id,
+    name: space.name,
+    description: space.description,
+    style: space.style,
+    createdAt: space.createdAt,
+    updatedAt: space.updatedAt,
+    totalLinks: space.spaceLinks.length ?? 0,
+    totalInteractions: space.spaceLinks.reduce((counter, spaceLink) => counter + spaceLink.link.linkInteractions.length, 0)
+  }))
 
   const totalPages = Math.ceil(total / perPage)
   const hasNextPage = page < totalPages
 
   return {
-    data,
+    data: spaces,
     total,
     hasNextPage,
     totalPages

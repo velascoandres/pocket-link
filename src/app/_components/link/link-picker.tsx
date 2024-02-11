@@ -27,7 +27,7 @@ export const LinkPicker = ({
   const debounce = useDebounceCallback()
 
   const { data: response } = api.link.getUserLinks.useQuery({
-    spaceLinkId: attachedSpace ? undefined : null,
+    spaceId: attachedSpace ? undefined : null,
     page: 1,
     perPage: 10,
     search
