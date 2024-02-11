@@ -7,14 +7,25 @@ import { usePathname } from 'next/navigation'
 import { NAVIGATION } from '@/constants/navigation'
 import { cn } from '@/lib/utils'
 
+import { ProfileCard } from '../auth/profile-card'
+import { ProfileMenu } from '../auth/profile-menu'
+
 const menuItems = Object.values(NAVIGATION)
 
 export const SideNavigation = () => {
   const pathname = usePathname()
 
   return (
-    <aside className="fixed z-20 bg-gradient-to-br from-slate-950 to-neutral-950 backdrop-blur bottom-[10%] left-[25%] right-[25%] rounded-full border border-gray-700 md:h-[calc(100dvh-165px)] md:top-[80px] md:left-0 md:rounded-none md:backdrop-blur-none md:right-auto md:border-transparent md:border-r-gray-700">
+    <aside className="md:py-4 bottom-2 md:w-[200px] fixed z-20 bg-gradient-to-br from-slate-950 to-neutral-950 backdrop-blur left-[15%] right-[15%] rounded-full border border-neutral-700 md:min-h-screen md:left-0 md:rounded-none md:backdrop-blur-none md:right-auto md:border-transparent md:border-r-neutral-800">
+      <Link href="/" className="hidden md:block md:mb-5 px-6 text-2xl font-semibold whitespace-nowrap text-white">
+        <strong className="text-amber-400">Pocket</strong> <strong className="text-gray-400">link</strong>
+      </Link>
+
+      <div className="hidden md:px-2 md:block">
+        <ProfileCard />
+      </div>
       <nav className="flex flex-col items-center justify-center h-full py-4 px-6 md:items-start md:justify-start md:px-2">
+        
         <ul className="inline-flex items-center gap-10 justify-center md:flex md:flex-col md:justify-start md:items-start md:w-full md:gap-5">
           {
             menuItems.map(({ name, icon: IconComponent, path }) => (
@@ -31,6 +42,9 @@ export const SideNavigation = () => {
               </li>
             ))      
           }
+          <li className="block md:hidden">
+            <ProfileMenu />
+          </li>
         </ul>
       </nav>
     </aside>

@@ -82,4 +82,16 @@
     min-height: 100vh;
     overscroll-behavior: none;
   }
+
+  header {
+    animation: header-shadown 1s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 100px;
+  }
+  
+  @keyframes header-shadown {
+    to {
+      @apply shadow-lg backdrop-blur bg-gray-800/80;
+    }
+  }
 }

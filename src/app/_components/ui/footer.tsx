@@ -3,7 +3,8 @@ import Link from 'next/link'
 
 export const Footer = () => {
   return (
-    <footer className="border-0 border-gray-600 border-t w-full p-8 text-sm text-gray-300">
+    <footer className="border-0 text-center w-full p-4 text-sm text-gray-300 inline-flex">
+      <div></div>
         Built with ❤️ by <Link className="text-amber-400 hover:underline" target="_blank" href="https://github.com/velascoandres">
         <strong>Andrés Velasco</strong>
       </Link>.

@@ -6,8 +6,6 @@ import { ModalContainer } from '@/app/_components/ui/modal-container'
 import { Toaster } from '@/app/_components/ui/toaster'
 import { TRPCReactProvider } from '@/trpc/react'
 
-import { Footer } from './_components/ui/footer'
-
 import '@/styles/globals.css'
 
 const inter = Onest({
@@ -45,7 +43,6 @@ const RootLayout = ({
             </TRPCReactProvider>
           </ThemeProvider>
         </AuthProvider>
-        <Footer />
       </body>
     </html>
   )

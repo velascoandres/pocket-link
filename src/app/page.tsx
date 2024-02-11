@@ -9,6 +9,7 @@ import { SigninProviders } from './_components/auth/signin-providers'
 import { PublicLinksSection } from './_components/link/public-links-section'
 import { AnimatedBagde } from './_components/ui/animated-bagde'
 import { Card, CardDescription, CardHeader, CardTitle } from './_components/ui/card'
+import { Footer } from './_components/ui/footer'
 import { FEATURES } from './_landing/features'
 
 export default async function Home() {
@@ -66,6 +67,8 @@ export default async function Home() {
       </section>
 
       <PublicLinksSection />
+      <Footer />
     </main>
+
   )
 }
