@@ -3,6 +3,7 @@ import {
   CreateSpaceLinkDto, 
   DeleteSpaceDto, 
   DeleteSpaceLinkDto, 
+  SearchByIdDto, 
   SearchSpaceByNameDto, 
   SearchSpaceDto, 
   UpdateSpaceDto, 
@@ -16,6 +17,7 @@ import {
   createSpaceService, 
   deleteSpaceService, 
   detachSpaceLinkService, 
+  searchSpaceByIdService, 
   searchSpaceByNameService, 
   searchSpaceService, 
   switchSpaceLinkService, 
@@ -82,6 +84,14 @@ export const spaceRouter = createTRPCRouter({
   )),
   searchSpaceByName: protectedProcedure.input(SearchSpaceByNameDto)
   .query(({ ctx, input }) => searchSpaceByNameService(
+    ctx.db,
+    {
+      ...input,
+      userId: ctx.session.user.id,
+    }
+  )),
+  searchSpaceById: protectedProcedure.input(SearchByIdDto)
+  .query(({ ctx, input }) => searchSpaceByIdService(
     ctx.db,
     {
       ...input,

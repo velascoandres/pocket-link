@@ -9,12 +9,12 @@ type Options = z.infer<typeof SearchDto> & { createdById?: string, isPublic?: bo
 interface LinkWhereQuery {
   isPublic: boolean
 	createdById?: string
-  spaceLinkId?: number
+  // spaceLink?: { spaceId: number | null}
 	OR?: Record<string, { contains: string }>[]
 }
 
 export const searchLinksService = async (prisma: PrismaClient, options: Options) => {
-  const { search, createdById, spaceLinkId, perPage = 10, page = 1, isPublic = false } = options
+  const { search, createdById, spaceId, perPage = 10, page = 1, isPublic = false } = options
 
   const query: LinkWhereQuery = {
     isPublic,
@@ -22,10 +22,6 @@ export const searchLinksService = async (prisma: PrismaClient, options: Options)
 
   if (createdById){
     query.createdById = createdById
-  }
-
-  if (spaceLinkId){
-    query.spaceLinkId = spaceLinkId
   }
 
   if (search) {
@@ -50,7 +46,10 @@ export const searchLinksService = async (prisma: PrismaClient, options: Options)
 
   const totalQuery = prisma.link.count({
     where: {
-      ...query
+      ...query,
+      spaceLink: spaceId ? {
+        spaceId
+      } : null,
     },
   })
 
@@ -63,7 +62,7 @@ export const searchLinksService = async (prisma: PrismaClient, options: Options)
       }
     },
     where: {
-      ...query
+      ...query,
     },
     orderBy: {
       updatedAt: 'desc',

@@ -1,4 +1,4 @@
-import { LayoutDashboard, Link, Workflow } from 'lucide-react'
+import { Group,LayoutDashboard, Link } from 'lucide-react'
 
 export const NAVIGATION = {
   DASHBOARD: {
@@ -14,6 +14,6 @@ export const NAVIGATION = {
   SPACES: {
     path: '/dashboard/spaces',
     name: 'Spaces',
-    icon: Workflow
+    icon: Group
   },
 } as const

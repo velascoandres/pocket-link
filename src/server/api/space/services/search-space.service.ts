@@ -44,7 +44,7 @@ export const searchSpaceService = async (db: PrismaClient, options: Options) => 
       ...query
     },
     orderBy: {
-      updatedAt: 'desc',
+      createdAt: 'desc',
     },
     skip: perPage * (page - 1), 
     take: perPage,

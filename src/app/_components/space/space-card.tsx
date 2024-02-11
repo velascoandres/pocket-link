@@ -50,7 +50,7 @@ export const SpaceCard = ({
   return (
     <SpaceCardContext.Provider value={{ space }}>
       <article  
-        className="relative select-none min-w-80 h-56 max-w-sm transition ease-in flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border-2 border-neutral-800 hover:border-white"
+        className="relative select-none min-w-60 md:min-w-80 h-56 max-w-xs md:max-w-sm transition ease-in flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border-2 border-neutral-800 hover:border-white"
         style={{ background: space.style?.background.value ?? COLORS[0], color: space.style?.textColor }}  
       >
         <h3 className="text-3xl font-bold text-ellipsis">{shortName}</h3>

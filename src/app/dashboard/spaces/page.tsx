@@ -77,7 +77,7 @@ const SpacePage = () => {
             />
           }
         >
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {response?.data.map((space) => (
               <SpaceCard 
                 key={`${space.id}-item`} 
@@ -87,7 +87,7 @@ const SpacePage = () => {
                   style: space.style as Style
                 }} 
               >
-                <Link href={`${NAVIGATION.SPACES.path}/${space.id}`} className="absolute top-1 right-12 text p-2 text-blue-400 rounded-full bg-slate-800/60">
+                <Link href={`${NAVIGATION.SPACES.path}/${space.id}`} className="absolute top-1 right-12 text p-2 text-white rounded-full bg-slate-800/60">
                   <ArrowUpRight />
                 </Link>
                 <SpaceCardActions 
