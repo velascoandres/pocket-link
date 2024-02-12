@@ -1,13 +1,10 @@
+import { type z } from 'zod'
+
 import { type PrismaClient } from '@prisma/client'
 
-interface Options {
-	search?: string
-	perPage?: number
-	page?: number
-	createdById?: string
-  isPublic?: boolean
-}
+import { type SearchDto } from '@/dtos'
 
+type Options = z.infer<typeof SearchDto> & { createdById?: string, isPublic?: boolean }
 
 interface LinkWhereQuery {
   isPublic: boolean
@@ -16,7 +13,7 @@ interface LinkWhereQuery {
 }
 
 export const searchLinksService = async (prisma: PrismaClient, options: Options) => {
-  const { search, perPage = 10, page = 1, createdById, isPublic = false } = options
+  const { search, createdById, spaceId, perPage = 10, page = 1, isPublic = false } = options
 
   const query: LinkWhereQuery = {
     isPublic,
@@ -46,9 +43,19 @@ export const searchLinksService = async (prisma: PrismaClient, options: Options)
     ]
   }
 
+  const fullQuery = {
+    ...query,
+    ...(spaceId === null ? { spaceLink: null } : {}),
+    ...(spaceId ? {
+      spaceLink: {
+        spaceId,
+      }
+    } : {}),
+  }
+
   const totalQuery = prisma.link.count({
     where: {
-      ...query
+      ...fullQuery,
     },
   })
 
@@ -58,10 +65,15 @@ export const searchLinksService = async (prisma: PrismaClient, options: Options)
         select: {
           id: true,
         }
+      },
+      spaceLink: {
+        include: {
+          space: true
+        }
       }
     },
     where: {
-      ...query
+      ...fullQuery
     },
     orderBy: {
       updatedAt: 'desc',
@@ -79,6 +91,7 @@ export const searchLinksService = async (prisma: PrismaClient, options: Options)
     path: link.path,
     totalInteractions: link.linkInteractions.length,
     isPublic: link.isPublic,
+    space: link.spaceLink?.space,
     createdAt: link.createdAt,
     updatedAt: link.updatedAt,
     expiresAt: link.expiresAt,

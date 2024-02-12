@@ -3,12 +3,14 @@ import Link from 'next/link'
 
 import { IconChevronRight } from '@tabler/icons-react'
 
+import { NAVIGATION } from '@/constants/navigation'
 import { getServerAuthSession } from '@/server/auth'
 
 import { SigninProviders } from './_components/auth/signin-providers'
 import { PublicLinksSection } from './_components/link/public-links-section'
 import { AnimatedBagde } from './_components/ui/animated-bagde'
 import { Card, CardDescription, CardHeader, CardTitle } from './_components/ui/card'
+import { Footer } from './_components/ui/footer'
 import { FEATURES } from './_landing/features'
 
 export default async function Home() {
@@ -30,7 +32,7 @@ export default async function Home() {
         {
           session ? (
             <Link
-              href="/dashboard"
+              href={NAVIGATION.LINKS.path}
               className="flex items-center transition ease-in group rounded-full text-white pl-4 pr-2 py-3 font-semibold no-underline "
             >
               <AnimatedBagde>
@@ -66,6 +68,8 @@ export default async function Home() {
       </section>
 
       <PublicLinksSection />
+      <Footer />
     </main>
+
   )
 }
