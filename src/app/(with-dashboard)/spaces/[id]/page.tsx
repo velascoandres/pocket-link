@@ -109,7 +109,7 @@ const SpaceLinkPage = ({ params }: {params: {id: string}}) => {
             {response?.data.map((link) => (
               <LinkCard 
                 key={`${link.id}-item`} 
-                link={link}
+                link={link as Link}
               >
                 <LinkCardActions
                   onClickInteractions={openInteractions}
