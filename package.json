@@ -13,6 +13,7 @@
     "lint:fix": "next lint --fix ",
     "db-build": "prisma generate && prisma db push",
     "start": "next start",
+    "types": "tsc --noEmit",
     "prepare": "husky"
   },
   "dependencies": {

@@ -55,7 +55,7 @@ export const LinkPicker = ({
             className={cn('my-1 flex flex-row justify-start items-center gap-2 transition ease-in cursor-pointer select-none px-3 py-2 hover:bg-gray-600 border border-neutral-700 rounded-md',{
               'bg-gray-600': selectedLink?.id === link.id
             })} 
-            onClick={() => handleSelectLink(link)} 
+            onClick={() => handleSelectLink(link as Link)} 
             key={link.id}
           >
             <ImageWithFallback

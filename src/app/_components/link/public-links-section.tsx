@@ -4,6 +4,7 @@ import React from 'react'
 
 import { IconUnlink } from '@tabler/icons-react'
 
+import { type Link } from '@/app/_interfaces/link'
 import { useModalStore } from '@/app/_store'
 import { api } from '@/trpc/react'
 
@@ -45,7 +46,7 @@ export const PublicLinksSection = () => {
           <div className="flex flex-row flex-wrap gap-2 justify-center">
             {
               response.data.map((link) => (
-                <LinkCard key={link.id} link={link} />
+                <LinkCard key={link.id} link={link as Link} />
               ))
             }
           </div>

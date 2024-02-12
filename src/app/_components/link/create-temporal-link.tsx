@@ -91,7 +91,6 @@ export const CreateTemporalLink = () => {
                 ...createdLink,
                 totalInteractions: 0
               }}
-              showPublic
             />
             <Alert className="border-amber-400">
               <IconAlertTriangle className="h-4 w-4" />
