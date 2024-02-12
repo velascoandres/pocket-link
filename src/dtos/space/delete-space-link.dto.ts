@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 export const DeleteSpaceLinkDto = z.object({
-  id: z.number(),
+  spaceId: z.number(),
+  linkId: z.number()
 })
   

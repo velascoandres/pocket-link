@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { IconChevronRight } from '@tabler/icons-react'
 
+import { NAVIGATION } from '@/constants/navigation'
 import { getServerAuthSession } from '@/server/auth'
 
 import { SigninProviders } from './_components/auth/signin-providers'
@@ -31,7 +32,7 @@ export default async function Home() {
         {
           session ? (
             <Link
-              href="/dashboard"
+              href={NAVIGATION.LINKS.path}
               className="flex items-center transition ease-in group rounded-full text-white pl-4 pr-2 py-3 font-semibold no-underline "
             >
               <AnimatedBagde>

@@ -9,11 +9,12 @@ import { type DeleteSpaceLinkDto } from '@/dtos'
 type Options = z.infer<typeof DeleteSpaceLinkDto> & { userId: string}
 
 export const detachSpaceLinkService = async (prisma: PrismaClient, options: Options) => {
-  const { userId, id: spaceLinkId } = options
+  const { userId, spaceId, linkId } = options
 
   const currentSpaceLink = await prisma.spaceLink.findFirst({
     where: {
-      id: spaceLinkId,
+      spaceId,
+      linkId
     },
     include: {
       link: true,
@@ -39,7 +40,7 @@ export const detachSpaceLinkService = async (prisma: PrismaClient, options: Opti
 
   await prisma.spaceLink.delete({
     where: {
-      id: spaceLinkId
+      id: currentSpaceLink.id
     }
   })
 

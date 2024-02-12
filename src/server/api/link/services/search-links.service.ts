@@ -45,11 +45,12 @@ export const searchLinksService = async (prisma: PrismaClient, options: Options)
 
   const fullQuery = {
     ...query,
+    ...(spaceId === null ? { spaceLink: null } : {}),
     ...(spaceId ? {
       spaceLink: {
         spaceId,
       }
-    } : {})
+    } : {}),
   }
 
   const totalQuery = prisma.link.count({
@@ -63,6 +64,11 @@ export const searchLinksService = async (prisma: PrismaClient, options: Options)
       linkInteractions: {
         select: {
           id: true,
+        }
+      },
+      spaceLink: {
+        include: {
+          space: true
         }
       }
     },
@@ -85,6 +91,7 @@ export const searchLinksService = async (prisma: PrismaClient, options: Options)
     path: link.path,
     totalInteractions: link.linkInteractions.length,
     isPublic: link.isPublic,
+    space: link.spaceLink?.space,
     createdAt: link.createdAt,
     updatedAt: link.updatedAt,
     expiresAt: link.expiresAt,

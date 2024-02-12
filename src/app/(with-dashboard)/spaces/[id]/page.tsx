@@ -3,13 +3,18 @@
 import React from 'react'
 
 import { ManagementPageLayout } from '@/app/_components/dashboard/management-page-layout'
-import { LinkCard } from '@/app/_components/link/link-card'
+import { CreateUpdateLink } from '@/app/_components/link/create-update-link'
+import { DeleteLink } from '@/app/_components/link/delete-link'
+import { LinkCard, LinkCardActions } from '@/app/_components/link/link-card'
 import { LinkCardSkeleton } from '@/app/_components/link/link-card-skeleton'
+import { LinkInteractions } from '@/app/_components/link/link-interactions'
 import { AttachLinkSpace } from '@/app/_components/space/attach-link-space'
+import { DetachLinkSpace } from '@/app/_components/space/detach-link-space'
 import { EmptyState } from '@/app/_components/ui/empty-state'
 import { Pagination } from '@/app/_components/ui/pagination'
 import { ShowContent } from '@/app/_components/ui/show-content'
 import { useQueryParams } from '@/app/_hooks'
+import { type Link } from '@/app/_interfaces/link'
 import { useModalStore } from '@/app/_store'
 import { api } from '@/trpc/react'
 
@@ -45,6 +50,43 @@ const SpaceLinkPage = ({ params }: {params: {id: string}}) => {
     })
   }
 
+  const openUpdateModal = (link: Link) => {
+    openModal({
+      component: CreateUpdateLink,
+      props: {
+        link,
+      }
+    })
+  }
+
+  const openInteractions = (link: Link) => {
+    openModal({
+      component: LinkInteractions,
+      props: {
+        link
+      }
+    })
+  }
+
+  const openDeleteModal = (link: Link) => {
+    openModal({
+      component: DeleteLink,
+      props: {
+        link,
+      }
+    })
+  }
+
+  const openDetachModal = (link: Link) => {
+    openModal({
+      component: DetachLinkSpace,
+      props: {
+        link,
+        space: currentSpace
+      }
+    })
+  }
+
   return (
     <ManagementPageLayout 
       title={`${currentSpace?.name}`}  
@@ -68,7 +110,14 @@ const SpaceLinkPage = ({ params }: {params: {id: string}}) => {
               <LinkCard 
                 key={`${link.id}-item`} 
                 link={link}
-              />
+              >
+                <LinkCardActions
+                  onClickInteractions={openInteractions}
+                  onClickUpdate={openUpdateModal} 
+                  onClickDelete={openDeleteModal}
+                  onClickDetach={openDetachModal}
+                />
+              </LinkCard>
             ))}
           </div>
           <Pagination

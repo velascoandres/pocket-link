@@ -66,6 +66,10 @@
     --ring: 240 4.9% 83.9%;
   }
 }
+
+.base-bg {
+  @apply bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))];
+}
  
 @layer base {
   /* * {
@@ -84,12 +88,12 @@
   }
 
   header {
-    animation: header-shadown 1s linear both;
+    animation: nav-header-shadown 1s linear both;
     animation-timeline: scroll();
     animation-range: 0 100px;
   }
   
-  @keyframes header-shadown {
+  @keyframes nav-header-shadown {
     to {
       @apply shadow-lg backdrop-blur bg-gray-800/80;
     }

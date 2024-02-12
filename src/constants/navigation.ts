@@ -1,18 +1,18 @@
-import { Group,LayoutDashboard, Link } from 'lucide-react'
+import { Group, Link } from 'lucide-react'
 
 export const NAVIGATION = {
-  DASHBOARD: {
-    path: '/dashboard',
-    name: 'Dashboard',
-    icon: LayoutDashboard
-  },
+  // DASHBOARD: {
+  //   path: '/dashboard',
+  //   name: 'Dashboard',
+  //   icon: LayoutDashboard
+  // },
   LINKS: {
-    path: '/dashboard/links',
+    path: '/links',
     name: 'Links',
     icon: Link
   },
   SPACES: {
-    path: '/dashboard/spaces',
+    path: '/spaces',
     name: 'Spaces',
     icon: Group
   },

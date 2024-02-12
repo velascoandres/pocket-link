@@ -2,12 +2,15 @@
 
 import { ManagementPageLayout } from '@/app/_components/dashboard/management-page-layout'
 import { CreateUpdateLink } from '@/app/_components/link/create-update-link'
+import { DeleteLink } from '@/app/_components/link/delete-link'
+import { LinkCard, LinkCardActions } from '@/app/_components/link/link-card'
 import { LinkCardSkeleton } from '@/app/_components/link/link-card-skeleton'
-import { LinkGridList } from '@/app/_components/link/link-grid-list'
+import { LinkInteractions } from '@/app/_components/link/link-interactions'
 import { EmptyState } from '@/app/_components/ui/empty-state'
 import { Pagination } from '@/app/_components/ui/pagination'
 import { ShowContent } from '@/app/_components/ui/show-content'
 import { useQueryParams } from '@/app/_hooks'
+import { type Link } from '@/app/_interfaces/link'
 import { useModalStore } from '@/app/_store'
 import { api } from '@/trpc/react'
 
@@ -35,6 +38,33 @@ const DashboardPage = () => {
     })
   }
 
+  const openUpdateModal = (link: Link) => {
+    openModal({
+      component: CreateUpdateLink,
+      props: {
+        link,
+      }
+    })
+  }
+
+  const openInteractions = (link: Link) => {
+    openModal({
+      component: LinkInteractions,
+      props: {
+        link
+      }
+    })
+  }
+
+  const openDeleteModal = (link: Link) => {
+    openModal({
+      component: DeleteLink,
+      props: {
+        link,
+      }
+    })
+  }
+
   return (
     <ManagementPageLayout
       title="Links"
@@ -53,7 +83,23 @@ const DashboardPage = () => {
             />
           }
         >
-          <LinkGridList links={response?.data ?? []} />
+          {/* <LinkGridList links={response?.data ?? []} /> */}
+          <section className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center mt-10">
+            {
+              response?.data.map((link) => (
+                <LinkCard
+                  key={link.id}
+                  link={link as Link}
+                >
+                  <LinkCardActions
+                    onClickInteractions={openInteractions}
+                    onClickUpdate={openUpdateModal} 
+                    onClickDelete={openDeleteModal}
+                  />
+                </LinkCard>
+              ))
+            }
+          </section>
           <Pagination
             page={page}
             totalPages={response?.totalPages ?? 0}

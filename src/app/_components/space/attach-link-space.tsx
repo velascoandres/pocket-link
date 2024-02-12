@@ -69,7 +69,7 @@ export const AttachLinkSpace = ({
       <LinkPicker onLinkSelect={setLinkToAttach} />
 
       {
-        linkToAttatch && <LinkCard link={linkToAttatch} showPublic />
+        linkToAttatch && <LinkCard link={linkToAttatch} />
       }
 
       <DialogFooter>

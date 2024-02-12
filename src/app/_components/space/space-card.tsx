@@ -72,11 +72,11 @@ export const SpaceCardActions = ({
     <div className="absolute top-1 right-1 text-white">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="rounded-full border-none px-2 bg-slate-800/70">
+          <Button variant="outline" className="rounded-full border-none px-2 base-bg">
             <IconDotsVertical />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent className="base-bg border-neutral-700">
           <DropdownMenuItem
             onClick={() => onClickUpdate(space)}
             className="cursor-pointer flex justify-start gap-2"
@@ -102,7 +102,7 @@ export const SpaceAnalytics = ({
   links
 }: SpaceCardStadisticsProps) => {
   return (
-    <ul className="absolute [&>ul]:list-none bottom-2 mt-2 flex justify-start gap-2 bg-slate-800/70 rounded-2xl text-gray-300 text-sm p-1 px-2">
+    <ul className="absolute [&>ul]:list-none bottom-2 mt-2 flex justify-start gap-2 bg-slate-800/80 rounded-2xl text-gray-300 text-sm p-1 px-2">
       <li className="flex justify-start items-center gap-2">
         <Link className="w-4 h-4" /> <span>{links}</span>
       </li>

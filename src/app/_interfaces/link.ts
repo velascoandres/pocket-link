@@ -1,3 +1,5 @@
+import { type Space } from './space'
+
 export interface Link {
 	id: number
 	name: string
@@ -5,6 +7,7 @@ export interface Link {
 	originalLink: string
 	totalInteractions: number
 	isPublic: boolean
+	space?: Space
 	createdAt: Date
 	updatedAt: Date
 } 
