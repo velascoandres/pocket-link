@@ -91,7 +91,7 @@ export const CreateUpdateSpace = ({
       style: space?.style ?? {
         background: {
           type: 'color',
-          value: COLORS[0] ?? ''
+          value: COLORS[4] ?? ''
         },
         textColor: 'black'
       }
@@ -144,18 +144,11 @@ export const CreateUpdateSpace = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [existingSpace])
 
-  // useEffect(() => {
-  //   const color = space?.style?.background.value
-    
-  //   handleColorSelection(color)
-
-  // }, [])
-
   const hasErrors = Boolean(Object.values(form.formState.errors).length) || !form.formState.isValid
 
   return (
     <DialogContent 
-      className="h-screen md:h-auto md:max-w-3xl overflow-y-auto" 
+      className="h-screen xl:h-auto md:max-w-3xl overflow-y-auto" 
       preventCloseClickOutside
       preventScapeKeydown
     >
@@ -163,7 +156,7 @@ export const CreateUpdateSpace = ({
         <DialogTitle>{space ? 'Space information' : 'Add new Space'} </DialogTitle>
       </DialogHeader>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
           <div className="flex flex-col items-start gap-4 w-full">
             <div className="flex flex-col md:flex-row justify-between w-full gap-2">
               <div className="flex flex-col w-full">
@@ -244,12 +237,15 @@ export const CreateUpdateSpace = ({
             </div>   
           </div>
 
+          <h3 className="font-bold">Space preview</h3>
+
           <div className="flex flex-row justify-center w-full">
             <SpaceCard 
               space={{
                 id: 0,
-                name: form.watch('name'),
-                description: form.watch('description') ?? '',
+                name: form.watch('name') || '⚽️ Space name 🏈',
+                // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+                description: form.watch('description') || 'my great space for...',
                 style: form.watch('style')
               }}  
             />

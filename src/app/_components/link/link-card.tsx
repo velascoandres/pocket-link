@@ -106,7 +106,7 @@ export const LinkCard = ({
               className="rounded-full border border-white/10 bg-white"
             />
 
-            <span className="w-[150px]">{shortName}</span>
+            <span className="w-[150px] text-ellipsis">{shortName}</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="h-30 flex flex-col gap-3 mb-10">
@@ -120,7 +120,7 @@ export const LinkCard = ({
           </div>
 
           <NextLink href={originalLink} target="_blank">
-            <span className="text-gray-400 hover:underline text-sm">{shortOriginalLink}</span>
+            <span className="text-gray-400 hover:underline text-sm text-ellipsis">{shortOriginalLink}</span>
           </NextLink>
           { children }
         </CardContent>
