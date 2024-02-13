@@ -50,7 +50,7 @@ export const SpaceCard = ({
   return (
     <SpaceCardContext.Provider value={{ space }}>
       <article  
-        className="relative select-none min-w-60 md:min-w-80 h-56 max-w-xs md:max-w-sm transition ease-in flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border-2 border-neutral-800 hover:border-white"
+        className="transition ease-in group relative select-none min-w-60 md:min-w-80 h-56 max-w-xs md:max-w-sm flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border-2 border-neutral-800 hover:border-white"
         style={{ background: space.style?.background.value ?? COLORS[0], color: space.style?.textColor }}  
       >
         <h3 className="text-3xl font-bold text-ellipsis">{shortName}</h3>
@@ -102,7 +102,7 @@ export const SpaceAnalytics = ({
   links
 }: SpaceCardStadisticsProps) => {
   return (
-    <ul className="absolute [&>ul]:list-none bottom-2 mt-2 flex justify-start gap-2 bg-slate-800/80 rounded-2xl text-gray-300 text-sm p-1 px-2">
+    <ul className="hidden group-hover:flex absolute [&>ul]:list-none bottom-2 mt-2  justify-start gap-2 bg-slate-800/80 rounded-2xl text-gray-300 text-sm p-1 px-2">
       <li className="flex justify-start items-center gap-2">
         <Link className="w-4 h-4" /> <span>{links}</span>
       </li>
