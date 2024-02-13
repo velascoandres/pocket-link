@@ -23,7 +23,7 @@ export const DeleteSpace = ({
 
   const { mutate: deleteSpace } = api.space.deleteSpace.useMutation({
     onSuccess() {
-      void utils.link.getUserLinks.invalidate()
+      void utils.space.searchSpace.invalidate()
 
       toast({
         title: '🚨 Deleted',

@@ -69,7 +69,13 @@ export const AttachLinkSpace = ({
       <LinkPicker onLinkSelect={setLinkToAttach} />
 
       {
-        linkToAttatch && <LinkCard link={linkToAttatch} />
+        linkToAttatch && (
+          <div className="flex flex-col gap-2 items-start">
+            <h3 className="text-sm text-gray-400 font-semibold">Link preview</h3>
+
+            <LinkCard link={linkToAttatch} />
+          </div>
+        )
       }
 
       <DialogFooter>

@@ -71,7 +71,7 @@ const DashboardPage = () => {
       addLabel="Add new link"
       onAddClick={addNewLink}
     >
-      <div className="flex flex-col gap-8 items-center w-full">
+      <div className="flex flex-col gap-8 items-center md:items-start w-full">
         <ShowContent
           empty={!response?.data?.length}
           loading={isLoading}
@@ -83,8 +83,7 @@ const DashboardPage = () => {
             />
           }
         >
-          {/* <LinkGridList links={response?.data ?? []} /> */}
-          <section className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center mt-10">
+          <section className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 justify-start mt-10">
             {
               response?.data.map((link) => (
                 <LinkCard
@@ -100,11 +99,14 @@ const DashboardPage = () => {
               ))
             }
           </section>
-          <Pagination
-            page={page}
-            totalPages={response?.totalPages ?? 0}
-            onPageChange={onPageChange}
-          />
+          <div className="self-center">
+            <Pagination
+              page={page}
+              totalPages={response?.totalPages ?? 0}
+              onPageChange={onPageChange}
+            />
+          </div>
+          
         </ShowContent>
       </div>
     </ManagementPageLayout>

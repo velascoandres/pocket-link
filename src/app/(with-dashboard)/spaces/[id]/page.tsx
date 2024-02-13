@@ -93,19 +93,19 @@ const SpaceLinkPage = ({ params }: {params: {id: string}}) => {
       addLabel="Attach link" 
       onAddClick={openAttachModal}
     >
-      <div className="flex flex-col gap-8 items-center w-full">
+      <div className="flex flex-col gap-8 items-center md:items-start w-full">
         <ShowContent
           empty={!response?.data?.length}
           loading={isLoading}
           fallback={<LinkCardSkeleton />} 
           emptyState={
             <EmptyState
-              title="No links were found for this spaces"
+              title="No links were found for this space"
               description="Please try attaching links or change your search parameters"
             />
           }
         >
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 justify-start mt-10">
             {response?.data.map((link) => (
               <LinkCard 
                 key={`${link.id}-item`} 
@@ -120,11 +120,14 @@ const SpaceLinkPage = ({ params }: {params: {id: string}}) => {
               </LinkCard>
             ))}
           </div>
-          <Pagination
-            page={page}
-            totalPages={response?.totalPages ?? 0}
-            onPageChange={onPageChange}
-          />
+          <div className="self-center">
+            <Pagination
+              page={page}
+              totalPages={response?.totalPages ?? 0}
+              onPageChange={onPageChange}
+            />
+          </div>
+          
         </ShowContent>
       </div>
     </ManagementPageLayout>

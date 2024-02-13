@@ -87,7 +87,7 @@ const SpacePage = () => {
                   style: space.style as Style
                 }} 
               >
-                <Link href={`${NAVIGATION.SPACES.path}/${space.id}`} className="absolute top-1 right-12 text p-2 text-white rounded-full bg-slate-800/60">
+                <Link href={`${NAVIGATION.SPACES.path}/${space.id}`} className="hidden group-hover:block absolute top-1 right-12 text p-2 text-white rounded-full bg-slate-800/60">
                   <ArrowUpRight />
                 </Link>
                 <SpaceCardActions 
