@@ -12,9 +12,6 @@ const Layout = ({
 }) => {
   return (
     <div className="min-h-screen relative flex flex-col items-start justify-between overflow-y-auto">
-      {/* <div className="fixed w-screen top-0 z-10">
-        <Navbar />
-      </div> */}
       <SideNavigation />
       <div className="md:pl-[200px] w-full">
         {children}

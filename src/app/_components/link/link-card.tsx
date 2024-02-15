@@ -173,7 +173,7 @@ export const LinkCardActions = ({
             <IconDotsVertical />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="base-bg border-neutral-700">
+        <DropdownMenuContent className="base-bg border-gray-800">
           <DropdownMenuItem
             onClick={() => onClickUpdate(link)}
             className="cursor-pointer flex justify-start gap-2"

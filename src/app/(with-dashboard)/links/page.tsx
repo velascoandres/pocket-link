@@ -77,10 +77,12 @@ const DashboardPage = () => {
           loading={isLoading}
           fallback={<LinkCardSkeleton />} 
           emptyState={
-            <EmptyState
-              title="No links were found"
-              description="Please try adding new links or change your search parameters"
-            />
+            <div className="self-center">
+              <EmptyState
+                title="No links were found"
+                description="Please try adding new links or change your search parameters"
+              />
+            </div>
           }
         >
           <section className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 justify-start mt-10">

@@ -19,7 +19,10 @@ export const searchInteractionAnalyticsService = async (
       updatedAt: {
         gte: startDate,
         lte: endDate,
-      }
+      },
+    },
+    orderBy: {
+      createdAt: 'asc',
     },
   })
 

@@ -1,5 +1,6 @@
 import { Group, Link } from 'lucide-react'
 
+
 export const NAVIGATION = {
   // DASHBOARD: {
   //   path: '/dashboard',
@@ -17,3 +18,6 @@ export const NAVIGATION = {
     icon: Group
   },
 } as const
+
+
+export const REDIRECT_PATH = NAVIGATION.LINKS.path

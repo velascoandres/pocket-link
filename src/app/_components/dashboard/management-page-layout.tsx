@@ -39,7 +39,7 @@ export const ManagementPageLayout = ({
 
   return (
     <main className="overflow-y-auto py-2 flex flex-col gap-4 items-start min-h-screen">
-      <header className="px-4 py-2 z-10 fixed top-0 w-full flex flex-row flex-wrap items-center border border-transparent border-b-neutral-800 gap-2">
+      <header className="px-4 py-2 z-10 fixed top-0 w-full flex flex-row flex-wrap items-center border border-transparent border-b-gray-800 gap-2">
         <h1 className="text-3xl font-bold">{title}</h1>
         <div className="w-2/3 md:w-1/2 flex flex-col md:flex-row flex-wrap justify-start md:justify-center items-center gap-2">
           <SearchBox placeholder={searchPlaceholder} onSearch={onSearchHandler} value={searchParams.get('search') ?? ''} />

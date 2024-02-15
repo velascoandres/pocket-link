@@ -50,7 +50,7 @@ export const SpaceCard = ({
   return (
     <SpaceCardContext.Provider value={{ space }}>
       <article  
-        className="transition ease-in group relative select-none min-w-60 md:min-w-80 h-56 max-w-xs md:max-w-sm flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border-2 border-neutral-800 hover:border-white"
+        className="transition ease-in group relative select-none min-w-60 md:min-w-80 h-56 max-w-xs md:max-w-sm flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border border-gray-800 hover:border-white"
         style={{ background: space.style?.background.value ?? COLORS[0], color: space.style?.textColor }}  
       >
         <h3 className="text-3xl font-bold text-ellipsis">{shortName}</h3>
@@ -76,7 +76,7 @@ export const SpaceCardActions = ({
             <IconDotsVertical />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="base-bg border-neutral-700">
+        <DropdownMenuContent className="base-bg border-gray-800">
           <DropdownMenuItem
             onClick={() => onClickUpdate(space)}
             className="cursor-pointer flex justify-start gap-2"

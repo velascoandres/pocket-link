@@ -6,8 +6,9 @@ import { signIn } from 'next-auth/react'
 import { IconBrandDiscordFilled, IconBrandGithubFilled, IconBrandGoogleFilled } from '@tabler/icons-react'
 
 import { Button } from '@/app/_components/ui/button'
+import { REDIRECT_PATH } from '@/constants/navigation'
 
-const CONFIG = { callbackUrl: '/dashboard' }
+const CONFIG = { callbackUrl: REDIRECT_PATH }
 
 export function SigninProviders() {
 

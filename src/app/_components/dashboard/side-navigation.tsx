@@ -16,7 +16,7 @@ export const SideNavigation = () => {
   const pathname = usePathname()
 
   return (
-    <aside className="md:py-4 bottom-2 md:w-[200px] fixed z-20 bg-gradient-to-br from-slate-950 to-neutral-950 backdrop-blur left-[15%] right-[15%] rounded-full border border-neutral-700 md:min-h-screen md:left-0 md:rounded-none md:backdrop-blur-none md:right-auto md:border-transparent md:border-r-neutral-800">
+    <aside className="md:py-4 bottom-2 md:w-[200px] fixed z-20 bg-gradient-to-br from-slate-950 to-neutral-950 backdrop-blur left-[15%] right-[15%] rounded-full border border-gray-800 md:min-h-screen md:left-0 md:rounded-none md:backdrop-blur-none md:right-auto md:border-transparent md:border-r-gray-800">
       <Link href="/" className="hidden md:block md:mb-5 px-6 text-2xl font-semibold whitespace-nowrap text-white">
         <strong className="text-amber-400">Pocket</strong> <strong className="text-gray-400">link</strong>
       </Link>
@@ -32,7 +32,7 @@ export const SideNavigation = () => {
               <li 
                 key={`menu-${name}`}
                 className={cn('group transition ease-in relative list-none flex items-center md:w-full md:border md:border-transparent md:text-gray-400 md:hover:border-gray-700 md:px-4 md:py-2 md:rounded-xl md:hover:bg-zinc-800', {
-                  'md:bg-zinc-800 md:border-gray-700 md:text-amber-400': pathname === path 
+                  'border-gray-800 md:text-amber-400': pathname === path 
                 })}
               >
                 <Link href={path} className=" group-hover:text-amber-400 inline-flex gap-2 items-center md:justify-start md:gap-1 md:w-full">
