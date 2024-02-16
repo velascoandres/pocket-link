@@ -1,3 +1,4 @@
+import { type Metadata } from 'next'
 import { Onest } from 'next/font/google'
 
 import { AuthProvider } from '@/app/_components/auth/auth-provider'
@@ -13,18 +14,20 @@ const inter = Onest({
   variable: '--font-sans',
 })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Pocket link',
-  description: 'A URL shortener with some analytics',
+  description: 'Pocket link is a platform where you can manage your URLs efficiently',
   icons: [{ rel: 'icon', url: '/favicon.ico' }],
   openGraph: {
-    title: 'Pocket link an smart url shortener',
-    description: 'Pocket links is a platform where you can manage your urls efficiently',
+    title: 'Pocket link a smart url shortener',
+    description: 'Pocket link is a platform where you can manage your URLs efficiently',
+    url: 'https://pkin.vercel.app',
+    siteName: 'Pocket link',
     images: [
       {
         url: 'https://pkin.vercel.app/pocket.svg',
-        width: 800,
-        height: 600,
+        width: 1200,
+        height: 630,
       }
     ],
   },
