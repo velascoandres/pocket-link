@@ -1,13 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
 
 import { ManagementPageLayout } from '@/app/_components/dashboard/management-page-layout'
 import { LinkCardSkeleton } from '@/app/_components/link/link-card-skeleton'
 import { CreateUpdateSpace } from '@/app/_components/space/create-update-space'
 import { DeleteSpace } from '@/app/_components/space/delete-space'
-import { SpaceAnalytics, SpaceCard, SpaceCardActions } from '@/app/_components/space/space-card'
+import { SpaceCard, SpaceCardActions } from '@/app/_components/space/space-card'
 import { EmptyState } from '@/app/_components/ui/empty-state'
 import { Pagination } from '@/app/_components/ui/pagination'
 import { ShowContent } from '@/app/_components/ui/show-content'
@@ -77,7 +76,7 @@ const SpacePage = () => {
             />
           }
         >
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 gap-4 w-full">
             {response?.data.map((space) => (
               <SpaceCard 
                 key={`${space.id}-item`} 
@@ -85,16 +84,17 @@ const SpacePage = () => {
                   ...space,
                   description: space.description ?? '',
                   style: space.style as Style
-                }} 
+                }}
+                renderTitle={() => (
+                  <Link href={`${NAVIGATION.SPACES.path}/${space.id}`} className="hover:underline">             
+                    <h3 className="text-3xl font-bold max-w-[200px] text-ellipsis">{space.name}</h3>
+                  </Link>
+                )} 
               >
-                <Link href={`${NAVIGATION.SPACES.path}/${space.id}`} className="hidden group-hover:block absolute top-1 right-12 text p-2 text-white rounded-full bg-slate-800/60">
-                  <ArrowUpRight />
-                </Link>
                 <SpaceCardActions 
                   onClickUpdate={openUpdateSpaceModal} 
                   onClickRemove={openDeleteSpaceModal} 
                 />
-                <SpaceAnalytics interactions={space.totalInteractions} links={space.totalLinks} />
               </SpaceCard>
             ))}
           </div>

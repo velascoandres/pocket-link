@@ -239,14 +239,16 @@ export const CreateUpdateSpace = ({
 
           <h3 className="font-bold">Space preview</h3>
 
-          <div className="flex flex-row justify-center w-full">
+          <div className="flex-1 w-full">
             <SpaceCard 
               space={{
                 id: 0,
-                name: form.watch('name') || '⚽️ Space name 🏈',
+                name: form.watch('name') || '⚽️ name',
                 // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-                description: form.watch('description') || 'my great space for...',
-                style: form.watch('style')
+                description: form.watch('description') || 'my great space for Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum standard dummy text ever since the 1500s',
+                style: form.watch('style'),
+                totalInteractions: 100,
+                totalLinks: 152
               }}  
             />
           </div>

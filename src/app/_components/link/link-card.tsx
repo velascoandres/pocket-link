@@ -16,7 +16,7 @@ import {
 import { useToast } from '@/app/_hooks'
 import { type Link } from '@/app/_interfaces/link'
 import { NAVIGATION } from '@/constants/navigation'
-import { getDiffTime, getTinyFavicon, shortText } from '@/helpers'
+import { getDiffTime, getTinyFavicon } from '@/helpers'
 
 import { Button } from '../ui/button'
 import {
@@ -68,10 +68,6 @@ export const LinkCard = ({
 
   const { toast } = useToast()
 
-  const shortOriginalLink = shortText(originalLink, 30)
-
-  const shortName = shortText(name, 15)
-
   const dateAgo = getDiffTime(updatedAt)
 
 
@@ -103,10 +99,11 @@ export const LinkCard = ({
               width={32} 
               height={32} 
               alt={link.name}
-              className="rounded-full border border-white/10 bg-white"
+              className="rounded-full border border-white/10 bg-white select-none"
+              draggable={false}
             />
 
-            <span className="w-[150px] text-ellipsis">{shortName}</span>
+            <span className="text-ellipsis line-clamp-1">{name}</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="h-30 flex flex-col gap-3 mb-10">
@@ -120,7 +117,7 @@ export const LinkCard = ({
           </div>
 
           <NextLink href={originalLink} target="_blank">
-            <span className="text-gray-400 hover:underline text-sm text-ellipsis">{shortOriginalLink}</span>
+            <span className="text-gray-400 hover:underline text-sm text-ellipsis line-clamp-1">{originalLink}</span>
           </NextLink>
           { children }
         </CardContent>
@@ -166,10 +163,10 @@ export const LinkCardActions = ({
 
 
   return (
-    <div className="absolute top-4 right-3 text-white">
+    <div className="absolute top-1 right-1 text-white">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="rounded-full px-2 base-bg">
+          <Button variant="outline" className="rounded-full px-2 bg-transparent border-none">
             <IconDotsVertical />
           </Button>
         </DropdownMenuTrigger>

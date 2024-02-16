@@ -5,7 +5,6 @@ import { IconDotsVertical, IconEdit, IconTrash } from '@tabler/icons-react'
 
 import { type Space } from '@/app/_interfaces/space'
 import { COLORS } from '@/constants/colors'
-import { shortText } from '@/helpers'
 
 import { Button } from '../ui/button'
 import { 
@@ -23,14 +22,10 @@ interface SpaceCardContextType {
 
 interface Props {
     space: Omit<Space, 'createdById'>
+    renderTitle?: (space: Space) => React.ReactNode
     children?: React.ReactNode | React.ReactNode[]
 }
 
-
-interface SpaceCardStadisticsProps {
-  links: number;
-  interactions: number;
-}
 interface SpaceCardActions {
   onClickRemove: (space: Omit<Space, 'createdById'>) => void
   onClickUpdate: (space: Omit<Space, 'createdById'>) => void
@@ -41,22 +36,42 @@ const SpaceCardContext = createContext<SpaceCardContextType | null>(null)
 
 export const SpaceCard = ({
   space,
-  children
+  children,
+  renderTitle,
 }: Props) => {
-
-  const shortName = shortText(space.name, 20)
-  const shortDescription = shortText(space.description ?? '', 180)
 
   return (
     <SpaceCardContext.Provider value={{ space }}>
       <article  
-        className="transition ease-in group relative select-none min-w-60 md:min-w-80 h-56 max-w-xs md:max-w-sm flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border border-gray-800 hover:border-white"
+        className="overflow-hidden transition ease-in group relative select-none h-56 flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border border-gray-800 hover:border-white"
         style={{ background: space.style?.background.value ?? COLORS[0], color: space.style?.textColor }}  
       >
-        <h3 className="text-3xl font-bold text-ellipsis">{shortName}</h3>
-        <p className="text-md mb-6">{shortDescription}</p>
+        <header>
+          {
+            renderTitle ? renderTitle(space) : <h3 className="text-3xl font-bold max-w-[200px] text-ellipsis">{space.name}</h3>
+          }
+
+        </header>
+
+        <p className="text-md whitespace-normal truncate overflow-ellipsis mb-4">
+          {space.description}
+        </p>
 
         {children}
+
+        <footer className="absolute bottom-1 left-1">
+          <ul className="flex list-none justify-start gap-2 rounded-2xl text-sm p-1 px-2" style={{
+            color: space.style?.textColor,
+          }}>
+            <li className="flex justify-start items-center gap-2">
+              <Link className="w-4 h-4" /> <span>{space.totalLinks}</span>
+            </li>
+            <li  className="flex justify-start items-center gap-2">
+              <MousePointerClick className="w-4 h-4" /> <span>{space.totalInteractions}</span>
+            </li>
+          </ul>
+        </footer>
+        
       </article>
     </SpaceCardContext.Provider>
   )
@@ -72,7 +87,9 @@ export const SpaceCardActions = ({
     <div className="absolute top-1 right-1 text-white">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="rounded-full border-none px-2 base-bg">
+          <Button variant="outline" className="rounded-full border-none px-2 bg-transparent hover:bg-gray-800/50" style={{
+            color: space.style?.textColor
+          }}>
             <IconDotsVertical />
           </Button>
         </DropdownMenuTrigger>
@@ -93,22 +110,5 @@ export const SpaceCardActions = ({
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  )
-}
-
-
-export const SpaceAnalytics = ({
-  interactions,
-  links
-}: SpaceCardStadisticsProps) => {
-  return (
-    <ul className="hidden group-hover:flex absolute [&>ul]:list-none bottom-2 mt-2  justify-start gap-2 bg-slate-800/80 rounded-2xl text-gray-300 text-sm p-1 px-2">
-      <li className="flex justify-start items-center gap-2">
-        <Link className="w-4 h-4" /> <span>{links}</span>
-      </li>
-      <li  className="flex justify-start items-center gap-2">
-        <MousePointerClick className="w-4 h-4" /> <span>{interactions}</span>
-      </li>
-    </ul>
   )
 }

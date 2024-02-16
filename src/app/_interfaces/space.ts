@@ -7,6 +7,8 @@ export interface Space {
     name: string
     description: string | null
     style?: z.infer<typeof StyleDto>
+    totalInteractions: number
+    totalLinks: number
 }
 
 

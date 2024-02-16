@@ -17,6 +17,17 @@ export const metadata = {
   title: 'Pocket link',
   description: 'A URL shortener with some analytics',
   icons: [{ rel: 'icon', url: '/favicon.ico' }],
+  openGraph: {
+    title: 'Pocket link url shortener',
+    description: 'Pocket links is a platform where you can manage your urls efficiently',
+    images: [
+      {
+        url: '/pocket.svg',
+        width: 800,
+        height: 600,
+      }
+    ],
+  },
 }
 
 const RootLayout = ({
