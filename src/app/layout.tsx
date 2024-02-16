@@ -18,11 +18,11 @@ export const metadata = {
   description: 'A URL shortener with some analytics',
   icons: [{ rel: 'icon', url: '/favicon.ico' }],
   openGraph: {
-    title: 'Pocket link url shortener',
+    title: 'Pocket link an smart url shortener',
     description: 'Pocket links is a platform where you can manage your urls efficiently',
     images: [
       {
-        url: '/pocket.svg',
+        url: 'https://pkin.vercel.app/pocket.svg',
         width: 800,
         height: 600,
       }
