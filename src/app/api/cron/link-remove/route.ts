@@ -5,6 +5,8 @@ import { TRPCError } from '@trpc/server'
 import { removeExpireLinkService } from '@/server/api/link/services'
 import { db } from '@/server/db'
 
+export const revalidate = 0
+
 export const GET = async () => {
   try {
     const { removed } = await removeExpireLinkService(db)
