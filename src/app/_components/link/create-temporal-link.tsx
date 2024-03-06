@@ -85,7 +85,7 @@ export const CreateTemporalLink = () => {
       </DialogHeader>
       {
         createdLink && (
-          <div className="flex flex-col justify-center gap-2">
+          <div className="flex flex-col justify-center gap-2  max-w-sm md:max-w-md lg:max-w-lg">
             <LinkCard
               link={{
                 ...createdLink,

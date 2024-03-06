@@ -43,7 +43,7 @@ export const PublicLinksSection = () => {
       
       {
         response?.data?.length ? (
-          <div className="flex flex-row flex-wrap gap-2 justify-center">
+          <div className="flex flex-row flex-wrap gap-2 justify-center max-w-sm md:max-w-md lg:max-w-lg">
             {
               response.data.map((link) => (
                 <LinkCard key={link.id} link={link as Link} />
