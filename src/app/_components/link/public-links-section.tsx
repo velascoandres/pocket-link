@@ -29,29 +29,27 @@ export const PublicLinksSection = () => {
   }
 
   return (
-    <section className="flex flex-col w-full items-center mx-auto max-w-[300px] sm:max-w-[400px] md:max-w-[600px] lg:max-w-[850px] py-8 gap-4">
-      <h2 className="text-3xl font-bold text-gray-400 sm:text-4xl md:text-5xl lg:text-6xl/none"> 
-        Recently <strong className="text-amber-400">shortened</strong>
+    <section className="flex flex-col w-full items-center mx-auto py-8 gap-4 flex-1">
+      <h2 className="text-3xl font-bold text-gray-400 sm:text-2xl md:text-3xl lg:text-4xl/none"> 
+        Recently <strong className="text-primary">shortened</strong>
       </h2>
       <div className=" w-full flex flex-col group md:flex-row flex-wrap justify-start md:justify-center items-center gap-2">
-        <AnimatedBagde role="button" onClick={addNewLink} className="transition ease-in cursor-pointer active:scale-105">
-          <div className="flex gap-2 group-hover:text-amber-400 items-center">
-            <IconUnlink className="transition ease-out duration-200 group-hover:text-amber-400" /> Quick short a link
+        <AnimatedBagde role="button" onClick={addNewLink} className="transition ease-in cursor-pointer active:scale-105 p-[1px]">
+          <div className="flex gap-2 group-hover:text-primary items-center">
+            <IconUnlink className="transition ease-out duration-200 group-hover:text-primary" /> Quick short a link
           </div>
         </AnimatedBagde>
       </div>
-      
-      {
-        response?.data?.length ? (
-          <div className="flex flex-row flex-wrap gap-2 justify-center max-w-sm md:max-w-md lg:max-w-lg">
-            {
-              response.data.map((link) => (
-                <LinkCard key={link.id} link={link as Link} />
-              ))
-            }
-          </div>
-        ): null 
-      }
+
+      <div className="flex flex-row flex-wrap gap-2 w-full justify-center">
+        {
+          response?.data?.length ? (
+            response.data.map((link) => (
+              <LinkCard key={link.id} link={link as Link} />
+            ))
+          ): null 
+        }
+      </div>
     </section>
   )
 }

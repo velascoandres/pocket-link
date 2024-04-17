@@ -89,7 +89,7 @@ export const LinkCard = ({
   return (
     <LinkCardContext.Provider value={{ link }}>
       <Card
-        className="group w-full transition relative ease-in border border-gray-800 hover:border-gray-100 hover:border"
+        className="group w-[400px] transition relative ease-in border border-border hover:border-primary hover:border"
       >
         <CardHeader>
           <CardTitle className="text-base flex flex-row justify-start items-center gap-2">
@@ -99,7 +99,7 @@ export const LinkCard = ({
               width={32} 
               height={32} 
               alt={link.name}
-              className="rounded-full border border-white/10 bg-white select-none"
+              className="rounded-full border border-border bg-white select-none"
               draggable={false}
             />
 
@@ -107,7 +107,7 @@ export const LinkCard = ({
           </CardTitle>
         </CardHeader>
         <CardContent className="h-30 flex flex-col gap-3 mb-10">
-          <div className="flex flex-row justify-start items-center gap-2 rounded-xl py-1 px-1 border border-white/10">
+          <div className="flex flex-row justify-start items-center gap-2 rounded-xl py-1 px-1 border border-border/10">
             <Button variant="ghost" className="rounded-md px-2" onClick={handleCopyClipboard} >
               <IconClipboard />
             </Button>
@@ -170,7 +170,7 @@ export const LinkCardActions = ({
             <IconDotsVertical />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="base-bg border-gray-800">
+        <DropdownMenuContent className="border-border">
           <DropdownMenuItem
             onClick={() => onClickUpdate(link)}
             className="cursor-pointer flex justify-start gap-2"
@@ -187,14 +187,14 @@ export const LinkCardActions = ({
           {onClickDetach && (
             <DropdownMenuItem
               onClick={() => onClickDetach(link)}
-              className="cursor-pointer flex justify-start gap-2 text-red-600"
+              className="cursor-pointer flex justify-start gap-2 text-destructive"
             >
               <Split className="h-5 w-5" /> Detach
             </DropdownMenuItem>
           ) }
           <DropdownMenuItem
             onClick={() => onClickDelete(link)}
-            className="cursor-pointer flex justify-start gap-2 text-red-600"
+            className="cursor-pointer flex justify-start gap-2 text-destructive"
           >
             <IconTrash className="h-5 w-5" /> Delete
           </DropdownMenuItem>

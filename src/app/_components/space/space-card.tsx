@@ -43,7 +43,7 @@ export const SpaceCard = ({
   return (
     <SpaceCardContext.Provider value={{ space }}>
       <article  
-        className="overflow-hidden transition ease-in group relative select-none h-56 flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border border-gray-800 hover:border-white"
+        className="overflow-hidden transition ease-in group relative select-none h-56 flex flex-col items-start gap-2 justify-start rounded-lg px-3 py-5 border border-border hover:border-primary"
         style={{ background: space.style?.background.value ?? COLORS[0], color: space.style?.textColor }}  
       >
         <header>
@@ -87,13 +87,13 @@ export const SpaceCardActions = ({
     <div className="absolute top-1 right-1 text-white">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="rounded-full border-none px-2 bg-transparent hover:bg-gray-800/50" style={{
+          <Button variant="outline" className="rounded-full border-none px-2 bg-transparent hover:bg-background/50" style={{
             color: space.style?.textColor
           }}>
             <IconDotsVertical />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="base-bg border-gray-800">
+        <DropdownMenuContent className="border-border">
           <DropdownMenuItem
             onClick={() => onClickUpdate(space)}
             className="cursor-pointer flex justify-start gap-2"
@@ -103,7 +103,7 @@ export const SpaceCardActions = ({
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={() => onClickRemove(space)}
-            className="cursor-pointer flex justify-start gap-2 text-red-600"
+            className="cursor-pointer flex justify-start gap-2 text-destructive"
           >
             <IconTrash className="h-5 w-5" /> Delete
           </DropdownMenuItem>

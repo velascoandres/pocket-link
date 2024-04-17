@@ -11,7 +11,7 @@ export const ProfileCard = () => {
   }
 
   return (
-    <div className="select-none flex flex-row flex-wrap gap-2 items-start p-2 border border-gray-800 rounded-lg">
+    <div className="select-none flex flex-row flex-wrap gap-2 items-start p-2 border border-border rounded-lg">
       <Avatar>
         <AvatarImage src={data.user.image!} />
         <AvatarFallback>
@@ -20,7 +20,7 @@ export const ProfileCard = () => {
       </Avatar>
       <div className="mx-2 [&>span]:block text-start text-sm">
         <span>{data.user.name}</span>
-        <div role="button" className="cursor-pointer text-gray-600 hover:underline" onClick={() => signOut({ callbackUrl: '/' })}>
+        <div role="button" className="cursor-pointer text-foreground/25 hover:underline" onClick={() => signOut({ callbackUrl: '/' })}>
           <span>Sign out</span>
         </div>
       </div>
