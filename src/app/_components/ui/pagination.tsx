@@ -42,15 +42,15 @@ export const Pagination = ({
 
   return (
     <div className="flex flex-row justify-between gap-4 items-center">
-      <Button variant="secondary" disabled={page === 1} onClick={previousPage}>
+      <Button variant="outline" disabled={page === 1} onClick={previousPage}>
         <IconChevronLeft />
       </Button>
 
-      <span className="text-md font-semibold">
+      <span className="text-sm font-semibold">
                 Page: {page} / {totalPages}
       </span>
 
-      <Button variant="secondary" disabled={page === totalPages} onClick={nextPage}>
+      <Button variant="outline" disabled={page === totalPages} onClick={nextPage}>
         <IconChevronRight />
       </Button>
     </div>

@@ -66,11 +66,11 @@ export const LinkPicker = ({
         loading={isLoading}
         fallback={<Skeleton className="h-[300px] w-full" />}
       >
-        <h3 className="ml-2 mt-2 font-semibold text-sm self-start text-gray-400">Available links: </h3>
-        <ul className="list-none w-full p-2 overflow-y-auto max-h-[300px] border border-gray-800 rounded-md">
+        <h3 className="ml-2 mt-2 font-semibold text-base self-start">Available links: </h3>
+        <ul className="list-none w-full p-2 overflow-y-auto max-h-[300px] border border-border rounded-md">
           {response?.data.map((link) => 
             <li
-              className={cn('my-1 flex flex-row justify-start items-center gap-2 transition ease-in cursor-pointer select-none px-3 py-2 hover:bg-neutral-700 border border-gray-800 rounded-md',{
+              className={cn('my-1 text-sm flex flex-row justify-start items-center gap-2 transition ease-in cursor-pointer select-none px-3 py-2 hover:bg-neutral-700 border border-border rounded-md',{
                 'bg-neutral-800': selectedLink?.id === link.id
               })} 
               onClick={() => handleSelectLink(link as Link)} 
@@ -87,14 +87,8 @@ export const LinkPicker = ({
               <span>{link.name}</span>
             </li>
           )}
-
-
         </ul>
-
       </ShowContent>
-
-
-
     </div>
   )
 }

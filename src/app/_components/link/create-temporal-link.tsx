@@ -164,7 +164,7 @@ export const CreateTemporalLink = () => {
                     'block animate-spin': isCreatingTemporal,
                   })}
                 />
-                   Save changes
+                   Short
               </div>
 
             </Button>
