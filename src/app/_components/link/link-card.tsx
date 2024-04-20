@@ -2,14 +2,13 @@
 
 import React, { createContext, useContext } from 'react'
 import NextLink from 'next/link'
-import { Split } from 'lucide-react'
+import { BarChartIcon ,Split } from 'lucide-react'
 
 import { 
   IconChartSankey, 
   IconClipboard, 
   IconDotsVertical, 
   IconEdit, 
-  IconEye, 
   IconTrash 
 } from '@tabler/icons-react'
 
@@ -65,11 +64,8 @@ export const LinkCard = ({
   children
 }: Props) => {
   const { name, originalLink, path, updatedAt, totalInteractions } = link
-
   const { toast } = useToast()
-
   const dateAgo = getDiffTime(updatedAt)
-
 
   const favIcon = getTinyFavicon(link.originalLink)
 
@@ -89,10 +85,10 @@ export const LinkCard = ({
   return (
     <LinkCardContext.Provider value={{ link }}>
       <Card
-        className="group w-[400px] transition relative ease-in border border-border hover:border-primary hover:border"
+        className="group w-[400px] transition relative ease-in border border-border hover:border-primary"
       >
         <CardHeader>
-          <CardTitle className="text-base flex flex-row justify-start items-center gap-2">
+          <CardTitle className="text-base flex flex-row justify-start items-center gap-2 pt-2">
             <ImageWithFallback
               fallback="/404.png"
               src={favIcon} 
@@ -103,11 +99,11 @@ export const LinkCard = ({
               draggable={false}
             />
 
-            <span className="text-ellipsis line-clamp-1">{name}</span>
+            <span className="text-ellipsis line-clamp-1 text-pretty text-base">{name}</span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="h-30 flex flex-col gap-3 mb-10">
-          <div className="flex flex-row justify-start items-center gap-2 rounded-xl py-1 px-1 border border-border/10">
+        <CardContent className="h-16 flex flex-col gap-3 mb-10 flex-1">
+          <div className="flex flex-row justify-start items-center gap-2 rounded-xl py-1 px-1 border border-border/45">
             <Button variant="ghost" className="rounded-md px-2" onClick={handleCopyClipboard} >
               <IconClipboard />
             </Button>
@@ -117,18 +113,18 @@ export const LinkCard = ({
           </div>
 
           <NextLink href={originalLink} target="_blank">
-            <span className="text-gray-400 hover:underline text-sm text-ellipsis line-clamp-1">{originalLink}</span>
+            <span className="text-gray-400 hover:underline text-xs text-ellipsis line-clamp-1">{originalLink}</span>
           </NextLink>
           { children }
         </CardContent>
-        <CardFooter className="flex flex-row justify-between items-center w-full absolute bottom-1">
+        <CardFooter className="flex flex-row justify-between items-center w-full">
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger className="flex flex-row gap-2 justify-start items-center text-gray-400">
-                <IconEye /> <span className="text-sm">{totalInteractions}</span>
+                <BarChartIcon /> <span className="text-base">{totalInteractions}</span>
               </TooltipTrigger>
               <TooltipContent>
-                <p className="font-medium">Total link interactions</p>
+                <p className="font-medium text-xs">Total link interactions</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
@@ -137,7 +133,7 @@ export const LinkCard = ({
         {
           link.space && (
             <NextLink href={`${NAVIGATION.SPACES.path}/${link.space.id}`} 
-              className="transition ease-in hidden group-hover:block absolute font-semibold bottom-0 left-0 py-1 px-2 text-xs rounded-b-md text-ellipsis w-full" 
+              className="absolute font-semibold top-0 left-0 py-1 px-2 text-xs rounded-tl-md rounded-br-md text-ellipsis w-2/3" 
               style={{
                 background: link.space.style?.background.value, 
                 color: link.space.style?.textColor
