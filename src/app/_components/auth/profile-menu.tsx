@@ -29,7 +29,7 @@ export const ProfileMenu = () => {
           className="cursor-pointer"
           onClick={() => signOut({ callbackUrl: '/' })}
         >
-			Sign out
+          <span className="text-xs">Sign out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
