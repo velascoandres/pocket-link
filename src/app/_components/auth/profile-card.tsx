@@ -21,7 +21,7 @@ export const ProfileCard = () => {
       <div className="mx-2 [&>span]:block text-start text-sm">
         <span>{data.user.name}</span>
         <div role="button" className="cursor-pointer text-foreground/25 hover:underline" onClick={() => signOut({ callbackUrl: '/' })}>
-          <span>Sign out</span>
+          <span className="text-xs">Sign out</span>
         </div>
       </div>
     </div>

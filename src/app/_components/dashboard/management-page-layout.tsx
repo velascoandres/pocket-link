@@ -41,7 +41,7 @@ export const ManagementPageLayout = ({
     <main className="overflow-y-auto py-2 flex flex-col items-start min-h-screen">
       <header className="px-4 py-2 z-10 fixed top-0 w-full flex flex-row flex-wrap items-center border border-transparent border-b-border gap-2">
         <h1 className="text-2xl font-bold text-pretty">{title}</h1>
-        <div className="w-2/3 md:w-1/2 flex flex-col md:flex-row flex-wrap justify-start md:justify-center items-center gap-2">
+        <div className="w-2/3 flex flex-col md:flex-row flex-wrap justify-start md:justify-center items-center gap-2">
           <SearchBox placeholder={searchPlaceholder} onSearch={onSearchHandler} value={searchParams.get('search') ?? ''} />
           <Button variant="outline" onClick={onAddClick} className="hidden z-0 p-2 px-4 w-auto md:flex flex-row gap-2 justify-center items-center rounded-md">
             <IconPlus className="w-auto md:h-auto" /> <span className="hidden md:block">{addLabel}</span>
