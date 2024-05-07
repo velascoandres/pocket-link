@@ -67,7 +67,7 @@ const DashboardPage = () => {
 
   return (
     <ManagementPageLayout
-      title="Links"
+      title="All Links"
       addLabel="Add new link"
       onAddClick={addNewLink}
     >

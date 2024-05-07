@@ -68,7 +68,7 @@
   
   @keyframes nav-header-shadown {
     to {
-      @apply shadow-lg backdrop-blur bg-gray-800/80;
+      @apply shadow-lg backdrop-blur bg-background/80;
     }
   }
 }
