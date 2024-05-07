@@ -7,6 +7,8 @@ import { ModalContainer } from '@/app/_components/ui/modal-container'
 import { Toaster } from '@/app/_components/ui/toaster'
 import { TRPCReactProvider } from '@/trpc/react'
 
+import { ProgressBar } from './_components/dashboard/progress-bar'
+
 import '@/styles/globals.css'
 
 const inter = Onest({
@@ -41,9 +43,7 @@ const RootLayout = ({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`font-sans relative flex ${inter.variable} flex-col`}>        
-        {/* <div className="absolute top-0 bottom-0  z-[-2] min-h-screen w-full bg-black 
-        bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div> */}
-        {/* <Background /> */}
+        <ProgressBar />
         <AuthProvider>
           <ThemeProvider
             attribute="class"

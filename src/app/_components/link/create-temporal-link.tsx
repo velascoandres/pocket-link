@@ -85,7 +85,7 @@ export const CreateTemporalLink = () => {
       </DialogHeader>
       {
         createdLink && (
-          <div className="flex flex-col justify-center gap-2  max-w-sm md:max-w-md lg:max-w-lg">
+          <div className="flex flex-col justify-center gap-2 max-w-sm md:max-w-md lg:max-w-lg items-center mx-auto">
             <LinkCard
               link={{
                 ...createdLink,
@@ -93,9 +93,9 @@ export const CreateTemporalLink = () => {
               }}
             />
             <Alert className="border-amber-400">
-              <IconAlertTriangle className="h-4 w-4" />
-              <AlertTitle className="text-amber-400">Heads up!</AlertTitle>
-              <AlertDescription className="[&>strong]:text-amber-400">
+              <IconAlertTriangle className="h-4 w-4 text-primary" />
+              <AlertTitle className="text-primary text-pretty">Heads up!</AlertTitle>
+              <AlertDescription className="[&>strong]:text-primary">
                    The shortened link will last <strong>72 hours</strong>. 
                    Create a <strong>free account</strong> to short <strong>unlimited links</strong>  
               </AlertDescription>

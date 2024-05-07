@@ -85,7 +85,7 @@ export const LinkCard = ({
   return (
     <LinkCardContext.Provider value={{ link }}>
       <Card
-        className="group w-[400px] transition relative ease-in border border-border hover:border-primary"
+        className="group transition-all relative ease-in border border-border hover:border-primary"
       >
         <CardHeader>
           <CardTitle className="text-base flex flex-row justify-start items-center gap-2 pt-2">

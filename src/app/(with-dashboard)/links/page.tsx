@@ -85,7 +85,7 @@ const DashboardPage = () => {
             </div>
           }
         >
-          <section className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 justify-start mt-10 w-full">
+          <section className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 justify-start mt-10 w-full">
             {
               response?.data.map((link) => (
                 <LinkCard
