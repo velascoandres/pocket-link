@@ -11,13 +11,14 @@ type Options = z.infer<typeof CreateLinkDto> & {
 }
 
 export const createLinkService = async (prisma: PrismaClient, options: Options) => {
-  const { name, path = '', createdById, originalLink } = options
+  const { name, path = '', createdById, originalLink, isFavorite } = options
 
   const dataToCreate = {
     name,
     path: '',
     createdBy: { connect: { id: createdById } },
     originalLink,
+    isFavorite
   }
 
   if (!path) {

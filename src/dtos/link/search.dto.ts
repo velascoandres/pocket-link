@@ -6,3 +6,7 @@ export const SearchDto = z.object({
   spaceId: z.number().nullable().optional(),
   page: z.number().optional().default(1),
 })
+
+export const SimpleTextSearchDto = z.object({
+  search: z.string(),
+})

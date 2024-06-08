@@ -9,10 +9,11 @@ interface Options {
 	path?: string
 	originalLink: string
 	createdById: string
+  isFavorite: boolean
 }
 
 export const updateLinkService = async (prisma: PrismaClient, options: Options) => {
-  const { id, name, path, createdById, originalLink } = options
+  const { id, name, path, createdById, originalLink, isFavorite } = options
 
   if (!path) {
     return prisma.link.update({
@@ -22,6 +23,7 @@ export const updateLinkService = async (prisma: PrismaClient, options: Options) 
       data: {
         name,
         path: generateUniqueString({ size: CONSTANTS.DEFAULT_PATH_SIZE }),
+        isFavorite,
         createdBy: { connect: { id: createdById } },
         originalLink,
       }
@@ -50,6 +52,7 @@ export const updateLinkService = async (prisma: PrismaClient, options: Options) 
     data: {
       name,
       path,
+      isFavorite,
       createdBy: { connect: { id: createdById } },
       originalLink,
     }

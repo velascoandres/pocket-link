@@ -11,4 +11,5 @@ export const CreateLinkDto = z.object({
     message: 'Path must be at least 10 characters.',
   })
   .url('Path should be a valid url format'),
+  isFavorite: z.boolean().default(false)
 })

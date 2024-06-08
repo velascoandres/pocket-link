@@ -30,6 +30,7 @@ import {
   DialogHeader,
   DialogTitle
 } from '../ui/dialog'
+import { Switch } from '../ui/switch'
 
 import { LinkPreview } from './link-preview'
 import { PathField } from './path-field'
@@ -78,6 +79,7 @@ export const CreateUpdateLink = ({
         name: '',
         originalLink: '',
         path: '',
+        isFavorite: false,
       }
     },
   })
@@ -152,8 +154,31 @@ export const CreateUpdateLink = ({
             {
               watchedUrl && <LinkPreview url={watchedUrl} />
             }
+            <FormField
+              control={form.control}
+              name="isFavorite"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm w-full">
+                  <div className="space-y-0.5">
+                    <FormLabel>
+                      Mark link as <strong className="font-bold text-primary text-base">favorite</strong>
+                    </FormLabel>
+                    <FormDescription> 
+                      <p className="text-xs">
+                        The link marked as favorite will be listed on favorites section
+                      </p>
+                    </FormDescription>
+                  </div>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
           </div>
-
           <DialogFooter>
             <Button
               disabled={ isCreating || isUpdating || hasErrors }

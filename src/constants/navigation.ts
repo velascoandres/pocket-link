@@ -1,12 +1,7 @@
-import { Group, Link } from 'lucide-react'
+import { Group, Link, Star } from 'lucide-react'
 
 
 export const NAVIGATION = {
-  // DASHBOARD: {
-  //   path: '/dashboard',
-  //   name: 'Dashboard',
-  //   icon: LayoutDashboard
-  // },
   LINKS: {
     path: '/links',
     name: 'Links',
@@ -17,6 +12,11 @@ export const NAVIGATION = {
     name: 'Spaces',
     icon: Group
   },
+  FAVORITES: {
+    path: '/favorites',
+    name: 'Favorites',
+    icon: Star
+  }
 } as const
 
 

@@ -76,10 +76,11 @@ model Link {
     linkInteractions LinkInteraction[]
     expiresAt        DateTime?
     isPublic         Boolean           @default(false)
+    isFavorite       Boolean           @default(false)
     spaceLink        SpaceLink?    
     spaceLinkId      Int?
 
-    @@index([name, path])
+    @@index([name, path, isFavorite])
 }
 
 model LinkInteraction {

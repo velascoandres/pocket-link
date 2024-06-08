@@ -4,6 +4,7 @@ import {
   SearchByPathDto, 
   SearchDto, 
   SearchLinkAnalyticsDto, 
+  SimpleTextSearchDto, 
   UpdateLinkDto 
 } from '@/dtos/link'
 
@@ -14,6 +15,7 @@ import {
   createLinkService, 
   createTemporalLinkService, 
   deleteUserLinkService, 
+  searchFavoritesService, 
   searchLinkByPathService, 
   searchLinksService, 
   updateLinkService,
@@ -40,6 +42,12 @@ export const linkRouter = createTRPCRouter({
       createdById: ctx.session.user.id,
     })
   }),
+  getUserFavoriteLinks: protectedProcedure.input(SimpleTextSearchDto).query(({ ctx, input }) => {
+    return searchFavoritesService(ctx.db, {
+      ...input,
+      createdById: ctx.session.user.id,
+    })
+  }),
   getTemporalLinks: publicProcedure.input(SearchDto)
   .query(({ ctx, input }) => {
     return searchLinksService(ctx.db, {
@@ -60,6 +68,7 @@ export const linkRouter = createTRPCRouter({
     const options = {
       name: input.name,
       path: input.path,
+      isFavorite: input.isFavorite,
       originalLink: input.originalLink,
       createdById: ctx.session.user.id,
     }
@@ -88,6 +97,7 @@ export const linkRouter = createTRPCRouter({
       id: input.id,
       name: input.name,
       path: input.path,
+      isFavorite: input.isFavorite,
       originalLink: input.originalLink,
       createdById: ctx.session.user.id,
     }

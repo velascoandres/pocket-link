@@ -2,21 +2,21 @@ import { type z } from 'zod'
 
 import { type PrismaClient } from '@prisma/client'
 
-import { type SearchDto } from '@/dtos'
+import { type SimpleTextSearchDto } from '@/dtos'
 
-type Options = z.infer<typeof SearchDto> & { createdById?: string, isPublic?: boolean }
+type Options = z.infer<typeof SimpleTextSearchDto> & { createdById?: string }
 
 interface LinkWhereQuery {
-  isPublic: boolean
+    isFavorite: boolean
 	createdById?: string
 	OR?: Record<string, { contains: string }>[]
 }
 
-export const searchLinksService = async (prisma: PrismaClient, options: Options) => {
-  const { search, createdById, spaceId, perPage = 10, page = 1, isPublic = false } = options
+export const searchFavoritesService = async (prisma: PrismaClient, options: Options) => {
+  const { search, createdById } = options
 
   const query: LinkWhereQuery = {
-    isPublic,
+    isFavorite: true,
   }
 
   if (createdById){
@@ -43,19 +43,9 @@ export const searchLinksService = async (prisma: PrismaClient, options: Options)
     ]
   }
 
-  const fullQuery = {
-    ...query,
-    ...(spaceId === null ? { spaceLink: null } : {}),
-    ...(spaceId ? {
-      spaceLink: {
-        spaceId,
-      }
-    } : {}),
-  }
-
   const totalQuery = prisma.link.count({
     where: {
-      ...fullQuery,
+      ...query,
     },
   })
 
@@ -73,13 +63,11 @@ export const searchLinksService = async (prisma: PrismaClient, options: Options)
       }
     },
     where: {
-      ...fullQuery
+      ...query
     },
     orderBy: {
       updatedAt: 'desc',
     },
-    skip: perPage * (page - 1), 
-    take: perPage,
   })
 
   const [total, linksData] = await Promise.all([totalQuery, dataQuery])
@@ -89,23 +77,17 @@ export const searchLinksService = async (prisma: PrismaClient, options: Options)
     name: link.name,
     originalLink: link.originalLink,
     path: link.path,
+    isFavorite: link.isFavorite,
     totalInteractions: link.linkInteractions.length,
     isPublic: link.isPublic,
     space: link.spaceLink?.space,
-    isFavorite: link.isFavorite,
     createdAt: link.createdAt,
     updatedAt: link.updatedAt,
     expiresAt: link.expiresAt,
   }))
 
-  const totalPages = Math.ceil(total / perPage)
-  const hasNextPage = page < totalPages
-
   return {
-    hasNextPage,
-    totalPages,
     total,
-    page,
     data
   }
 }
