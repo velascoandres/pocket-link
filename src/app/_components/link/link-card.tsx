@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext } from 'react'
 import NextLink from 'next/link'
-import { BarChartIcon ,Split } from 'lucide-react'
+import { BarChartIcon ,Split, Star, StarOff } from 'lucide-react'
 
 import { 
   IconChartSankey, 
@@ -54,6 +54,7 @@ interface LinkCardActionsProps {
   onClickUpdate: (link: Link) => void
   onClickDelete: (link: Link) => void
   onClickDetach?: (link: Link) => void
+  onClickToggleFavorite: (link: Link) => void
 }
 
 
@@ -153,6 +154,7 @@ export const LinkCardActions = ({
   onClickUpdate,
   onClickDetach,
   onClickInteractions,
+  onClickToggleFavorite,
 }: LinkCardActionsProps) => {
   
   const { link } = useContext(LinkCardContext)!
@@ -172,6 +174,22 @@ export const LinkCardActions = ({
             className="cursor-pointer flex justify-start gap-2"
           >
             <IconEdit className="h-5 w-5" /> Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onClickToggleFavorite(link)}
+            className="cursor-pointer flex justify-start gap-2"
+          >
+            {
+              link.isFavorite ? (
+                <>
+                  <StarOff className="h-5 w-5"/> Remove favorite
+                </> 
+              ) : (
+                <>
+                  <Star className="h-5 w-5"/> Add to Favorites
+                </> 
+              )
+            }
           </DropdownMenuItem>
           <DropdownMenuItem
             className="cursor-pointer flex justify-start gap-2"

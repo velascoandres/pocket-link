@@ -8,6 +8,7 @@ import { LinkInteractions } from '@/app/_components/link/link-interactions'
 import { EmptyState } from '@/app/_components/ui/empty-state'
 import { ShowContent } from '@/app/_components/ui/show-content'
 import { useQueryParams } from '@/app/_hooks'
+import { useToggleLinkFavorite } from '@/app/_hooks/use-toggle-favorite'
 import { type Link } from '@/app/_interfaces/link'
 import { useModalStore } from '@/app/_store'
 import { api } from '@/trpc/react'
@@ -17,6 +18,8 @@ const FavoritesPage = () => {
   const { searchParams } = useQueryParams()
 
   const { openModal } = useModalStore()
+
+  const toggleFavorite = useToggleLinkFavorite()
 
   const { data: response, isLoading } = api.link.getUserFavoriteLinks.useQuery({
     search: searchParams.get('search') ?? '',
@@ -75,6 +78,7 @@ const FavoritesPage = () => {
                   onClickInteractions={openInteractions}
                   onClickUpdate={openUpdateModal} 
                   onClickDelete={openDeleteModal}
+                  onClickToggleFavorite={toggleFavorite}
                 />
               </LinkCard>
             ))

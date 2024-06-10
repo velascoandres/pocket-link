@@ -7,6 +7,7 @@ export interface Link {
 	originalLink: string
 	totalInteractions: number
 	isPublic: boolean
+	isFavorite: boolean
 	space?: Space
 	createdAt: Date
 	updatedAt: Date

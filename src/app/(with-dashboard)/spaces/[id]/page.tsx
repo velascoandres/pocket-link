@@ -14,6 +14,7 @@ import { EmptyState } from '@/app/_components/ui/empty-state'
 import { Pagination } from '@/app/_components/ui/pagination'
 import { ShowContent } from '@/app/_components/ui/show-content'
 import { useQueryParams } from '@/app/_hooks'
+import { useToggleLinkFavorite } from '@/app/_hooks/use-toggle-favorite'
 import { type Link } from '@/app/_interfaces/link'
 import { useModalStore } from '@/app/_store'
 import { api } from '@/trpc/react'
@@ -25,6 +26,7 @@ const SpaceLinkPage = ({ params }: {params: {id: string}}) => {
   const spaceId = Number(params.id)
   const page = searchParams.get('page') ? Number(searchParams.get('page')) : 1
 
+  const toggleFavorite = useToggleLinkFavorite()
 
   const { data: currentSpace } = api.space.searchSpaceById.useQuery({
     id: spaceId
@@ -118,6 +120,7 @@ const SpaceLinkPage = ({ params }: {params: {id: string}}) => {
                   onClickUpdate={openUpdateModal} 
                   onClickDelete={openDeleteModal}
                   onClickDetach={openDetachModal}
+                  onClickToggleFavorite={toggleFavorite}
                 />
               </LinkCard>
             ))}

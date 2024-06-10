@@ -52,7 +52,7 @@ export const LinkPreview = ({
 
       {
         pageData && (
-          <article className="flex flex-col md:flex-row justify-start rounded-md border border-gray-800 gap-2 w-full">
+          <article className="flex flex-col md:flex-row justify-start rounded-md border border-border gap-2 w-full">
             <div className="flex flex-col items-center justify-center rounded-t-md md:rounded-t-none md:rounded-tl-md md:rounded-bl-md p-2 bg-white/55">
               <ImageWithFallback
                 className="w-[128px] h-[128px]"
